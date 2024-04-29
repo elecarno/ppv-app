@@ -10,9 +10,13 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
-    "svelte": "^4.2.12",
-    "vite": "^5.2.0",
     "fs": "^0.0.1-security",
-    "pdf2json": "^3.0.5"
+    "pdf2json": "^3.0.5",
+    "svelte": "^4.2.12",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "pdf.js": "^0.1.0",
+    "svelte-pdf": "^1.0.20"
   }
 }
