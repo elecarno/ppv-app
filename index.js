@@ -120,7 +120,7 @@ function outlinePDF(doc) {
         getPageText(doc, pageNumber).then(function(pageText) {
             //console.log(pageNumber, pageText)        
             for (let questionNumber = 1; questionNumber <= 50; questionNumber++){
-                if (pageText.includes("MARGIN" + questionNumber + ". ") || pageText.includes("questions" + questionNumber + ". ")) {
+                if (pageText.includes("MARGIN" + questionNumber + ". ") || pageText.includes("questions" + questionNumber + ". ") || pageText.includes("guidance" + questionNumber + ". ")) {
                     if (questionsDict[questionNumber] == null){
                         questionsDict[questionNumber] = [[], {}]
                     }
@@ -173,4 +173,4 @@ function sortNumericalArray(arr) {
 }
 
 loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
-//loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2023.pdf", "mi")
+loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2023.pdf", "mi")
