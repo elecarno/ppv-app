@@ -116,29 +116,55 @@ const getPageText = async (pdf, pageNo) => {
 function outlinePDF(doc) {
     let questionsDict = {}
 
-    const searchString = "(a)"
-
     for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
         getPageText(doc, pageNumber).then(function(pageText) {
             //console.log(pageNumber, pageText)        
             for (let questionNumber = 1; questionNumber <= 50; questionNumber++){
-                if (pageText.includes("MARGIN" + questionNumber + ". ")) {
+                if (pageText.includes("MARGIN" + questionNumber + ". ") || pageText.includes("questions" + questionNumber + ". ")) {
                     if (questionsDict[questionNumber] == null){
                         questionsDict[questionNumber] = [[], {}]
                     }
                     questionsDict[questionNumber][0].push(pageNumber)  
                     questionsDict[questionNumber][0] = sortNumericalArray(questionsDict[questionNumber][0])
-
-                    // let startIdx = 0;
-                    // while ((i = pageText.indexOf(searchString, startIdx)) != -1) {
-                    //     questionsDict[questionNumber][1][searchString] = pageNumber
-                    //     startIdx = i + searchString.length
-                    // }         
+                    
+                    for (i = 0; i < 26; i++) {
+                        let startIdx = 0;
+                        let stringIdx = (i+10).toString(36)
+                        let searchString = "(" + stringIdx + ")"
+                        //console.log(searchString)
+                        if (pageText.includes(searchString)) {
+                            if (questionsDict[questionNumber][1][stringIdx] == null){
+                                questionsDict[questionNumber][1][stringIdx] = []
+                            }
+                            questionsDict[questionNumber][1][stringIdx].push(pageNumber)
+                            questionsDict[questionNumber][1][stringIdx] = sortNumericalArray(questionsDict[questionNumber][1][stringIdx])
+                            questionsDict[questionNumber][1] = removeNonConsecutiveAlphabets(questionsDict[questionNumber][1])
+                        }
+                    }
                 }
             }
         });
     }
     return questionsDict
+}
+
+function removeNonConsecutiveAlphabets(dictionary) {
+    // Convert dictionary keys to an array and sort it
+    const keys = Object.keys(dictionary).sort();
+
+    // Initialize a new dictionary to store consecutive keys and their corresponding values
+    const resultDictionary = {};
+
+    // Iterate through the sorted keys
+    for (let i = 0; i < keys.length; i++) {
+        // Check if it's the first key or if the character code is consecutive with the previous one
+        if (i === 0 || keys[i].charCodeAt(0) === keys[i - 1].charCodeAt(0) + 1) {
+            // If consecutive, add it to the result dictionary
+            resultDictionary[keys[i]] = dictionary[keys[i]];
+        }
+    }
+
+    return resultDictionary;
 }
 
 function sortNumericalArray(arr) {
