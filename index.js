@@ -4,6 +4,10 @@ const previousButton = document.getElementById("previous-button")
 const viewer = document.getElementById("pdf-viewer")
 let currentPDF = {};
 
+let currentQuestion = 1
+let currentArticle = 1
+let currentPart = 1
+
 function resetCurrentPDF() {
     currentPDF = {
         file: null,
@@ -39,6 +43,16 @@ function loadPDF() {
     pdfFile.promise.then(doc => {
         currentPDF.file = doc;
         currentPDF.totalPages = doc.numPages;
+
+         // Check for questions text
+        for (let number = 1; number <= currentPDF.totalPages; number++) {
+            getPageText(doc, number).then(function(result) {
+                if (result.includes("1. ")) {
+                    console.log("Question 1 is on page" + number)
+                }
+            });
+        }
+
         renderCurrentPage();
     })
 }
@@ -57,5 +71,12 @@ function renderCurrentPage() {
         page.render(renderContext);
     })
 }
+
+const getPageText = async (pdf, pageNo) => {
+    const page = await pdf.getPage(pageNo);
+    const tokenizedText = await page.getTextContent();
+    const pageText = tokenizedText.items.map(token => token.str).join("");
+    return pageText;
+};
 
 loadPDF()
