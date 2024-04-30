@@ -8,26 +8,15 @@ import output_json from "../output/parsed.json?raw"
 import PdfViewer from 'svelte-pdf';
 import PdfQuestionViewer from "./lib/PdfQuestionViewer.svelte"
 import PdfMIViewer from "./lib/PdfMIViewer.svelte"
+import PdfViewer2 from "./lib/PdfViewer2.svelte";
+import PdfViewer3 from "./lib/PDFViewer3.svelte";
+import PdfViewer4 from "./lib/PDFViewer4.svelte";
 </script>
 
 <main>
-  <div class="question-viewer">
-    <PdfQuestionViewer url="../sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf" />
-  </div>
-  <div class="mi-viewer">
-    <PdfMIViewer url="../sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf" />
-  </div>
-  
-
+  <PdfViewer4/>
 </main>
 
 <style>
-  .question-viewer {
-    width: 52%;
-    float: left;
-  }
-  .mi-viewer {
-    width: 47%;
-    float: right;
-  }
+
 </style>
