@@ -1,6 +1,6 @@
-const loadButton = document.getElementById("load-button")
 const nextButton = document.getElementById("next-button")
 const previousButton = document.getElementById("previous-button")
+const questionLabel = document.getElementById("question-label")
 
 const qpViewer = document.getElementById("qp-viewer")
 const miViewer = document.getElementById("mi-viewer")
@@ -11,6 +11,7 @@ let questionsQP = {};
 let questionsMI = {};
 
 let currentQuestion = 1
+let currentQuestionPage = 0
 let currentArticle = 1
 let currentPart = 1
 
@@ -31,13 +32,29 @@ function resetCurrentMI() {
     }
 }
 
-// nextButton.addEventListener("click", () => {
-//     const isValidPage = currentQP.currentPage < currentQP.totalPages;
-//     if (isValidPage) {
-//         currentQP.currentPage += 1;
-//         renderCurrentPage();
-//     }
-// })
+nextButton.addEventListener("click", () => {
+    if (currentQP.currentPage == 1) {
+        currentQP.currentPage = questionsQP[1][0]
+    } else if (questionsQP[currentQuestion].length > (currentQuestionPage+1)) {
+        currentQuestionPage += 1;
+        currentQP.currentPage += 1;
+    } else {
+        currentQP.currentPage += 1;
+        currentQuestion += 1;
+        currentQuestionPage = 0;
+    }
+
+    currentMI.currentPage = questionsMI[currentQuestion][0]
+
+    // const isValidPage = currentQP.currentPage < currentQP.totalPages;
+    // if (isValidPage) {
+    //     currentQP.currentPage = questionsQP[currentQuestion][currentQuestionPage]
+    // }
+
+    renderCurrentPage(currentQP, qpViewer);
+    renderCurrentPage(currentMI, miViewer);
+    questionLabel.innerHTML = "Current Question: " + currentQuestion
+})
 
 // previousButton.addEventListener("click", () => {
 //     const isValidPage = (currentQP.currentPage - 1) > 0;
