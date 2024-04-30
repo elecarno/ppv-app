@@ -7,6 +7,9 @@ const miViewer = document.getElementById("mi-viewer")
 let currentQP = {};
 let currentMI = {};
 
+let questionsQP = {};
+let questionsMI = {};
+
 let currentQuestion = 1
 let currentArticle = 1
 let currentPart = 1
@@ -64,13 +67,30 @@ function loadPDF(pdfURL, currentPDF) {
         } 
 
         // Check for questions
+        let questionsDict = {}
         for (let number = 1; number <= doc.numPages; number++) {
             getPageText(doc, number).then(function(result) {
-                if (result.includes("1. ")) {
-                    console.log(currentPDF + ": Question 1 is on page " + number)
+                for (let question = 1; question <= 50; question++){
+                    if (result.includes(question + ". ")) {
+                        //console.log(currentPDF + ": Question " + question + " is on page " + number)
+                        if (questionsDict[question] == null) {
+                            questionsDict[question] = [number]
+                        } else if (!questionsDict[question].includes(number)) {
+                            questionsDict[question].push(number)
+                        }                        
+                    }
                 }
             });
         }  
+
+        console.log(currentPDF)
+        if (currentPDF == "qp") {
+            questionsQP = questionsDict
+            console.log(questionsQP)
+        } else if (currentPDF == "mi") {
+            questionsMI = questionsDict
+            console.log(questionsMI)
+        }
     })
 }
 
