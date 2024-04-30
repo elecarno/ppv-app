@@ -1,15 +1,26 @@
 const loadButton = document.getElementById("load-button")
 const nextButton = document.getElementById("next-button")
 const previousButton = document.getElementById("previous-button")
-const viewer = document.getElementById("pdf-viewer")
-let currentPDF = {};
+
+const qpViewer = document.getElementById("qp-viewer")
+const miViewer = document.getElementById("mi-viewer")
+let currentQP = {};
+let currentMI = {};
 
 let currentQuestion = 1
 let currentArticle = 1
 let currentPart = 1
 
-function resetCurrentPDF() {
-    currentPDF = {
+function resetCurrentQP() {
+    currentQP = {
+        file: null,
+        totalPages: 0,
+        currentPage: 1,
+        zoom: 1.5
+    }
+}
+function resetCurrentMI() {
+    currentMI = {
         file: null,
         totalPages: 0,
         currentPage: 1,
@@ -17,47 +28,53 @@ function resetCurrentPDF() {
     }
 }
 
-// loadButton.addEventListener("click", () => {
-//     loadPDF()
+// nextButton.addEventListener("click", () => {
+//     const isValidPage = currentQP.currentPage < currentQP.totalPages;
+//     if (isValidPage) {
+//         currentQP.currentPage += 1;
+//         renderCurrentPage();
+//     }
 // })
 
-nextButton.addEventListener("click", () => {
-    const isValidPage = currentPDF.currentPage < currentPDF.totalPages;
-    if (isValidPage) {
-        currentPDF.currentPage += 1;
-        renderCurrentPage();
-    }
-})
+// previousButton.addEventListener("click", () => {
+//     const isValidPage = (currentQP.currentPage - 1) > 0;
+//     if (isValidPage) {
+//         currentQP.currentPage -= 1;
+//         renderCurrentPage();
+//     }
+// })
 
-previousButton.addEventListener("click", () => {
-    const isValidPage = (currentPDF.currentPage - 1) > 0;
-    if (isValidPage) {
-        currentPDF.currentPage -= 1;
-        renderCurrentPage();
-    }
-})
+function loadPDF(pdfURL, currentPDF) {
+    resetCurrentQP();
+    resetCurrentMI();
 
-function loadPDF() {
-    resetCurrentPDF();
-    const pdfFile = pdfjsLib.getDocument("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf");
+    const pdfFile = pdfjsLib.getDocument(pdfURL);
     pdfFile.promise.then(doc => {
-        currentPDF.file = doc;
-        currentPDF.totalPages = doc.numPages;
+        switch (currentPDF) {
+            case "qp":
+                currentQP.file = doc;
+                currentQP.totalPages = doc.numPages;
+                renderCurrentPage(currentQP, qpViewer);
+                break;
+            case "mi":
+                currentMI.file = doc;
+                currentMI.totalPages = doc.numPages;
+                renderCurrentPage(currentMI, miViewer);
+                break;
+        } 
 
-         // Check for questions text
-        for (let number = 1; number <= currentPDF.totalPages; number++) {
+        // Check for questions
+        for (let number = 1; number <= doc.numPages; number++) {
             getPageText(doc, number).then(function(result) {
                 if (result.includes("1. ")) {
-                    console.log("Question 1 is on page" + number)
+                    console.log(currentPDF + ": Question 1 is on page " + number)
                 }
             });
-        }
-
-        renderCurrentPage();
+        }  
     })
 }
 
-function renderCurrentPage() {
+function renderCurrentPage(currentPDF, viewer) {
     currentPDF.file.getPage(currentPDF.currentPage).then(page => {
         const context = viewer.getContext("2d");
         const viewport = page.getViewport({scale: currentPDF.zoom});
@@ -79,4 +96,5 @@ const getPageText = async (pdf, pageNo) => {
     return pageText;
 };
 
-loadPDF()
+loadPDF("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf", "qp")
+loadPDF("sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf", "mi")
