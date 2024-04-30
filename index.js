@@ -11,7 +11,7 @@ let questionsQP = {};
 let questionsMI = {};
 
 let currentQuestion = 1
-let currentQuestionPage = 0
+let currentQuestionPage = 1
 let currentArticle = 1
 let currentPart = 1
 
@@ -34,21 +34,24 @@ function resetCurrentMI() {
 
 nextButton.addEventListener("click", () => {
     if (currentQP.currentPage == 1) {
-        currentQP.currentPage = questionsQP[1][0]
-    } else if (questionsQP[currentQuestion].length > (currentQuestionPage+1)) {
+        currentQP.currentPage = questionsQP[currentQuestion][0][0]
+    } else if (questionsQP[currentQuestion][0].length > currentQuestionPage) {
         currentQuestionPage += 1;
         currentQP.currentPage += 1;
-    } else {
+    } 
+    else {
         currentQP.currentPage += 1;
         currentQuestion += 1;
-        currentQuestionPage = 0;
+        currentQuestionPage = 1;
     }
 
-    currentMI.currentPage = questionsMI[currentQuestion][0]
+    //currentMI.currentPage = questionsMI[currentQuestion][0][1]
 
     renderCurrentPage(currentQP, qpViewer);
-    renderCurrentPage(currentMI, miViewer);
+    //renderCurrentPage(currentMI, miViewer);
     questionLabel.innerHTML = "Current Question: " + currentQuestion + ", page: " + currentQuestionPage
+
+    console.log(questionsQP[currentQuestion][0].length)
 })
 
 // previousButton.addEventListener("click", () => {
@@ -112,22 +115,36 @@ const getPageText = async (pdf, pageNo) => {
 
 function outlinePDF(doc) {
     let questionsDict = {}
+
+    const searchString = "(a)"
+
     for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
         getPageText(doc, pageNumber).then(function(pageText) {
-            for (let question = 1; question <= 50; question++){
-                if (pageText.includes(question + ". ")) {
-                    if (questionsDict[question] == null) {
-                        questionsDict[question] = [pageNumber]
-                    } else if (!questionsDict[question].includes(pageNumber)) {
-                        questionsDict[question].push(pageNumber)
-                    }                        
+            //console.log(pageNumber, pageText)        
+            for (let questionNumber = 1; questionNumber <= 50; questionNumber++){
+                if (pageText.includes("MARGIN" + questionNumber + ". ")) {
+                    if (questionsDict[questionNumber] == null){
+                        questionsDict[questionNumber] = [[], {}]
+                    }
+                    questionsDict[questionNumber][0].push(pageNumber)  
+                    questionsDict[questionNumber][0] = sortNumericalArray(questionsDict[questionNumber][0])
+
+                    // let startIdx = 0;
+                    // while ((i = pageText.indexOf(searchString, startIdx)) != -1) {
+                    //     questionsDict[questionNumber][1][searchString] = pageNumber
+                    //     startIdx = i + searchString.length
+                    // }         
                 }
             }
         });
     }
-
     return questionsDict
 }
 
-loadPDF("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf", "qp")
-loadPDF("sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf", "mi")
+function sortNumericalArray(arr) {
+    // Use the sort method with a compare function
+    return arr.slice().sort((a, b) => a - b);
+}
+
+loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
+//loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2023.pdf", "mi")
