@@ -46,22 +46,13 @@ nextButton.addEventListener("click", () => {
 
     currentMI.currentPage = questionsMI[currentQuestion][0]
 
-    // const isValidPage = currentQP.currentPage < currentQP.totalPages;
-    // if (isValidPage) {
-    //     currentQP.currentPage = questionsQP[currentQuestion][currentQuestionPage]
-    // }
-
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
-    questionLabel.innerHTML = "Current Question: " + currentQuestion
+    questionLabel.innerHTML = "Current Question: " + currentQuestion + ", page: " + currentQuestionPage
 })
 
 // previousButton.addEventListener("click", () => {
-//     const isValidPage = (currentQP.currentPage - 1) > 0;
-//     if (isValidPage) {
-//         currentQP.currentPage -= 1;
-//         renderCurrentPage();
-//     }
+
 // })
 
 function loadPDF(pdfURL, currentPDF) {
