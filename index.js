@@ -75,21 +75,7 @@ function loadPDF(pdfURL, currentPDF) {
         } 
 
         // Check for questions
-        let questionsDict = {}
-        for (let number = 1; number <= doc.numPages; number++) {
-            getPageText(doc, number).then(function(result) {
-                for (let question = 1; question <= 50; question++){
-                    if (result.includes(question + ". ")) {
-                        //console.log(currentPDF + ": Question " + question + " is on page " + number)
-                        if (questionsDict[question] == null) {
-                            questionsDict[question] = [number]
-                        } else if (!questionsDict[question].includes(number)) {
-                            questionsDict[question].push(number)
-                        }                        
-                    }
-                }
-            });
-        }  
+        let questionsDict = outlinePDF(doc)
 
         console.log(currentPDF)
         if (currentPDF == "qp") {
@@ -123,6 +109,25 @@ const getPageText = async (pdf, pageNo) => {
     const pageText = tokenizedText.items.map(token => token.str).join("");
     return pageText;
 };
+
+function outlinePDF(doc) {
+    let questionsDict = {}
+    for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
+        getPageText(doc, pageNumber).then(function(pageText) {
+            for (let question = 1; question <= 50; question++){
+                if (pageText.includes(question + ". ")) {
+                    if (questionsDict[question] == null) {
+                        questionsDict[question] = [pageNumber]
+                    } else if (!questionsDict[question].includes(pageNumber)) {
+                        questionsDict[question].push(pageNumber)
+                    }                        
+                }
+            }
+        });
+    }
+
+    return questionsDict
+}
 
 loadPDF("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf", "qp")
 loadPDF("sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf", "mi")
