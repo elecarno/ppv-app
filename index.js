@@ -1,4 +1,6 @@
 const loadButton = document.getElementById("load-button")
+const nextButton = document.getElementById("next-button")
+const previousButton = document.getElementById("previous-button")
 const viewer = document.getElementById("pdf-viewer")
 let currentPDF = {};
 
@@ -11,8 +13,24 @@ function resetCurrentPDF() {
     }
 }
 
-loadButton.addEventListener("click", () => {
-    loadPDF()
+// loadButton.addEventListener("click", () => {
+//     loadPDF()
+// })
+
+nextButton.addEventListener("click", () => {
+    const isValidPage = currentPDF.currentPage < currentPDF.totalPages;
+    if (isValidPage) {
+        currentPDF.currentPage += 1;
+        renderCurrentPage();
+    }
+})
+
+previousButton.addEventListener("click", () => {
+    const isValidPage = (currentPDF.currentPage - 1) > 0;
+    if (isValidPage) {
+        currentPDF.currentPage -= 1;
+        renderCurrentPage();
+    }
 })
 
 function loadPDF() {
@@ -39,3 +57,5 @@ function renderCurrentPage() {
         page.render(renderContext);
     })
 }
+
+loadPDF()
