@@ -13,6 +13,11 @@
     padding-bottom: 5px;
 }
 
+#viewer-holder {
+    text-align: center;
+    margin: 0 auto;
+}
+
 .navbar {
     text-align: center;
 }
@@ -22,14 +27,27 @@
 }
 
 .s-nav-button {
-    font-size: 30px;
-    width: 50px;
-    margin-top: 20px;
+    font-size: 25px;
+    width: 40px;
+    /* margin-top: 20px; */
+}
+
+.s-nav-holder {
+    width: 150px; 
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 15px;
 }
 
 .q-nav-button {
     font-size: 20px;
     width: 200px
+}
+
+.pagecount {
+    width: 100px;
+    margin: 0 auto;
+    padding-top: 8.5px;
 }
 
 .viewer {

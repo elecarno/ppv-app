@@ -1,5 +1,5 @@
-const qpViewer = document.getElementById("qp-viewer")
-const miViewer = document.getElementById("mi-viewer")
+const qpViewer = document.getElementById("qp-pdf-viewer")
+const miViewer = document.getElementById("mi-pdf-viewer")
 let currentQP = {};
 let currentMI = {};
 
@@ -15,7 +15,7 @@ function resetCurrentQP() {
         file: null,
         totalPages: 0,
         currentPage: 1,
-        zoom: 1.5
+        zoom: 2.5
     }
 }
 function resetCurrentMI() {
@@ -23,7 +23,7 @@ function resetCurrentMI() {
         file: null,
         totalPages: 0,
         currentPage: 1,
-        zoom: 1.5
+        zoom: 2.5
     }
 }
 

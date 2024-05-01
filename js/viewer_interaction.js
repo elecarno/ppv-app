@@ -1,16 +1,23 @@
 let usingQuestionNavigation = true
 let showMI = false
+let isEnlarged = false
 
 navToggleButton.addEventListener("click", () => {
     usingQuestionNavigation = !usingQuestionNavigation
     if (usingQuestionNavigation) {
         navToggleButton.innerHTML = "Switch to Separate Navigation"
         questionNavigationPanel.style.display = "block"
-        separateNavigationPanel.style.display = "none"
+        qpNextButton.style.display = "none"
+        qpPreviousButton.style.display = "none"
+        miNextButton.style.display = "none"
+        miPreviousButton.style.display = "none"
     } else {
         navToggleButton.innerHTML = "Switch to Question Navigation"
         questionNavigationPanel.style.display = "none"
-        separateNavigationPanel.style.display = "block"
+        qpNextButton.style.display = "block"
+        qpPreviousButton.style.display = "block"
+        miNextButton.style.display = "block"
+        miPreviousButton.style.display = "block"
     }
     currentQuestion = 1
     currentArticle = 0
@@ -18,12 +25,39 @@ navToggleButton.addEventListener("click", () => {
     questionLabel.innerHTML = "Current Question: N/A"
 })
 
+scaleToggleButton.addEventListener("click", () => {
+    isEnlarged = !isEnlarged
+    if (isEnlarged) {
+        scaleToggleButton.innerHTML = "Minimise View"
+        viewerScale.style.width = "100%"
+    }
+    else {
+        scaleToggleButton.innerHTML = "Enlarge View"
+        if (showMI){
+            viewerScale.style.width = "70%"
+        } else {
+            viewerScale.style.width = "50%"
+        }
+    }
+})
+
 miVisToggleButton.addEventListener("click", () => {
     showMI = !showMI
     if (showMI) {
-        miViewerHolder.style.display = block
+        miVisToggleButton.innerHTML = "Hide Marking Instructions"
+        viewerHolder.style.width = "100%"
+        qpViewerHolder.style.width = "48%"
+        miViewerHolder.style.display = "block"
     } else {
-        miViewerHolder.style.display = none
+        miVisToggleButton.innerHTML = "Show Marking Instructions"
+        viewerHolder.style.width = "70%"
+        qpViewerHolder.style.width = "100%"
+        miViewerHolder.style.display = "none"
+    }
+    if (isEnlarged){
+        viewerScale.style.width = "100%"
+    } else {
+        viewerScale.style.width = "70%"
     }
 })
 
@@ -35,7 +69,7 @@ qpNextButton.addEventListener("click", () => {
 })
 
 qpPreviousButton.addEventListener("click", () => {
-    if (currentQP.currentPage != 0){
+    if (currentQP.currentPage != 1){
         currentQP.currentPage -= 1;
         renderCurrentPage(currentQP, qpViewer);
     }
@@ -49,7 +83,7 @@ miNextButton.addEventListener("click", () => {
 })
 
 miPreviousButton.addEventListener("click", () => {
-    if (currentMI.currentPage != 0){
+    if (currentMI.currentPage != 1){
         currentMI.currentPage -= 1;
         renderCurrentPage(currentMI, miViewer);
     }
