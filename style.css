@@ -1,5 +1,25 @@
+* {
+    /* font-family: 'Tahoma'; */
+    /* font-family: 'Trebuchet MS'; */
+    font-family: "Atkinson Hyperlegible";
+}
+
+#toolbar {
+    border-radius: 3px;
+    border-color: black;
+    border: solid;
+    margin: 0.25rem;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#q-navigation {
+    text-align: center;
+    padding: 25px;
+}
+
 .pdf-viewer {
-    width: 45%;
+    width: 49%;
     border-radius: 3px;
     border-color: black;
     border: solid;

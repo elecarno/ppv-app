@@ -1,5 +1,7 @@
 const nextButton = document.getElementById("next-button")
 const previousButton = document.getElementById("previous-button")
+const navToggleButton = document.getElementById("toggle-nav-button")
+const questionNavigationPanel = document.getElementById("q-navigation")
 const questionLabel = document.getElementById("question-label")
 
 const qpViewer = document.getElementById("qp-viewer")
@@ -13,10 +15,7 @@ let questionsMI = {};
 let currentQuestion = 1 // 1. , 2. , 3.
 let currentArticle = 0 // (a) , (b) , (c)
 let currentArticlePage = 0
-
-let pageHistoryQP = []
-let pageHistoryMI = []
-let backPage = 0
+let usingQuestionNavigation = true
 
 function resetCurrentQP() {
     currentQP = {
@@ -34,6 +33,17 @@ function resetCurrentMI() {
         zoom: 1.5
     }
 }
+
+navToggleButton.addEventListener("click", () => {
+    usingQuestionNavigation = !usingQuestionNavigation
+    if (usingQuestionNavigation) {
+        navToggleButton.innerHTML = "Switch to Separate Navigation"
+        questionNavigationPanel.style.display = "block"
+    } else {
+        navToggleButton.innerHTML = "Switch to Question Navigation"
+        questionNavigationPanel.style.display = "none"
+    }
+})
 
 nextButton.addEventListener("click", () => {
     // If on first page, move to first page of first question
