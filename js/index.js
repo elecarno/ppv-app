@@ -41,7 +41,22 @@ function subjectClickHandler(subject) {
 
 function levelClickHandler(subject, level) {
     levelSelection.style.display = "none";
+    document.getElementById("year-paper-container").style.display = "block"
     stepLabel.innerHTML = "Select Year & Paper";
+
+    yearSelection.innerHTML = ""
+
+    var BackButton = document.createElement("button")
+    BackButton.setAttribute("id", "year-back-button");
+    BackButton.style.border = "none"
+    BackButton.style.borderBottom = "solid 5px white"
+    BackButton.style.height = "40px"
+    BackButton.style.backgroundColor = "grey"
+    BackButton.innerHTML = "Back to Levels"
+    BackButton.addEventListener("click", function() {
+        yearBackButton()
+    })
+    yearSelection.append(BackButton)
 
     // Remove the pressed class from all buttons initially
     var buttons = yearSelection.getElementsByTagName("button");
@@ -71,6 +86,11 @@ function levelClickHandler(subject, level) {
     }
 }
 
+document.getElementById("level-back-button").addEventListener("click", () => {
+    subjectSelection.style.display = "block"
+    levelSelection.style.display = "none"
+})
+
 function yearClickHandler(subject, level, year) {
     //console.log(subject, level, year)
 
@@ -97,6 +117,11 @@ function yearClickHandler(subject, level, year) {
     }
 }
 
+function yearBackButton(){
+    levelSelection.style.display = "block";
+    document.getElementById("year-paper-container").style.display = "none"
+}
+
 function paperClickHandler(qpPath, miPath, paperFullname) {
     console.log(qpPath, miPath, paperFullname)
     loadPDF(qpPath, "qp")
@@ -104,6 +129,11 @@ function paperClickHandler(qpPath, miPath, paperFullname) {
     menuUI.style.display = "none"
     viewerUI.style.display = "block"
 }
+
+document.getElementById("viewer-back-button").addEventListener("click", () => {
+    menuUI.style.display = "block"
+    viewerUI.style.display = "none"
+})
 
 loadSubjects()
 
