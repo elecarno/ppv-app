@@ -129,6 +129,7 @@ function yearClickHandler(subject, level, year) {
 function yearBackButton(){
     levelSelection.style.display = "block";
     document.getElementById("year-paper-container").style.display = "none"
+    paperSelection.innerHTML = ""
 }
 
 function paperClickHandler(qpPath, miPath, paperFullname) {

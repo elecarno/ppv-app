@@ -6,3 +6,7 @@ Known Bugs:
 - Moving between questions will sometimes not reach the final page of the paper.
 - Modern Languages Reading Papers do not navigation through questions properly.
 - Physics, Biology, and Chemistry Mulitple Choice Papers do not work with question navigation.
+
+To-do:
+- Add supplementary sheets display
+- Add audio player for listening papers

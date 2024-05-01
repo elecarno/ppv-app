@@ -29,5 +29,10 @@ var paperNames = {
     "all": "All",
     "p1": "Paper 1",
     "p2": "Paper 2",
-    "qp": "Question Paper"
+    "s1": "Section 1",
+    "s2": "Section 2",
+    "qp": "Question Paper",
+    "re": "Reading",
+    "dw": "Directed Writing",
+    "li": "Listening"
 }
