@@ -14,6 +14,10 @@ let currentQuestion = 1 // 1. , 2. , 3.
 let currentArticle = 0 // (a) , (b) , (c)
 let currentArticlePage = 0
 
+let pageHistoryQP = []
+let pageHistoryMI = []
+let backPage = 0
+
 function resetCurrentQP() {
     currentQP = {
         file: null,
@@ -65,17 +69,60 @@ nextButton.addEventListener("click", () => {
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
-    questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
+    updateQuestionLabel();
+})
+
+previousButton.addEventListener("click", () => {
+    // If on first page, move to first page of first question
+    if (currentQP.currentPage == 1) {
+        currentQP.currentPage = questionsQP[currentQuestion][1][0][0]
+        currentMI.currentPage = questionsMI[currentQuestion][1][0][0]
+        console.log("qp: moved to first page of first question")
+    } else {
+        if (currentArticle > 0){
+            if (currentArticlePage > 0) {
+                currentArticlePage -= 1
+                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
+                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage]
+                console.log("qp: moved to previous page of current article")
+            } else {
+                currentArticle -= 1
+                currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
+                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle].at(-1)
+                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle].at(-1)
+                console.log("qp: moved to last page of previous article")
+            }
+        } else {
+            currentQuestion -= 1
+            currentArticle = Object.keys(questionsQP[currentQuestion]).length - 1
+            currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
+            currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle].at(-1)
+            currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle].at(-1)
+            console.log("qp: moved to last page of previous question")
+        }
+    }
+
+    renderCurrentPage(currentQP, qpViewer);
+    renderCurrentPage(currentMI, miViewer);
+    updateQuestionLabel();
+})
+
+function updateQuestionLabel(){
+    if (questionsQP[currentQuestion][1][currentArticle] != undefined){
+        if (questionsQP[currentQuestion][1][currentArticle].length > 1){
+            questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ") - page " + (currentArticlePage+1)
+        } else {
+            questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
+        }
+    } else {
+        questionLabel.innerHTML = "Current Question: " + currentQuestion + "."
+    }
 
     console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)
     , "\ncurrentQuestion: ", currentQuestion, ", number of pages: ", questionsQP[currentQuestion][0].length
     , "\ncurrentArticle: ", currentArticle, ", number of pages: ", questionsQP[currentQuestion][1][currentArticle].length
     , "\ncurrentArticlePage: ", currentArticlePage, ", actual page: ", questionsQP[currentQuestion][1][currentArticle][currentArticlePage])
-})
-
-// previousButton.addEventListener("click", () => {
-
-// })
+}
 
 function loadPDF(pdfURL, currentPDF) {
     resetCurrentQP();
@@ -97,7 +144,7 @@ function loadPDF(pdfURL, currentPDF) {
         } 
 
         // Check for questions
-        let questionsDict = outlinePDF(doc)
+        let questionsDict = outlinePDF(doc, currentPDF)
 
         console.log(currentPDF)
         if (currentPDF == "qp") {
@@ -132,8 +179,13 @@ const getPageText = async (pdf, pageNo) => {
     return pageText;
 };
 
-function outlinePDF(doc) {
+function outlinePDF(doc, currentPDF) {
     let questionsDict = {}
+    let isMI = false
+
+    if (currentPDF == "mi"){
+        isMI = true
+    }
 
     for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
         getPageText(doc, pageNumber).then(function(pageText) {
@@ -143,8 +195,7 @@ function outlinePDF(doc) {
                 || pageText.includes("questions" + questionNumber + ". ") 
                 || pageText.includes("guidance" + questionNumber + ". ")
                 || pageText.includes("." + questionNumber + ". ")
-                || pageText.includes("accept:" + questionNumber + ". ")
-                || pageText.includes(questionNumber + ". (")) {
+                || pageText.includes("accept:" + questionNumber + ". ")) {
                     if (questionsDict[questionNumber] == null){
                         questionsDict[questionNumber] = [[], {}]
                     }
@@ -160,13 +211,18 @@ function outlinePDF(doc) {
                             }
                             questionsDict[questionNumber][1][i].push(pageNumber)
                             questionsDict[questionNumber][1][i] = sortNumericalArray(questionsDict[questionNumber][1][i])
+                            questionsDict[questionNumber][1][i] = removeNonConsecutiveNumbersArray(questionsDict[questionNumber][1][i])
                             questionsDict[questionNumber][1] = removeNonConsecutiveNumbers(questionsDict[questionNumber][1])
+                            //questionsDict[questionNumber][1] = removeNonConsecutiveEntries(questionsDict[questionNumber][1])
                         }
                     }
                 }
+
+                //questionsDict[questionNumber][0] = removeNonConsecutiveNumbersArray(questionsDict[questionNumber][0])
             }
         });
     }
+
     return questionsDict
 }
 
@@ -208,13 +264,39 @@ function removeNonConsecutiveNumbers(dictionary) {
     return resultDictionary;
 }
 
+function removeNonConsecutiveNumbersArray(arr) {
+    // Convert array elements to numbers and sort it
+    const sortedArr = arr.map(Number).sort((a, b) => a - b);
+
+    // Initialize a new array to store consecutive elements
+    const resultArr = [];
+
+    // Iterate through the sorted array
+    for (let i = 0; i < sortedArr.length; i++) {
+        // Check if the number is consecutive with the previous one
+        if (i === 0 || sortedArr[i] === sortedArr[i - 1] + 1) {
+            // If consecutive, add it to the result array
+            resultArr.push(sortedArr[i]);
+        } else {
+            // If non-consecutive, break the loop
+            break;
+        }
+    }
+
+    return resultArr;
+}
+
 function sortNumericalArray(arr) {
     // Use the sort method with a compare function
+    arr = removeNonConsecutiveNumbersArray(arr)
     return arr.slice().sort((a, b) => a - b);
 }
 
-loadPDF("sqa_pdfs/NH_Spanish_Reading_2023.pdf", "qp")
-loadPDF("sqa_pdfs/mi_NH_Spanish_Reading_2023.pdf", "mi")
+//loadPDF("sqa_pdfs/NH_Spanish_Reading_2023.pdf", "qp")
+//loadPDF("sqa_pdfs/mi_NH_Spanish_Reading_2023.pdf", "mi")
 
 //loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
 //loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2022.pdf", "mi")
+
+loadPDF("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf", "qp")
+loadPDF("sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf", "mi")
