@@ -32,47 +32,55 @@ function resetCurrentMI() {
 }
 
 nextButton.addEventListener("click", () => {
+    // If on first page, move to first page of first question
     if (currentQP.currentPage == 1) {
         currentQP.currentPage = questionsQP[currentQuestion][1][0][0]
+        currentMI.currentPage = questionsMI[currentQuestion][1][0][0]
         console.log("qp: moved to first page of first question")
     } else {
+        // check if still on current question
         if (currentArticle+1 < questionsQP[currentQuestion][0].length && questionsQP[currentQuestion][1][0] != undefined){
+            // check if still within current article
             if (currentArticlePage+1 < questionsQP[currentQuestion][1][currentArticle].length) {
                 currentArticlePage += 1
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
+                if (questionsMI[currentQuestion][1][currentArticle][currentArticlePage] != undefined) {
+                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0]
+                    console.log("standard - article page")
+                } else {
+                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage-1] + 1
+                    console.log("edgecase - article page")
+                }
                 console.log("qp: set to next page of current article")
-            } else {
+            } else { // move to next article if at end of current article
                 currentArticlePage = 0
                 currentArticle += 1
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][0]
+                if (questionsMI[currentQuestion][1][currentArticle] != undefined) {
+                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0]     
+                    console.log("standard - article")     
+                } else {
+                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle-1][0] + 1
+                    console.log("edgecase - article")
+                }
+                      
                 console.log("qp: set to page of next article")
             }
-        } else {
+        } else { // move to next question if at end of current question
             currentArticlePage = 0
             currentArticle = 0
             currentQuestion += 1
             currentQP.currentPage = questionsQP[currentQuestion][0][0]
-            console.log("moved to first page of next question")
+            currentMI.currentPage = questionsMI[currentQuestion][0][0]
+            console.log("qp: moved to first page of next question")
         }
-
-
-        // if (currentArticle in questionsMI[currentQuestion][1]) {
-        //     currentArticle += 1
-        //     currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][0]
-        //     currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0]
-        // } else {
-        //     currentArticle += 1
-        //     currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][0]
-        //     currentMI.currentPage += 1
-        // }
     }
-
-    // if (currentArticle < Object.keys(questionsQP[currentQuestion][1]).length)
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
-    questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
+    questionLabel.innerHTML = "(qp) Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
 
+    console.log(questionsMI[currentQuestion][1][currentArticle][currentArticlePage-1] + 1)
     console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)
     , "\ncurrentQuestion: ", currentQuestion, ", number of pages: ", questionsQP[currentQuestion][0].length
     , "\ncurrentArticle: ", currentArticle, ", number of pages: ", questionsQP[currentQuestion][1][currentArticle].length
@@ -207,33 +215,6 @@ function removeNonConsecutiveNumbers(dictionary) {
         if (i === 0 || keys[i] === keys[i - 1] + 1) {
             // If consecutive, add it to the result dictionary
             resultDictionary[keys[i]] = dictionary[keys[i]];
-        }
-    }
-
-    return resultDictionary;
-}
-
-function removeNonConsecutiveNumbers2(dictionary) {
-    // Convert dictionary keys to an array of numbers and sort it
-    const keys = Object.keys(dictionary).map(Number).sort((a, b) => a - b);
-
-    // Check if the first key is 0, if not, return an empty dictionary
-    if (keys[0] !== 0) {
-        return {};
-    }
-
-    // Initialize a new dictionary to store consecutive keys and their corresponding values
-    const resultDictionary = {};
-
-    // Iterate through the sorted keys
-    for (let i = 0; i < keys.length; i++) {
-        // Check if the number is consecutive with the previous one
-        if (i === 0 || keys[i] === keys[i - 1] + 1) {
-            // If consecutive, add it to the result dictionary
-            resultDictionary[keys[i]] = dictionary[keys[i]];
-        } else {
-            // If non-consecutive, break the loop
-            break;
         }
     }
 
