@@ -6,6 +6,7 @@ let customMIURL = ""
 
 function loadSubjects() {
     for(let subject in sqaFiles){
+        (function(subject) {
         var button = document.createElement("button");
         button.innerHTML = subjectNames[subject];
         button.setAttribute("id", subject);
@@ -14,6 +15,7 @@ function loadSubjects() {
             subjectClickHandler(subject);
         });
         subjectSelection.appendChild(button);
+        })(subject);
     }
 }
 
