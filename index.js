@@ -65,9 +65,8 @@ nextButton.addEventListener("click", () => {
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
-    questionLabel.innerHTML = "(qp) Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
+    questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
 
-    console.log(questionsMI[currentQuestion][1][currentArticle][currentArticlePage-1] + 1)
     console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)
     , "\ncurrentQuestion: ", currentQuestion, ", number of pages: ", questionsQP[currentQuestion][0].length
     , "\ncurrentArticle: ", currentArticle, ", number of pages: ", questionsQP[currentQuestion][1][currentArticle].length
@@ -144,7 +143,8 @@ function outlinePDF(doc) {
                 || pageText.includes("questions" + questionNumber + ". ") 
                 || pageText.includes("guidance" + questionNumber + ". ")
                 || pageText.includes("." + questionNumber + ". ")
-                || pageText.includes("accept:" + questionNumber + ". ")) {
+                || pageText.includes("accept:" + questionNumber + ". ")
+                || pageText.includes(questionNumber + ". (")) {
                     if (questionsDict[questionNumber] == null){
                         questionsDict[questionNumber] = [[], {}]
                     }
@@ -213,8 +213,8 @@ function sortNumericalArray(arr) {
     return arr.slice().sort((a, b) => a - b);
 }
 
-//loadPDF("sqa_pdfs/NH_Spanish_Reading_2023.pdf", "qp")
-//loadPDF("sqa_pdfs/mi_NH_Spanish_Reading_2023.pdf", "mi")
+loadPDF("sqa_pdfs/NH_Spanish_Reading_2023.pdf", "qp")
+loadPDF("sqa_pdfs/mi_NH_Spanish_Reading_2023.pdf", "mi")
 
-loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
-loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2022.pdf", "mi")
+//loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
+//loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2022.pdf", "mi")
