@@ -1,7 +1,12 @@
 const nextButton = document.getElementById("next-button")
 const previousButton = document.getElementById("previous-button")
 const navToggleButton = document.getElementById("toggle-nav-button")
+const qpNextButton = document.getElementById("qp-right-button")
+const qpPreviousButton = document.getElementById("qp-left-button")
+const miNextButton = document.getElementById("mi-right-button")
+const miPreviousButton = document.getElementById("mi-left-button")
 const questionNavigationPanel = document.getElementById("q-navigation")
+const separateNavigationPanel = document.getElementById("s-navigation")
 const questionLabel = document.getElementById("question-label")
 
 const qpViewer = document.getElementById("qp-viewer")
@@ -39,10 +44,36 @@ navToggleButton.addEventListener("click", () => {
     if (usingQuestionNavigation) {
         navToggleButton.innerHTML = "Switch to Separate Navigation"
         questionNavigationPanel.style.display = "block"
+        separateNavigationPanel.style.display = "none"
     } else {
         navToggleButton.innerHTML = "Switch to Question Navigation"
         questionNavigationPanel.style.display = "none"
+        separateNavigationPanel.style.display = "block"
     }
+    currentQuestion = 1
+    currentArticle = 0
+    currentArticlePage = 0
+    questionLabel.innerHTML = "Current Question: N/A"
+})
+
+qpNextButton.addEventListener("click", () => {
+    currentQP.currentPage += 1;
+    renderCurrentPage(currentQP, qpViewer);
+})
+
+qpPreviousButton.addEventListener("click", () => {
+    currentQP.currentPage -= 1;
+    renderCurrentPage(currentQP, qpViewer);
+})
+
+miNextButton.addEventListener("click", () => {
+    currentMI.currentPage += 1;
+    renderCurrentPage(currentMI, miViewer);
+})
+
+miPreviousButton.addEventListener("click", () => {
+    currentMI.currentPage -= 1;
+    renderCurrentPage(currentMI, miViewer);
 })
 
 nextButton.addEventListener("click", () => {

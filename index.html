@@ -15,12 +15,22 @@
     <body>
         <main>
             <div id="toolbar">
-                <div id="q-navigation">
-                    <button id="previous-button">Previous Question</button>
-                    <button id="next-button">Next Question</button>
+                <div id="q-navigation" class="navbar">
                     <p id="question-label">Current Question: N/A</p>
+                    <button id="previous-button" class="q-nav-button">Previous Question</button>
+                    <button id="next-button" class="q-nav-button">Next Question</button>
                 </div>
-                <button id="toggle-nav-button">Switch to Separate Navigation</button>
+                <div id="s-navigation" class="navbar" style="display: none;">
+                    <div id="qp-navigation" class="s-nav" style="float: left;">
+                        <button id="qp-left-button" class="s-nav-button">‹</button>
+                        <button id="qp-right-button" class="s-nav-button">›</button>
+                    </div>
+                    <div id="qp-navigation" class="s-nav" style="float: right;">
+                        <button id="mi-left-button" class="s-nav-button">‹</button>
+                        <button id="mi-right-button" class="s-nav-button">›</button>
+                    </div>
+                </div>
+                <button id="toggle-nav-button" style="margin-top: 20px;">Switch to Separate Navigation</button>
             </div>
             <div>
                 <canvas id="qp-viewer" class="pdf-viewer" style="float: left"></canvas>

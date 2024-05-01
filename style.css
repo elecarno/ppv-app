@@ -13,9 +13,23 @@
     padding-bottom: 5px;
 }
 
-#q-navigation {
+.navbar {
     text-align: center;
-    padding: 25px;
+}
+
+.s-nav {
+    width: 50%;
+}
+
+.s-nav-button {
+    font-size: 30px;
+    width: 50px;
+    margin-top: 20px;
+}
+
+.q-nav-button {
+    font-size: 20px;
+    width: 200px
 }
 
 .pdf-viewer {
