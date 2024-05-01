@@ -33,6 +33,7 @@
 }
 
 .viewer {
+    width: 49%;
     text-align: center;
     border-radius: 3px;
     border-color: black;

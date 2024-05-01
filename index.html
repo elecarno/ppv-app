@@ -9,12 +9,15 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-        <title>SQA Viewer</title>
+        <title>SQA Past Paper Viewer</title>
     </head>    
 
     <body>
         <main>
-            <div id="viewer-ui">
+            <div id="menu-ui" style="margin: 50px; display: none;">
+                <h1>SQA Past Paper Viewer</h1>
+            </div>
+            <div id="viewer-ui" style="display: block;">
                 <div id="toolbar">
                     <div id="q-navigation" class="navbar">
                         <p id="question-label">Current Question: N/A</p>
@@ -32,13 +35,14 @@
                         </div>
                     </div>
                     <button id="toggle-nav-button" style="margin-top: 20px;">Switch to Separate Navigation</button>
+                    <button id="toggle-mi-visibility">Show Marking Instructions</button>
                 </div>
                 <div style="width: 100%;">
-                    <div class="viewer" style="width: 49%; float: left;">
+                    <div class="viewer" style="float: left; width: 49%;">
                         <p id="qp-pagecount">1 / 1</p>
                         <canvas id="qp-viewer" class="pdf-viewer" style="float: left"></canvas>
                     </div>
-                    <div class="viewer" style="width: 49%; float: right;">
+                    <div id="mi-viewer-holder" class="viewer" style="float: right; display: none; width: 49%;">
                         <p id="mi-pagecount">1 / 1</p>
                         <canvas id="mi-viewer" class="pdf-viewer" style="float: right"></canvas>
                     </div>
@@ -46,7 +50,10 @@
             </div>  
         </main>
         <p style="float: right; margin: 1rem;">SQA Past Paper Viewer, github.com/elecarno</p>
-        <script src="index.js"></script>
+        <script src="js/element_refs.js"></script>
+        <script src="js/viewer.js"></script>
+        <script src="js/viewer_interaction.js"></script>
+        <script src="js/index.js"></script>
     </body>
 
 </html>
