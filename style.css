@@ -32,10 +32,17 @@
     width: 200px
 }
 
-.pdf-viewer {
-    width: 49%;
+.viewer {
+    text-align: center;
     border-radius: 3px;
     border-color: black;
     border: solid;
     margin: 0.25rem;
+}
+
+.pdf-viewer {
+    width: 100%;
+    border-top: solid;
+    border-color: grey;
+    border-top-width: 3px;
 }

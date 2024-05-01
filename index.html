@@ -14,28 +14,36 @@
 
     <body>
         <main>
-            <div id="toolbar">
-                <div id="q-navigation" class="navbar">
-                    <p id="question-label">Current Question: N/A</p>
-                    <button id="previous-button" class="q-nav-button">Previous Question</button>
-                    <button id="next-button" class="q-nav-button">Next Question</button>
-                </div>
-                <div id="s-navigation" class="navbar" style="display: none;">
-                    <div id="qp-navigation" class="s-nav" style="float: left;">
-                        <button id="qp-left-button" class="s-nav-button">‹</button>
-                        <button id="qp-right-button" class="s-nav-button">›</button>
+            <div id="viewer-ui">
+                <div id="toolbar">
+                    <div id="q-navigation" class="navbar">
+                        <p id="question-label">Current Question: N/A</p>
+                        <button id="previous-button" class="q-nav-button">Previous Question</button>
+                        <button id="next-button" class="q-nav-button">Next Question</button>
                     </div>
-                    <div id="qp-navigation" class="s-nav" style="float: right;">
-                        <button id="mi-left-button" class="s-nav-button">‹</button>
-                        <button id="mi-right-button" class="s-nav-button">›</button>
+                    <div id="s-navigation" class="navbar" style="display: none;">
+                        <div id="qp-navigation" class="s-nav" style="float: left;">
+                            <button id="qp-left-button" class="s-nav-button">‹</button>
+                            <button id="qp-right-button" class="s-nav-button">›</button>
+                        </div>
+                        <div id="qp-navigation" class="s-nav" style="float: right;">
+                            <button id="mi-left-button" class="s-nav-button">‹</button>
+                            <button id="mi-right-button" class="s-nav-button">›</button>
+                        </div>
+                    </div>
+                    <button id="toggle-nav-button" style="margin-top: 20px;">Switch to Separate Navigation</button>
+                </div>
+                <div style="width: 100%;">
+                    <div class="viewer" style="width: 49%; float: left;">
+                        <p id="qp-pagecount">1 / 1</p>
+                        <canvas id="qp-viewer" class="pdf-viewer" style="float: left"></canvas>
+                    </div>
+                    <div class="viewer" style="width: 49%; float: right;">
+                        <p id="mi-pagecount">1 / 1</p>
+                        <canvas id="mi-viewer" class="pdf-viewer" style="float: right"></canvas>
                     </div>
                 </div>
-                <button id="toggle-nav-button" style="margin-top: 20px;">Switch to Separate Navigation</button>
-            </div>
-            <div>
-                <canvas id="qp-viewer" class="pdf-viewer" style="float: left"></canvas>
-                <canvas id="mi-viewer" class="pdf-viewer" style="float: right"></canvas>
-            </div>
+            </div>  
         </main>
         <p style="float: right; margin: 1rem;">SQA Past Paper Viewer, github.com/elecarno</p>
         <script src="index.js"></script>

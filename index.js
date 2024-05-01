@@ -8,6 +8,8 @@ const miPreviousButton = document.getElementById("mi-left-button")
 const questionNavigationPanel = document.getElementById("q-navigation")
 const separateNavigationPanel = document.getElementById("s-navigation")
 const questionLabel = document.getElementById("question-label")
+const qpNavLabel = document.getElementById("qp-pagecount")
+const miNavLabel = document.getElementById("mi-pagecount")
 
 const qpViewer = document.getElementById("qp-viewer")
 const miViewer = document.getElementById("mi-viewer")
@@ -57,23 +59,31 @@ navToggleButton.addEventListener("click", () => {
 })
 
 qpNextButton.addEventListener("click", () => {
-    currentQP.currentPage += 1;
-    renderCurrentPage(currentQP, qpViewer);
+    if (currentQP.currentPage != currentQP.totalPages){
+        currentQP.currentPage += 1;
+        renderCurrentPage(currentQP, qpViewer);
+    }
 })
 
 qpPreviousButton.addEventListener("click", () => {
-    currentQP.currentPage -= 1;
-    renderCurrentPage(currentQP, qpViewer);
+    if (currentQP.currentPage != 0){
+        currentQP.currentPage -= 1;
+        renderCurrentPage(currentQP, qpViewer);
+    }
 })
 
 miNextButton.addEventListener("click", () => {
-    currentMI.currentPage += 1;
-    renderCurrentPage(currentMI, miViewer);
+    if (currentMI.currentPage != currentMI.totalPages){
+        currentMI.currentPage += 1;
+        renderCurrentPage(currentMI, miViewer);
+    }
 })
 
 miPreviousButton.addEventListener("click", () => {
-    currentMI.currentPage -= 1;
-    renderCurrentPage(currentMI, miViewer);
+    if (currentMI.currentPage != 0){
+        currentMI.currentPage -= 1;
+        renderCurrentPage(currentMI, miViewer);
+    }
 })
 
 nextButton.addEventListener("click", () => {
@@ -165,6 +175,11 @@ function updateQuestionLabel(){
     , "\ncurrentArticlePage: ", currentArticlePage, ", actual page: ", questionsQP[currentQuestion][1][currentArticle][currentArticlePage])
 }
 
+function updatePageCounts(){
+    qpNavLabel.innerHTML = currentQP.currentPage + " / " + currentQP.totalPages
+    miNavLabel.innerHTML = currentMI.currentPage + " / " + currentMI.totalPages
+}
+
 function loadPDF(pdfURL, currentPDF) {
     resetCurrentQP();
     resetCurrentMI();
@@ -211,6 +226,7 @@ function renderCurrentPage(currentPDF, viewer) {
         }
         page.render(renderContext);
     })
+    updatePageCounts()
 }
 
 const getPageText = async (pdf, pageNo) => {
@@ -339,5 +355,5 @@ function sortNumericalArray(arr) {
 //loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
 //loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2022.pdf", "mi")
 
-loadPDF("sqa_pdfs/NH_Graphic-Communication_QP_2023.pdf", "qp")
-loadPDF("sqa_pdfs/mi_NH_Graphic-Communication_mi_2023.pdf", "mi")
+loadPDF("./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp.pdf", "qp")
+loadPDF("./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp_mi.pdf", "mi")

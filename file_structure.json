@@ -1,0 +1,98 @@
+{
+    "chemistry": {
+        "higher": {
+            "2018": [
+                {
+                    "name": "mi_NH_Chemistry_mi_2018",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2018\\mi_NH_Chemistry_mi_2018.pdf"
+                },
+                {
+                    "name": "NH_Chemistry_all_2018",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2018\\NH_Chemistry_all_2018.pdf"
+                }
+            ],
+            "2019": [
+                {
+                    "name": "mi_NH_Chemistry_all_2019",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2019\\mi_NH_Chemistry_all_2019.pdf"
+                },
+                {
+                    "name": "NH_Chemistry_all_2019",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2019\\NH_Chemistry_all_2019.pdf"
+                }
+            ],
+            "2022": [
+                {
+                    "name": "chemistry_nh_2022_p1",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2022\\chemistry_nh_2022_p1.pdf",
+                    "mi": {
+                        "name": "chemistry_nh_2022_p1_mi",
+                        "path": "./sqa_pdfs\\chemistry\\higher\\2022\\chemistry_nh_2022_p1_mi.pdf"
+                    }
+                },
+                {
+                    "name": "chemistry_nh_2022_p2",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2022\\chemistry_nh_2022_p2.pdf",
+                    "mi": {
+                        "name": "chemistry_nh_2022_p2_mi",
+                        "path": "./sqa_pdfs\\chemistry\\higher\\2022\\chemistry_nh_2022_p2_mi.pdf"
+                    }
+                }
+            ],
+            "2023": [
+                {
+                    "name": "chemistry_nh_2023_p1",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2023\\chemistry_nh_2023_p1.pdf",
+                    "mi": {
+                        "name": "chemistry_nh_2023_p1_mi",
+                        "path": "./sqa_pdfs\\chemistry\\higher\\2023\\chemistry_nh_2023_p1_mi.pdf"
+                    }
+                },
+                {
+                    "name": "chemistry_nh_2023_p2",
+                    "path": "./sqa_pdfs\\chemistry\\higher\\2023\\chemistry_nh_2023_p2.pdf",
+                    "mi": {
+                        "name": "chemistry_nh_2023_p2_mi",
+                        "path": "./sqa_pdfs\\chemistry\\higher\\2023\\chemistry_nh_2023_p2_mi.pdf"
+                    }
+                }
+            ]
+        }
+    },
+    "graphcomm": {
+        "higher": {
+            "2023": [
+                {
+                    "name": "graphcomm_nh_2023_qp",
+                    "path": "./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp.pdf",
+                    "mi": {
+                        "name": "graphcomm_nh_2023_qp_mi",
+                        "path": "./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp_mi.pdf"
+                    }
+                }
+            ]
+        }
+    },
+    "spanish": {
+        "higher": {
+            "2023": [
+                {
+                    "name": "spanish_nh_2023_dw",
+                    "path": "./sqa_pdfs\\spanish\\higher\\2023\\spanish_nh_2023_dw.pdf",
+                    "mi": {
+                        "name": "spanish_nh_2023_dw_mi",
+                        "path": "./sqa_pdfs\\spanish\\higher\\2023\\spanish_nh_2023_dw_mi.pdf"
+                    }
+                },
+                {
+                    "name": "spanish_nh_2023_re",
+                    "path": "./sqa_pdfs\\spanish\\higher\\2023\\spanish_nh_2023_re.pdf",
+                    "mi": {
+                        "name": "spanish_nh_2023_re_mi",
+                        "path": "./sqa_pdfs\\spanish\\higher\\2023\\spanish_nh_2023_re_mi.pdf"
+                    }
+                }
+            ]
+        }
+    }
+}
