@@ -14,10 +14,21 @@
 
     <body>
         <main>
-            <div id="menu-ui" style="margin: 50px; display: none;">
+            <div id="menu-ui" style="margin-top: 70px; margin-left: 220px; height: 880px;">
                 <h1>SQA Past Paper Viewer</h1>
+                <h2 id="step-label">Select Subject</h2>
+                <div id="subject-selection" class="btn-group"></div>
+                <div id="level-selection" class="btn-group" style="display: none;">
+                    <button id="n5-button" style="display: none;">National 5</button>
+                    <button id="nh-button" style="display: none;">Higher</button>
+                    <button id="ah-button" style="display: none;">Advanced Higher</button>
+                </div>
+                <div id="year-paper-container">
+                    <div id="year-selection" class="btn-group"></div>
+                    <div id="paper-selection" class="btn-group"></div>
+                </div>
             </div>
-            <div id="viewer-ui" style="display: block;">
+            <div id="viewer-ui" style="display: none;">
                 <div id="toolbar">
                     <div id="q-navigation" class="navbar">
                         <p id="question-label">Current Question: N/A</p>
@@ -51,6 +62,8 @@
             </div>  
         </main>
         <p style="clear: both; float: right; margin: 1rem;">SQA Past Paper Viewer, github.com/elecarno</p>
+        <script src="js/sqa_files.js"></script>
+        <script src="js/display_names.js"></script>
         <script src="js/element_refs.js"></script>
         <script src="js/viewer.js"></script>
         <script src="js/viewer_interaction.js"></script>

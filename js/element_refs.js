@@ -1,3 +1,5 @@
+const menuUI = document.getElementById("menu-ui")
+const viewerUI = document.getElementById("viewer-ui")
 
 const navToggleButton = document.getElementById("toggle-nav-button")
 const miVisToggleButton = document.getElementById("toggle-mi-visibility")
@@ -20,3 +22,14 @@ const viewerScale = document.getElementById("viewer-scale")
 const viewerHolder = document.getElementById("viewer-holder")
 const qpViewerHolder = document.getElementById("qp-viewer")
 const miViewerHolder = document.getElementById("mi-viewer")
+
+const subjectSelection = document.getElementById("subject-selection")
+const levelSelection = document.getElementById("level-selection")
+const yearSelection = document.getElementById("year-selection")
+const paperSelection = document.getElementById("paper-selection")
+
+const stepLabel = document.getElementById("step-label")
+
+const n5Button = document.getElementById("n5-button")
+const nhButton = document.getElementById("nh-button")
+const ahButton = document.getElementById("ah-button")
