@@ -17,7 +17,34 @@ button:hover {
 
 #year-selection, #paper-selection {
     float: left;
-    width: 20%; /* Each div takes 50% width */
+    width: 30%; /* Each div takes 50% width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Add padding if needed */
+}
+
+#year-paper-container:after {
+    content: "";
+    display: table;
+    clear: both; /* Clear the floats */
+}
+
+#subject-container, #custom-container {
+    float: left;
+    width: 30%; /* Each div takes 50% width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Add padding if needed */
+}
+
+#subject-custom-container:after {
+    content: "";
+    display: table;
+    clear: both; /* Clear the floats */
+}
+
+
+#year-selection, #paper-selection {
+    float: left;
+    width: 30%; /* Each div takes 50% width */
     box-sizing: border-box; /* Include padding and border in the width */
     padding: 10px; /* Add padding if needed */
 }

@@ -1,4 +1,8 @@
-let selectedSubject
+let selectedSubject = ""
+let selectedLevel = ""
+
+let customQPURL = ""
+let customMIURL = ""
 
 function loadSubjects() {
     for(let subject in sqaFiles){
@@ -15,8 +19,8 @@ function loadSubjects() {
 
 function subjectClickHandler(subject) {
     selectedSubject = subject
-    stepLabel.innerHTML = "Select Level"
-    subjectSelection.style.display = "none"
+    stepLabel.innerHTML = "Select Level for " + subjectNames[subject]
+    subjectCustomConatiner.style.display = "none"
     levelSelection.style.display = "block"
 
     if (sqaFiles[subject]["n5"] != undefined){
@@ -40,9 +44,10 @@ function subjectClickHandler(subject) {
 }
 
 function levelClickHandler(subject, level) {
+    selectedLevel = level
     levelSelection.style.display = "none";
     document.getElementById("year-paper-container").style.display = "block"
-    stepLabel.innerHTML = "Select Year & Paper";
+    stepLabel.innerHTML = "Select Year & Paper for " + levelNames[selectedLevel] + " " + subjectNames[selectedSubject];
 
     yearSelection.innerHTML = ""
 
@@ -87,7 +92,7 @@ function levelClickHandler(subject, level) {
 }
 
 document.getElementById("level-back-button").addEventListener("click", () => {
-    subjectSelection.style.display = "block"
+    subjectCustomConatiner.style.display = "block"
     levelSelection.style.display = "none"
 })
 
@@ -95,6 +100,10 @@ function yearClickHandler(subject, level, year) {
     //console.log(subject, level, year)
 
     paperSelection.innerHTML = ""
+
+    var header = document.createElement("h3")
+    header.innerHTML = year + " Papers"
+    paperSelection.append(header)
 
     for (paper in sqaFiles[subject][level][year]){
         (function(paper) {
@@ -133,6 +142,28 @@ function paperClickHandler(qpPath, miPath, paperFullname) {
 document.getElementById("viewer-back-button").addEventListener("click", () => {
     menuUI.style.display = "block"
     viewerUI.style.display = "none"
+})
+
+function getCustomQP(event) {
+    const inputQP = event.target.files[0];
+    const inputMI = event.target.files[1];
+
+    const readerQP = new FileReader();
+    readerQP.readAsDataURL(inputQP);
+    readerQP.onload = () => {
+        loadPDF(readerQP.result, "qp");
+    };
+
+    const readerMI = new FileReader();
+    readerMI.readAsDataURL(inputMI);
+    readerMI.onload = () => {
+        loadPDF(readerMI.result, "mi");
+    };
+}
+
+loadCustomPDFs.addEventListener("click", () => {
+    menuUI.style.display = "none"
+    viewerUI.style.display = "block"
 })
 
 loadSubjects()
