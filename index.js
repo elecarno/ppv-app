@@ -44,26 +44,13 @@ nextButton.addEventListener("click", () => {
             if (currentArticlePage+1 < questionsQP[currentQuestion][1][currentArticle].length) {
                 currentArticlePage += 1
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
-                if (questionsMI[currentQuestion][1][currentArticle][currentArticlePage] != undefined) {
-                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0]
-                    console.log("standard - article page")
-                } else {
-                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage-1] + 1
-                    console.log("edgecase - article page")
-                }
+                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage]
                 console.log("qp: set to next page of current article")
             } else { // move to next article if at end of current article
                 currentArticlePage = 0
                 currentArticle += 1
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][0]
-                if (questionsMI[currentQuestion][1][currentArticle] != undefined) {
-                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0]     
-                    console.log("standard - article")     
-                } else {
-                    currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle-1][0] + 1
-                    console.log("edgecase - article")
-                }
-                      
+                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0] 
                 console.log("qp: set to page of next article")
             }
         } else { // move to next question if at end of current question
