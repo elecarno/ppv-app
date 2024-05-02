@@ -8,7 +8,7 @@ function loadSubjects() {
     for(let subject in sqaFiles){
         (function(subject) {
         var button = document.createElement("button");
-        button.innerHTML = subjectNames[subject];
+        button.innerHTML = subjectNames[subject] + "<br>" + countSubjectPapers(sqaFiles[subject]);
         button.setAttribute("id", subject);
         button.style.display = "block"
         button.addEventListener("click", function() {
@@ -27,18 +27,21 @@ function subjectClickHandler(subject) {
 
     if (sqaFiles[subject]["n5"] != undefined){
         n5Button.style.display = "block"
+        n5Button.innerHTML = "National 5" + "<br>" + countLevelPapers(sqaFiles[selectedSubject]["n5"]);
         n5Button.addEventListener("click", function() {
             levelClickHandler(subject, "n5");
         });
     }
     if (sqaFiles[subject]["nh"] != undefined){
         nhButton.style.display = "block"
+        nhButton.innerHTML = "Higher" + "<br>" + countLevelPapers(sqaFiles[selectedSubject]["nh"]);
         nhButton.addEventListener("click", function() {
             levelClickHandler(subject, "nh");
         });
     }
     if (sqaFiles[subject]["ah"] != undefined){
         ahButton.style.display = "block"
+        ahButton.innerHTML = "Advanced Higher" + "<br>" + countLevelPapers(sqaFiles[selectedSubject]["ah"]);
         ahButton.addEventListener("click", function() {
             levelClickHandler(subject, "ah");
         });
@@ -74,7 +77,7 @@ function levelClickHandler(subject, level) {
     for (var year in sqaFiles[subject][level]) {
         (function(year) {
             var button = document.createElement("button");
-            button.innerHTML = year;
+            button.innerHTML = year + "<br>" + countYearPapers(sqaFiles[selectedSubject][selectedLevel][year]);
             button.setAttribute("id", year);
             button.style.display = "block";
             button.addEventListener("click", function() {
@@ -169,13 +172,34 @@ loadCustomPDFs.addEventListener("click", () => {
     viewerUI.style.display = "block"
 })
 
+function countSubjectPapers(subject){
+    let count = 0
+    for (level in subject){
+        for (year in subject[level]) {
+            if (subject[level][year] != []){
+                count += subject[level][year].length
+            }
+        }
+    }
+
+    return " • " + count
+}
+
+function countLevelPapers(level) {
+    let count = 0
+    for (year in level) {
+        if (level[year] != []){
+            count += level[year].length
+        }
+    }
+
+    return " • " + count
+}
+
+function countYearPapers(year) {
+    let count = 0
+    count += year.length
+    return " • " + count
+}
+
 loadSubjects()
-
-//loadPDF("sqa_pdfs/NH_Spanish_Reading_2023.pdf", "qp")
-//loadPDF("sqa_pdfs/mi_NH_Spanish_Reading_2023.pdf", "mi")
-
-//loadPDF("sqa_pdfs/NH_Chemistry_Paper2_2022.pdf", "qp")
-//loadPDF("sqa_pdfs/mi_NH_Chemistry_Paper-2_2022.pdf", "mi")
-
-// loadPDF("./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp.pdf", "qp")
-// loadPDF("./sqa_pdfs\\graphcomm\\higher\\2023\\graphcomm_nh_2023_qp_mi.pdf", "mi")
