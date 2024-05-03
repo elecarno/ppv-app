@@ -1,0 +1,8 @@
+node_modules/
+node_modules/electron
+build
+npm-debug.log
+.env
+.DS_Store
+out/
+src/sqa_pdfs

@@ -1,0 +1,138 @@
+* {
+    /* font-family: 'Tahoma'; */
+    /* font-family: 'Trebuchet MS'; */
+    font-family: "Atkinson Hyperlegible";
+}
+
+button {
+    background-color: #2c2cb7; /* Green background */
+    border: 1px solid #25259c; /* Green border */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer/hand icon */
+}
+
+button:hover {
+    background-color: #20208a;
+}
+
+#year-selection, #paper-selection {
+    float: left;
+    width: 30%; /* Each div takes 50% width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Add padding if needed */
+}
+
+#year-paper-container:after {
+    content: "";
+    display: table;
+    clear: both; /* Clear the floats */
+}
+
+#subject-container, #custom-container {
+    float: left;
+    width: 30%; /* Each div takes 50% width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Add padding if needed */
+}
+
+#subject-custom-container:after {
+    content: "";
+    display: table;
+    clear: both; /* Clear the floats */
+}
+
+
+#year-selection, #paper-selection {
+    float: left;
+    width: 30%; /* Each div takes 50% width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Add padding if needed */
+}
+
+#year-paper-container:after {
+    content: "";
+    display: table;
+    clear: both; /* Clear the floats */
+}
+
+#toolbar {
+    border-radius: 3px;
+    border-color: black;
+    border: solid;
+    margin: 0.25rem;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#viewer-holder {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn-group button {
+    background-color: #2c2cb7; /* Green background */
+    border: 1px solid #25259c; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 250px; /* Set a width if needed */
+    height: 44px;
+    display: block; /* Make the buttons appear below each other */
+    text-align: left;
+}
+
+.btn-group button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+  
+.btn-group button:hover {
+    background-color: #20208a;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.s-nav {
+    width: 50%;
+}
+
+.s-nav-button {
+    font-size: 25px;
+    width: 40px;
+    /* margin-top: 20px; */
+}
+
+.s-nav-holder {
+    width: 150px; 
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.q-nav-button {
+    font-size: 20px;
+    width: 200px
+}
+
+.pagecount {
+    width: 100px;
+    margin: 0 auto;
+    padding-top: 8.5px;
+}
+
+.viewer {
+    width: 49%;
+    text-align: center;
+    border-radius: 3px;
+    border-color: black;
+    border: solid;
+    margin: 0.25rem;
+}
+
+.pdf-viewer {
+    width: 100%;
+    border-top: solid;
+    border-color: grey;
+    border-top-width: 3px;
+}
