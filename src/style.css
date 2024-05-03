@@ -56,9 +56,6 @@ button:hover {
 }
 
 #toolbar {
-    border-radius: 3px;
-    border-color: black;
-    border: solid;
     margin: 0.25rem;
     text-align: center;
     padding-bottom: 5px;
@@ -66,7 +63,10 @@ button:hover {
 
 #viewer-holder {
     text-align: center;
-    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .btn-group button {
@@ -97,32 +97,74 @@ button:hover {
     width: 50%;
 }
 
-.s-nav-button {
+.nav-button {
     font-size: 25px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar-button {
+    font-size: 22px;
     width: 40px;
-    /* margin-top: 20px; */
+    height: 40px;
+    border: none;
+    border-radius: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#q-navigation {
+    width: 240px; 
+    height: 50px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    border: none;
+    border-radius: 12px;
+    background-color: lightgrey;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#toolbar-button-holder {
+    width: 370px; 
+    height: 50px;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+    border-radius: 12px;
+    background-color: lightgrey;
 }
 
 .s-nav-holder {
+    margin: 0 auto; 
     width: 150px; 
-    margin: 0 auto;
+    height: 30px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     padding-top: 10px;
     padding-bottom: 15px;
-}
-
-.q-nav-button {
-    font-size: 20px;
-    width: 200px
 }
 
 .pagecount {
     width: 100px;
     margin: 0 auto;
-    padding-top: 8.5px;
 }
 
 .viewer {
-    width: 49%;
+    width: 100%;
     text-align: center;
     border-radius: 3px;
     border-color: black;

@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="style.css" type="text/css"/>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
@@ -41,42 +43,75 @@
                     <div id="paper-selection" class="btn-group"></div>
                 </div>
             </div>
-            <div id="viewer-ui" style="display: none;">
-                <div id="toolbar">
-                    <button id="viewer-back-button" style="display: block;">Back to Papers</button>
-                    <div id="q-navigation" class="navbar">
-                        <p id="question-label" style="text-align: center;">Current Question: N/A</p>
-                        <button id="previous-button" class="q-nav-button">Previous Question</button>
-                        <button id="next-button" class="q-nav-button">Next Question</button>
+            <div id="viewer-ui">
+                <div id="toolbar" style="height: 70px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    <button id="viewer-back-button" class="toolbar-button" style="width: 120px; border-radius: 15px; float: left; background-color: lightgrey; color: black; font-size: 14px;">Back to Papers</button>
+                    <div id="q-navigation">
+                        <button id="previous-button" class="nav-button" style="float: left; margin-left: 5px; margin-right: auto;">
+                            <ion-icon name="chevron-back-outline"></ion-icon>
+                        </button>
+                        <p id="question-label" style="text-align: center;">Question: N/A</p>
+                        <button id="next-button" class="nav-button" style="float: right; margin-right: 5px; margin-left: auto;">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </button>
                     </div>
-                    <button id="toggle-nav-button" style="margin-top: 20px;">Switch to Separate Navigation</button>
-                    <button id="toggle-mi-visibility">Show Marking Instructions</button>
-                    <button id="toggle-scale">Enlarge View</button>
+                    <div id="toolbar-button-holder">
+                        <button id="toggle-nav-button" class="toolbar-button" style="width: 150px; border-radius: 15px; font-size: 14px;">Switch to <br>Separate Navigation</button>
+                        <button id="toggle-scale-button" class="toolbar-button">+</button>
+                        <div style="border-left: 3px solid grey; height: 30px; margin-left: 5px; margin-right: 5px;"></div>
+                        <button id="toggle-sp-button" class="toolbar-button">
+                            <ion-icon name="document-outline"></ion-icon>
+                        </button>
+                        <button id="toggle-qp-button" class="toolbar-button">
+                            <ion-icon name="reader"></ion-icon>
+                        </button>
+                        <button id="toggle-mi-button" class="toolbar-button">
+                            <ion-icon name="clipboard-outline"></ion-icon>
+                        </button>
+                    </div>
                 </div>
-                <div id="viewer-scale" style="width: 50%; margin: 0 auto;">
-                    <div id="viewer-holder" style="width: 70%;">
-                        <div id="qp-viewer" class="viewer" style="float: left; width: 100%;">
-                            <div class="s-nav-holder">
-                                <button id="qp-left-button" class="s-nav-button" style="float: left; display: none;">‹</button>
-                                <button id="qp-right-button" class="s-nav-button" style="float: right; display: none;">›</button>
-                                <p id="qp-pagecount" class="pagecount">1 / 1</p>
-                            </div>
-                            <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
+                <div id="viewer-holder" style="width: 100%">
+                    <div id="sp-viewer" class="viewer" style="display: none;">
+                        <div class="s-nav-holder">
+                            <button id="sp-left-button" class="nav-button" style="float: left; display: none;">
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                            </button>
+                            <p id="sp-pagecount" class="pagecount">1 / 1</p>
+                            <button id="sp-right-button" class="nav-button" style="display: none;">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
                         </div>
-                        <div id="mi-viewer" class="viewer" style="float: right; display: none; width: 48%;">
-                            <div class="s-nav-holder">
-                                <button id="mi-left-button" class="s-nav-button" style="float: left; display: none;">‹</button>
-                                <button id="mi-right-button" class="s-nav-button" style="float: right; display: none;">›</button>
-                                <p id="mi-pagecount" class="pagecount">1 / 1</p>
-                            </div>
-                            <canvas id="mi-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
+                        <canvas id="sp-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
+                    </div>
+                    <div id="qp-viewer" class="viewer">
+                        <div class="s-nav-holder">
+                            <button id="qp-left-button" class="nav-button" style="float: left; display: none;">
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                            </button>
+                            <p id="qp-pagecount" class="pagecount">1 / 1</p>
+                            <button id="qp-right-button" class="nav-button" style="display: none;">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
                         </div>
+                        <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
+                    </div>
+                    <div id="mi-viewer" class="viewer" style="display: none;">
+                        <div class="s-nav-holder">
+                            <button id="mi-left-button" class="nav-button" style="float: left; display: none;">
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                            </button>
+                            <p id="mi-pagecount" class="pagecount">1 / 1</p>
+                            <button id="mi-right-button" class="nav-button" style="display: none;">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
+                        </div>
+                        <canvas id="mi-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
                     </div>
                 </div>
             </div>  
         </main>
         <a style="clear: both; float: right; margin-right: 1rem;" href="https://docs.google.com/forms/d/e/1FAIpQLScLeYaD3txzzMaY8tYa1zMVtgP5kJkifgNjdUzTBaLIto3hiA/viewform?usp=sf_link">Feedback Form</a>
-        <p style="clear: both; float: right; margin-right: 1rem;">SQA Past Paper Viewer v1.0, dev-electron, github.com/elecarno</p>
+        <p style="clear: both; float: right; margin-right: 1rem;">SQA Past Paper Viewer v1.1, github.com/elecarno</p>
         <script src="./js/sqa_files.js"></script>
         <script src="./js/display_names.js"></script>
         <script src="./js/element_refs.js"></script>

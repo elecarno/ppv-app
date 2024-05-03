@@ -1,3 +1,5 @@
+This project uses Iconicons (https://github.com/ionic-team/ionicons)
+
 Notice: This project contains test files taken from the SQA website. I do not own the copyrights to these files.
 
 Known Bugs:

@@ -6,11 +6,13 @@ navToggleButton.addEventListener("click", () => {
     usingQuestionNavigation = !usingQuestionNavigation
     if (usingQuestionNavigation) {
         navToggleButton.innerHTML = "Switch to Separate Navigation"
-        questionNavigationPanel.style.display = "block"
+        questionNavigationPanel.style.display = "flex"
         qpNextButton.style.display = "none"
         qpPreviousButton.style.display = "none"
         miNextButton.style.display = "none"
         miPreviousButton.style.display = "none"
+        spNextButton.style.display = "none"
+        spPreviousButton.style.display = "none"
     } else {
         navToggleButton.innerHTML = "Switch to Question Navigation"
         questionNavigationPanel.style.display = "none"
@@ -18,47 +20,87 @@ navToggleButton.addEventListener("click", () => {
         qpPreviousButton.style.display = "block"
         miNextButton.style.display = "block"
         miPreviousButton.style.display = "block"
+        spNextButton.style.display = "block"
+        spPreviousButton.style.display = "block"
+        
     }
     currentQuestion = 1
     currentArticle = 0
     currentArticlePage = 0
-    questionLabel.innerHTML = "Current Question: N/A"
+    questionLabel.innerHTML = "Question: N/A"
 })
 
 scaleToggleButton.addEventListener("click", () => {
     isEnlarged = !isEnlarged
+
+    scaleToggleButton.innerHTML = ""
+    var icon = document.createElement("ion-icon")
+
     if (isEnlarged) {
-        scaleToggleButton.innerHTML = "Minimise View"
-        viewerScale.style.width = "100%"
+        icon.setAttribute("name", "remove")
+        qpViewerHolder.style.width = "100%"
+        miViewerHolder.style.width = "100%"
+        spViewerHolder.style.width = "100%"
     }
     else {
-        scaleToggleButton.innerHTML = "Enlarge View"
-        if (showMI){
-            viewerScale.style.width = "70%"
-        } else {
-            viewerScale.style.width = "50%"
-        }
+        icon.setAttribute("name", "add")
+        qpViewerHolder.style.width = "70%"
+        miViewerHolder.style.width = "70%"
+        spViewerHolder.style.width = "70%"
     }
+
+    scaleToggleButton.append(icon)
+})
+
+qpVisToggleButton.addEventListener("click", () => {
+    showMI = !showMI
+
+    qpVisToggleButton.innerHTML = ""
+    var icon = document.createElement("ion-icon")
+
+    if (showMI) {
+        icon.setAttribute("name", "reader")
+        qpViewerHolder.style.display = "block"
+    } else {
+        icon.setAttribute("name", "reader-outline")
+        qpViewerHolder.style.display = "none"
+    }
+
+    qpVisToggleButton.append(icon)
 })
 
 miVisToggleButton.addEventListener("click", () => {
     showMI = !showMI
+
+    miVisToggleButton.innerHTML = ""
+    var icon = document.createElement("ion-icon")
+
     if (showMI) {
-        miVisToggleButton.innerHTML = "Hide Marking Instructions"
-        viewerHolder.style.width = "100%"
-        qpViewerHolder.style.width = "48%"
+        icon.setAttribute("name", "clipboard")
         miViewerHolder.style.display = "block"
     } else {
-        miVisToggleButton.innerHTML = "Show Marking Instructions"
-        viewerHolder.style.width = "70%"
-        qpViewerHolder.style.width = "100%"
+        icon.setAttribute("name", "clipboard-outline")
         miViewerHolder.style.display = "none"
     }
-    if (isEnlarged){
-        viewerScale.style.width = "100%"
+
+    miVisToggleButton.append(icon)
+})
+
+spVisToggleButton.addEventListener("click", () => {
+    showMI = !showMI
+
+    spVisToggleButton.innerHTML = ""
+    var icon = document.createElement("ion-icon")
+
+    if (showMI) {
+        icon.setAttribute("name", "document")
+        spViewerHolder.style.display = "block"
     } else {
-        viewerScale.style.width = "70%"
+        icon.setAttribute("name", "document-outline")
+        spViewerHolder.style.display = "none"
     }
+
+    spVisToggleButton.append(icon)
 })
 
 qpNextButton.addEventListener("click", () => {
@@ -164,12 +206,12 @@ previousButton.addEventListener("click", () => {
 function updateQuestionLabel(){
     if (questionsQP[currentQuestion][1][currentArticle] != undefined){
         if (questionsQP[currentQuestion][1][currentArticle].length > 1){
-            questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ") - page " + (currentArticlePage+1)
+            questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ") - page " + (currentArticlePage+1)
         } else {
-            questionLabel.innerHTML = "Current Question: " + currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
+            questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
         }
     } else {
-        questionLabel.innerHTML = "Current Question: " + currentQuestion + "."
+        questionLabel.innerHTML = currentQuestion + "."
     }
 
     console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)

@@ -1,7 +1,9 @@
 const qpViewer = document.getElementById("qp-pdf-viewer")
 const miViewer = document.getElementById("mi-pdf-viewer")
+const spViewer = document.getElementById("sp-pdf-viewer")
 let currentQP = {};
 let currentMI = {};
+let currentSP = {};
 
 let questionsQP = {};
 let questionsMI = {};
@@ -10,16 +12,20 @@ let currentQuestion = 1 // 1. , 2. , 3.
 let currentArticle = 0 // (a) , (b) , (c)
 let currentArticlePage = 0
 
-function resetCurrentQP() {
+function resetCurrentPDFs() {
     currentQP = {
         file: null,
         totalPages: 0,
         currentPage: 1,
         zoom: 2.5
     }
-}
-function resetCurrentMI() {
     currentMI = {
+        file: null,
+        totalPages: 0,
+        currentPage: 1,
+        zoom: 2.5
+    }
+    currentSP = {
         file: null,
         totalPages: 0,
         currentPage: 1,
@@ -28,8 +34,7 @@ function resetCurrentMI() {
 }
 
 function loadPDF(pdfURL, currentPDF) {
-    resetCurrentQP();
-    resetCurrentMI();
+    resetCurrentPDFs();
 
     const pdfFile = pdfjsLib.getDocument(pdfURL);
     pdfFile.promise.then(doc => {
