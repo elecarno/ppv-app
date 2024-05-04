@@ -24,6 +24,7 @@
     "electron": "^30.0.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "pdfjs-dist": "^4.2.67"
   }
 }
