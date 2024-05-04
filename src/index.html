@@ -4,48 +4,61 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="style.css" type="text/css"/>
+        <title>SQA Past Paper Viewer</title>
+        <!-- pdf.js -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+        <!-- Ion Icons -->
         <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+        <!-- Font: Atkinson Hyperlegible -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-        <title>SQA Past Paper Viewer</title>
     </head>    
-
     <body>
         <main>
-            <div id="menu-ui" style="margin-top: 70px; margin-left: 15%; height: 880px;">
+            <!-- Home Page -->
+            <div id="menu-ui" style="margin-top: 70px; margin-left: 180px; height: 880px;">
                 <h1>SQA Past Paper Viewer</h1>
                 <div id="subject-custom-container">
+                    <!-- Native PDF selection -->
                     <div id="subject-container">
-                        <h2 id="step-label">Select Subject</h2>
+                        <h2><span class="notbold">Select Subject</span></h2>
                         <div id="subject-selection" class="btn-group"></div>
                     </div>
+                    <!-- Load PDFs from computer -->
                     <div id="custom-container">
-                        <h2 id="step-label">Load PDFs from Computer</h2>
+                        <h2 id="step-label"><span class="notbold">Load PDFs from Computer</span></h2>
                         <div id="custom-selection" class="btn-group">
                             <input type="file" id="load-qp-button" style="display: block;" accept="application/pdf" multiple="multiple" onchange="getCustomQP(event)"> - Select Question Paper <b>First</b><br> - Select Marking Instructions <b>Second</b></input>
                             <button id="load-custom-button" style="border: none; border-top: solid 5px white; height: 60px; margin-top: 15px;">View PDFs</button>
                         </div>
                     </div>
                 </div>
-                
+                <!-- Level Selection (n5/nh/ah) -->
                 <div id="level-selection" class="btn-group" style="display: none;">
+                    <h2 id="level-label">Select Level</h2>
                     <button id="level-back-button" style="border: none; border-bottom: solid 5px white; height: 40px; background-color: grey;">Back to Subjects</button>
                     <button id="n5-button" style="display: none;">National 5</button>
                     <button id="nh-button" style="display: none;">Higher</button>
                     <button id="ah-button" style="display: none;">Advanced Higher</button>
                 </div>
+                <!-- Year & Paper Selection -->
                 <div id="year-paper-container" style="display: none;">
-                    <div id="year-selection" class="btn-group"></div>
-                    <div id="paper-selection" class="btn-group"></div>
+                    <h2 id="year-paper-label">Select Year & Paper</h2>
+                    <div id="year-paper-holder">
+                        <div id="year-selection" class="btn-group"></div>
+                        <div id="paper-selection" class="btn-group"></div>
+                    </div>
                 </div>
             </div>
-            <div id="viewer-ui">
+            <!-- PDF Viewer -->
+            <div id="viewer-ui" style="display: none;">
+                <!-- Toolbar -->
                 <div id="toolbar" style="height: 70px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
                     <button id="viewer-back-button" class="toolbar-button" style="width: 120px; border-radius: 15px; float: left; background-color: lightgrey; color: black; font-size: 14px;">Back to Papers</button>
+                    <!-- Question Navigation -->
                     <div id="q-navigation">
                         <button id="previous-button" class="nav-button" style="float: left; margin-left: 5px; margin-right: auto;">
                             <ion-icon name="chevron-back-outline"></ion-icon>
@@ -55,10 +68,15 @@
                             <ion-icon name="chevron-forward-outline"></ion-icon>
                         </button>
                     </div>
+                    <!-- Control Buttons -->
                     <div id="toolbar-button-holder">
+                        <!-- Global Toggles -->
                         <button id="toggle-nav-button" class="toolbar-button" style="width: 150px; border-radius: 15px; font-size: 14px;">Switch to <br>Separate Navigation</button>
-                        <button id="toggle-scale-button" class="toolbar-button">+</button>
+                        <button id="toggle-scale-button" class="toolbar-button">
+                            <ion-icon name="expand-outline"></ion-icon>
+                        </button>
                         <div style="border-left: 3px solid grey; height: 30px; margin-left: 5px; margin-right: 5px;"></div>
+                        <!-- Paper Toggles -->
                         <button id="toggle-sp-button" class="toolbar-button">
                             <ion-icon name="document-outline"></ion-icon>
                         </button>
@@ -70,7 +88,9 @@
                         </button>
                     </div>
                 </div>
+                <!-- PDF Viewers -->
                 <div id="viewer-holder" style="width: 100%">
+                    <!-- Supplementary Sheet Viewer -->
                     <div id="sp-viewer" class="viewer" style="display: none;">
                         <div class="s-nav-holder">
                             <button id="sp-left-button" class="nav-button" style="float: left; display: none;">
@@ -83,6 +103,7 @@
                         </div>
                         <canvas id="sp-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
                     </div>
+                    <!-- Question Paper Viewer -->
                     <div id="qp-viewer" class="viewer">
                         <div class="s-nav-holder">
                             <button id="qp-left-button" class="nav-button" style="float: left; display: none;">
@@ -95,6 +116,7 @@
                         </div>
                         <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
                     </div>
+                    <!-- Marking Instructions Viewer -->
                     <div id="mi-viewer" class="viewer" style="display: none;">
                         <div class="s-nav-holder">
                             <button id="mi-left-button" class="nav-button" style="float: left; display: none;">
@@ -110,14 +132,15 @@
                 </div>
             </div>  
         </main>
+        <!-- Footer -->
         <a style="clear: both; float: right; margin-right: 1rem;" href="https://docs.google.com/forms/d/e/1FAIpQLScLeYaD3txzzMaY8tYa1zMVtgP5kJkifgNjdUzTBaLIto3hiA/viewform?usp=sf_link">Feedback Form</a>
         <p style="clear: both; float: right; margin-right: 1rem;">SQA Past Paper Viewer v1.1, github.com/elecarno</p>
-        <script src="./js/sqa_files.js"></script>
-        <script src="./js/display_names.js"></script>
-        <script src="./js/element_refs.js"></script>
+        <!-- Scripts -->
+        <script src="./js/refs/sqa_files.js"></script>
+        <script src="./js/refs/display_names.js"></script>
+        <script src="./js/refs/element_refs.js"></script>
         <script src="./js/viewer.js"></script>
         <script src="./js/viewer_interaction.js"></script>
         <script src="./js/main.js"></script>
     </body>
-
 </html>

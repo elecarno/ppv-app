@@ -1,17 +1,23 @@
 const qpViewer = document.getElementById("qp-pdf-viewer")
 const miViewer = document.getElementById("mi-pdf-viewer")
 const spViewer = document.getElementById("sp-pdf-viewer")
+
+// stores for PDF data
 let currentQP = {};
 let currentMI = {};
 let currentSP = {};
 
+// stores for question outlines
 let questionsQP = {};
 let questionsMI = {};
+let questionsSP = {};
 
+// counters for question navigation
 let currentQuestion = 1 // 1. , 2. , 3.
 let currentArticle = 0 // (a) , (b) , (c)
-let currentArticlePage = 0
+let currentArticlePage = 0 // page of current article
 
+// reset PDF data stores
 function resetCurrentPDFs() {
     currentQP = {
         file: null,
@@ -31,40 +37,58 @@ function resetCurrentPDFs() {
         currentPage: 1,
         zoom: 2.5
     }
+
+    qpVisToggleButton.style.display = "none"
+    miVisToggleButton.style.display = "none"
+    spVisToggleButton.style.display = "none"
 }
 
-function loadPDF(pdfURL, currentPDF) {
+// load PDF data from path (pdfURL = path, pdfType = type of paper ("qp", "mi", "sp"))
+function loadPDF(pdfURL, pdfType) {
     resetCurrentPDFs();
 
     const pdfFile = pdfjsLib.getDocument(pdfURL);
     pdfFile.promise.then(doc => {
-        switch (currentPDF) {
+        // check for type and load to correct viewer
+        switch (pdfType) {
             case "qp":
                 currentQP.file = doc;
                 currentQP.totalPages = doc.numPages;
+                qpVisToggleButton.style.display = "flex"
                 renderCurrentPage(currentQP, qpViewer);
                 break;
             case "mi":
                 currentMI.file = doc;
                 currentMI.totalPages = doc.numPages;
+                miVisToggleButton.style.display = "flex"
                 renderCurrentPage(currentMI, miViewer);
+                break;
+            case "sp":
+                currentSP.file = doc;
+                currentSP.totalPages = doc.numPages;
+                spVisToggleButton.style.display = "flex"
+                renderCurrentPage(currentSP, spViewer);
                 break;
         } 
 
-        // Check for questions
-        let questionsDict = outlinePDF(doc, currentPDF)
+        // outline questions
+        let questionsDict = outlinePDF(doc, pdfType)
 
-        console.log(currentPDF)
-        if (currentPDF == "qp") {
+        console.log(pdfType)
+        if (pdfType == "qp") {
             questionsQP = questionsDict
             console.log(questionsQP)
-        } else if (currentPDF == "mi") {
+        } else if (pdfType == "mi") {
             questionsMI = questionsDict
             console.log(questionsMI)
+        } else if (pdfType == "sp") {
+            questionsSP = questionsDict
+            console.log(questionsSP)
         }
     })
 }
 
+// render page to viewer
 function renderCurrentPage(currentPDF, viewer) {
     currentPDF.file.getPage(currentPDF.currentPage).then(page => {
         const context = viewer.getContext("2d");
@@ -81,18 +105,12 @@ function renderCurrentPage(currentPDF, viewer) {
     updatePageCounts()
 }
 
-const getPageText = async (pdf, pageNo) => {
-    const page = await pdf.getPage(pageNo);
-    const tokenizedText = await page.getTextContent();
-    const pageText = tokenizedText.items.map(token => token.str).join("");
-    return pageText;
-};
-
-function outlinePDF(doc, currentPDF) {
+// question outliner
+function outlinePDF(doc, pdfType) {
     let questionsDict = {}
     let isMI = false
 
-    if (currentPDF == "mi"){
+    if (pdfType == "mi"){
         isMI = true
     }
 
@@ -134,6 +152,14 @@ function outlinePDF(doc, currentPDF) {
 
     return questionsDict
 }
+
+// functions for the outliner
+const getPageText = async (pdf, pageNo) => {
+    const page = await pdf.getPage(pageNo);
+    const tokenizedText = await page.getTextContent();
+    const pageText = tokenizedText.items.map(token => token.str).join("");
+    return pageText;
+};
 
 function removeNonConsecutiveAlphabets(dictionary) {
     // Convert dictionary keys to an array and sort it

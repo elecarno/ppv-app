@@ -1,0 +1,11 @@
+v1.0 - Initial Testing Release
+
+v1.1
+Features:
+- Viewer UI Overhaul
+- Added Functionality for Supplementary Sheets
+
+Bug Fixes:
+- Fixed Paper Selection Header
+- Fixed Level's for Subject detection.
+- Fixed Various HTML/CSS Formatting Issues

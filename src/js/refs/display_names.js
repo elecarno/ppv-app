@@ -36,5 +36,5 @@ var paperNames = {
     "dw": "Directed Writing",
     "li": "Listening",
     "cr": "Critical Reading",
-    "ru": "Reading for Understanding Analysis and Evaluation"
+    "ru": "RUAE"
 }

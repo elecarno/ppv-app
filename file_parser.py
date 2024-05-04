@@ -16,6 +16,8 @@ def folder_to_dict(folder_path):
                     file_name, file_extension = os.path.splitext(filename)
                     if file_name.endswith("_mi") and file_name[:-3] in files_dict:
                         files_dict[file_name[:-3]]['mi'] = {'name': file_name, 'path': file_path.replace('/src', '')}
+                    elif file_name.endswith("_sp") and file_name[:-3] in files_dict:
+                        files_dict[file_name[:-3]]['sp'] = {'name': file_name, 'path': file_path.replace('/src', '')}
                     else:
                         files_dict[file_name] = {'name': file_name, 'path': file_path.replace('/src', '')}
                 folder_dict[item] = list(files_dict.values())
@@ -32,7 +34,7 @@ def main():
     print("File structure parsed and saved to file_structure.json")
 
     # Write the JSON data into a JavaScript file
-    with open('./src/js/sqa_files.js', 'w') as js_file:
+    with open('./src/js/refs/sqa_files.js', 'w') as js_file:
         js_file.write(f'var sqaFiles = {json.dumps(parsed_data, indent=4)};')
 
     print("JSON data written to sqa_files.js")

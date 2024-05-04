@@ -15,32 +15,9 @@ button:hover {
     background-color: #20208a;
 }
 
-#year-selection, #paper-selection {
-    float: left;
-    width: 30%; /* Each div takes 50% width */
-    box-sizing: border-box; /* Include padding and border in the width */
-    padding: 10px; /* Add padding if needed */
-}
-
-#year-paper-container:after {
-    content: "";
-    display: table;
-    clear: both; /* Clear the floats */
-}
-
-#subject-container, #custom-container {
-    float: left;
-    width: 30%; /* Each div takes 50% width */
-    box-sizing: border-box; /* Include padding and border in the width */
-    padding: 10px; /* Add padding if needed */
-}
-
-#subject-custom-container:after {
-    content: "";
-    display: table;
-    clear: both; /* Clear the floats */
-}
-
+.notbold{
+    font-weight:normal
+}​
 
 #year-selection, #paper-selection {
     float: left;
@@ -53,6 +30,27 @@ button:hover {
     content: "";
     display: table;
     clear: both; /* Clear the floats */
+}
+
+#subject-custom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#custom-container {
+    padding-left: 70px;
+}
+
+#year-paper-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#paper-selection {
+    padding-left: 50px;
+    padding-top: 20px;
 }
 
 #toolbar {
@@ -137,7 +135,7 @@ button:hover {
 }
 
 #toolbar-button-holder {
-    width: 370px; 
+    /* width: 370px;  */
     height: 50px;
     display: flex; 
     flex-direction: row; 
@@ -164,7 +162,7 @@ button:hover {
 }
 
 .viewer {
-    width: 100%;
+    width: 70%;
     text-align: center;
     border-radius: 3px;
     border-color: black;

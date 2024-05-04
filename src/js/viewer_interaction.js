@@ -2,11 +2,14 @@ let usingQuestionNavigation = true
 let showMI = false
 let isEnlarged = false
 
+// add functionality to navigation toggle button
 navToggleButton.addEventListener("click", () => {
     usingQuestionNavigation = !usingQuestionNavigation
     if (usingQuestionNavigation) {
-        navToggleButton.innerHTML = "Switch to Separate Navigation"
+        // update navToggleButton
+        navToggleButton.innerHTML = "Switch to<br>Separate Navigation"
         questionNavigationPanel.style.display = "flex"
+        // hide all "s-nav-button"s
         qpNextButton.style.display = "none"
         qpPreviousButton.style.display = "none"
         miNextButton.style.display = "none"
@@ -14,8 +17,10 @@ navToggleButton.addEventListener("click", () => {
         spNextButton.style.display = "none"
         spPreviousButton.style.display = "none"
     } else {
-        navToggleButton.innerHTML = "Switch to Question Navigation"
+         // update navToggleButton
+        navToggleButton.innerHTML = "Switch to<br>Question Navigation"
         questionNavigationPanel.style.display = "none"
+        // show all "s-nav-button"s
         qpNextButton.style.display = "block"
         qpPreviousButton.style.display = "block"
         miNextButton.style.display = "block"
@@ -24,12 +29,14 @@ navToggleButton.addEventListener("click", () => {
         spPreviousButton.style.display = "block"
         
     }
+    // reset counters and display for question navigation
     currentQuestion = 1
     currentArticle = 0
     currentArticlePage = 0
     questionLabel.innerHTML = "Question: N/A"
 })
 
+// add functionality to enlarge/minimise button
 scaleToggleButton.addEventListener("click", () => {
     isEnlarged = !isEnlarged
 
@@ -37,13 +44,13 @@ scaleToggleButton.addEventListener("click", () => {
     var icon = document.createElement("ion-icon")
 
     if (isEnlarged) {
-        icon.setAttribute("name", "remove")
+        icon.setAttribute("name", "contract-outline")
         qpViewerHolder.style.width = "100%"
         miViewerHolder.style.width = "100%"
         spViewerHolder.style.width = "100%"
     }
     else {
-        icon.setAttribute("name", "add")
+        icon.setAttribute("name", "expand-outline")
         qpViewerHolder.style.width = "70%"
         miViewerHolder.style.width = "70%"
         spViewerHolder.style.width = "70%"
@@ -52,6 +59,7 @@ scaleToggleButton.addEventListener("click", () => {
     scaleToggleButton.append(icon)
 })
 
+// add functionality to paper visibility toggles
 qpVisToggleButton.addEventListener("click", () => {
     showMI = !showMI
 
@@ -103,6 +111,7 @@ spVisToggleButton.addEventListener("click", () => {
     spVisToggleButton.append(icon)
 })
 
+// add functionality to seperate navigation buttons
 qpNextButton.addEventListener("click", () => {
     if (currentQP.currentPage != currentQP.totalPages){
         currentQP.currentPage += 1;
@@ -131,6 +140,21 @@ miPreviousButton.addEventListener("click", () => {
     }
 })
 
+spNextButton.addEventListener("click", () => {
+    if (currentSP.currentPage != currentSP.totalPages){
+        currentSP.currentPage += 1;
+        renderCurrentPage(currentSP, spViewer);
+    }
+})
+
+spPreviousButton.addEventListener("click", () => {
+    if (currentSP.currentPage != 1){
+        currentSP.currentPage -= 1;
+        renderCurrentPage(currentSP, spViewer);
+    }
+})
+
+// add functionality to question navigation buttons
 nextButton.addEventListener("click", () => {
     // If on first page, move to first page of first question
     if (currentQP.currentPage == 1) {
@@ -175,13 +199,17 @@ previousButton.addEventListener("click", () => {
         currentMI.currentPage = questionsMI[currentQuestion][1][0][0]
         console.log("qp: moved to first page of first question")
     } else {
+        // check if not on first article
         if (currentArticle > 0){
+            // if no, check if not on current article's first page
             if (currentArticlePage > 0) {
+                // if no, move to previous page of current article
                 currentArticlePage -= 1
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
                 currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage]
                 console.log("qp: moved to previous page of current article")
             } else {
+                // if yes, move to previous article
                 currentArticle -= 1
                 currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
                 currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle].at(-1)
@@ -189,6 +217,7 @@ previousButton.addEventListener("click", () => {
                 console.log("qp: moved to last page of previous article")
             }
         } else {
+            // if yes, move to previous question
             currentQuestion -= 1
             currentArticle = Object.keys(questionsQP[currentQuestion]).length - 1
             currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
@@ -203,17 +232,24 @@ previousButton.addEventListener("click", () => {
     updateQuestionLabel();
 })
 
+// update displays
 function updateQuestionLabel(){
+    // check if question has article or is standalone
     if (questionsQP[currentQuestion][1][currentArticle] != undefined){
+        // check if article has mulitple pages
         if (questionsQP[currentQuestion][1][currentArticle].length > 1){
+            // render display with page number of article
             questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ") - page " + (currentArticlePage+1)
         } else {
+            // display standalone question and article
             questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
         }
     } else {
+        // display standalone question number
         questionLabel.innerHTML = currentQuestion + "."
     }
 
+    // log question navigation counters for debugging purposes
     console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)
     , "\ncurrentQuestion: ", currentQuestion, ", number of pages: ", questionsQP[currentQuestion][0].length
     , "\ncurrentArticle: ", currentArticle, ", number of pages: ", questionsQP[currentQuestion][1][currentArticle].length
@@ -223,4 +259,11 @@ function updateQuestionLabel(){
 function updatePageCounts(){
     qpNavLabel.innerHTML = currentQP.currentPage + " / " + currentQP.totalPages
     miNavLabel.innerHTML = currentMI.currentPage + " / " + currentMI.totalPages
+    spNavLabel.innerHTML = currentSP.currentPage + " / " + currentSP.totalPages
 }
+
+// add functionality to "Back to Papers" button
+document.getElementById("viewer-back-button").addEventListener("click", () => {
+    menuUI.style.display = "block"
+    viewerUI.style.display = "none"
+})

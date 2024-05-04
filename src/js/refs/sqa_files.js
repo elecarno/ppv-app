@@ -621,6 +621,18 @@ var sqaFiles = {
                         "name": "eng_nh_2022_cr_mi",
                         "path": "./sqa_pdfs\\eng\\nh\\2022\\eng_nh_2022_cr_mi.PDF"
                     }
+                },
+                {
+                    "name": "eng_nh_2022_ru",
+                    "path": "./sqa_pdfs\\eng\\nh\\2022\\eng_nh_2022_ru.pdf",
+                    "mi": {
+                        "name": "eng_nh_2022_ru_mi",
+                        "path": "./sqa_pdfs\\eng\\nh\\2022\\eng_nh_2022_ru_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "eng_nh_2022_ru_sp",
+                        "path": "./sqa_pdfs\\eng\\nh\\2022\\eng_nh_2022_ru_sp.pdf"
+                    }
                 }
             ],
             "2023": [
@@ -631,77 +643,26 @@ var sqaFiles = {
                         "name": "eng_nh_2023_cr_mi",
                         "path": "./sqa_pdfs\\eng\\nh\\2023\\eng_nh_2023_cr_mi.PDF"
                     }
+                },
+                {
+                    "name": "eng_nh_2023_ru",
+                    "path": "./sqa_pdfs\\eng\\nh\\2023\\eng_nh_2023_ru.pdf",
+                    "mi": {
+                        "name": "eng_nh_2023_ru_mi",
+                        "path": "./sqa_pdfs\\eng\\nh\\2023\\eng_nh_2023_ru_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "eng_nh_2023_ru_sp",
+                        "path": "./sqa_pdfs\\eng\\nh\\2023\\eng_nh_2023_ru_sp.pdf"
+                    }
                 }
             ]
         }
     },
-    "fren": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "geo": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "ger": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
+    "fren": [],
+    "geo": [],
+    "ger": [],
     "grc": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
         "n5": {
             "2018": [
                 {
@@ -740,6 +701,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "grc_n5_2023_qp_mi",
                         "path": "./sqa_pdfs\\grc\\n5\\2023\\grc_n5_2023_qp_mi.PDF"
+                    },
+                    "sp": {
+                        "name": "grc_n5_2023_qp_sp",
+                        "path": "./sqa_pdfs\\grc\\n5\\2023\\grc_n5_2023_qp_sp.pdf"
                     }
                 }
             ]
@@ -772,6 +737,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "grc_nh_2022_qp_mi",
                         "path": "./sqa_pdfs\\grc\\nh\\2022\\grc_nh_2022_qp_mi.PDF"
+                    },
+                    "sp": {
+                        "name": "grc_nh_2022_qp_sp",
+                        "path": "./sqa_pdfs\\grc\\nh\\2022\\grc_nh_2022_qp_sp.pdf"
                     }
                 }
             ],
@@ -782,31 +751,16 @@ var sqaFiles = {
                     "mi": {
                         "name": "grc_nh_2023_qp_mi",
                         "path": "./sqa_pdfs\\grc\\nh\\2023\\grc_nh_2023_qp_mi.PDF"
+                    },
+                    "sp": {
+                        "name": "grc_nh_2023_qp_sp",
+                        "path": "./sqa_pdfs\\grc\\nh\\2023\\grc_nh_2023_qp_sp.pdf"
                     }
                 }
             ]
         }
     },
-    "his": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
+    "his": [],
     "math": {
         "ah": {
             "2018": [
@@ -983,66 +937,9 @@ var sqaFiles = {
             ]
         }
     },
-    "mod": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "mus": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "pe": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
+    "mod": [],
+    "mus": [],
+    "pe": [],
     "phys": {
         "ah": {
             "2018": [
@@ -1072,6 +969,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_ah_2022_qp_mi",
                         "path": "./sqa_pdfs\\phys\\ah\\2022\\phys_ah_2022_qp_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_ah_2022_qp_sp",
+                        "path": "./sqa_pdfs\\phys\\ah\\2022\\phys_ah_2022_qp_sp.pdf"
                     }
                 }
             ],
@@ -1082,6 +983,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_ah_2023_qp_mi",
                         "path": "./sqa_pdfs\\phys\\ah\\2023\\phys_ah_2023_qp_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_ah_2023_qp_sp",
+                        "path": "./sqa_pdfs\\phys\\ah\\2023\\phys_ah_2023_qp_sp.pdf"
                     }
                 }
             ]
@@ -1114,6 +1019,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_n5_2022_s1_mi",
                         "path": "./sqa_pdfs\\phys\\n5\\2022\\phys_n5_2022_s1_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_n5_2022_s1_sp",
+                        "path": "./sqa_pdfs\\phys\\n5\\2022\\phys_n5_2022_s1_sp.pdf"
                     }
                 },
                 {
@@ -1122,6 +1031,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_n5_2022_s2_mi",
                         "path": "./sqa_pdfs\\phys\\n5\\2022\\phys_n5_2022_s2_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_n5_2022_s2_sp",
+                        "path": "./sqa_pdfs\\phys\\n5\\2022\\phys_n5_2022_s2_sp.pdf"
                     }
                 }
             ],
@@ -1132,6 +1045,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_n5_2023_s1_mi",
                         "path": "./sqa_pdfs\\phys\\n5\\2023\\phys_n5_2023_s1_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_n5_2023_s1_sp",
+                        "path": "./sqa_pdfs\\phys\\n5\\2023\\phys_n5_2023_s1_sp.pdf"
                     }
                 },
                 {
@@ -1140,6 +1057,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_n5_2023_s2_mi",
                         "path": "./sqa_pdfs\\phys\\n5\\2023\\phys_n5_2023_s2_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_n5_2023_s2_sp",
+                        "path": "./sqa_pdfs\\phys\\n5\\2023\\phys_n5_2023_s2_sp.pdf"
                     }
                 }
             ]
@@ -1172,6 +1093,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_nh_2022_p1_mi",
                         "path": "./sqa_pdfs\\phys\\nh\\2022\\phys_nh_2022_p1_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_nh_2022_p1_sp",
+                        "path": "./sqa_pdfs\\phys\\nh\\2022\\phys_nh_2022_p1_sp.pdf"
                     }
                 },
                 {
@@ -1180,6 +1105,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_nh_2022_p2_mi",
                         "path": "./sqa_pdfs\\phys\\nh\\2022\\phys_nh_2022_p2_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_nh_2022_p2_sp",
+                        "path": "./sqa_pdfs\\phys\\nh\\2022\\phys_nh_2022_p2_sp.pdf"
                     }
                 }
             ],
@@ -1190,6 +1119,10 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_nh_2023_p1_mi",
                         "path": "./sqa_pdfs\\phys\\nh\\2023\\phys_nh_2023_p1_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_nh_2023_p1_sp",
+                        "path": "./sqa_pdfs\\phys\\nh\\2023\\phys_nh_2023_p1_sp.pdf"
                     }
                 },
                 {
@@ -1198,86 +1131,16 @@ var sqaFiles = {
                     "mi": {
                         "name": "phys_nh_2023_p2_mi",
                         "path": "./sqa_pdfs\\phys\\nh\\2023\\phys_nh_2023_p2_mi.pdf"
+                    },
+                    "sp": {
+                        "name": "phys_nh_2023_p2_sp",
+                        "path": "./sqa_pdfs\\phys\\nh\\2023\\phys_nh_2023_p2_sp.pdf"
                     }
                 }
             ]
         }
     },
-    "prc": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "prw": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        }
-    },
-    "spa": {
-        "ah": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "n5": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": []
-        },
-        "nh": {
-            "2018": [],
-            "2019": [],
-            "2022": [],
-            "2023": [
-                {
-                    "name": "spa_nh_2023_dw",
-                    "path": "./sqa_pdfs\\spa\\nh\\2023\\spa_nh_2023_dw.pdf",
-                    "mi": {
-                        "name": "spa_nh_2023_dw_mi",
-                        "path": "./sqa_pdfs\\spa\\nh\\2023\\spa_nh_2023_dw_mi.pdf"
-                    }
-                },
-                {
-                    "name": "spa_nh_2023_re",
-                    "path": "./sqa_pdfs\\spa\\nh\\2023\\spa_nh_2023_re.pdf",
-                    "mi": {
-                        "name": "spa_nh_2023_re_mi",
-                        "path": "./sqa_pdfs\\spa\\nh\\2023\\spa_nh_2023_re_mi.pdf"
-                    }
-                }
-            ]
-        }
-    }
+    "prc": [],
+    "prw": [],
+    "spa": []
 };

@@ -21,19 +21,21 @@ const questionNavigationPanel = document.getElementById("q-navigation")
 const questionLabel = document.getElementById("question-label")
 const qpNavLabel = document.getElementById("qp-pagecount")
 const miNavLabel = document.getElementById("mi-pagecount")
+const spNavLabel = document.getElementById("sp-pagecount")
 
 const viewerHolder = document.getElementById("viewer-holder")
 const qpViewerHolder = document.getElementById("qp-viewer")
 const miViewerHolder = document.getElementById("mi-viewer")
 const spViewerHolder = document.getElementById("sp-viewer")
 
-const subjectCustomConatiner = document.getElementById("subject-custom-container")
+const subjectCustomContainer = document.getElementById("subject-custom-container")
 const subjectSelection = document.getElementById("subject-selection")
 const levelSelection = document.getElementById("level-selection")
 const yearSelection = document.getElementById("year-selection")
 const paperSelection = document.getElementById("paper-selection")
 
-const stepLabel = document.getElementById("step-label")
+const levelLabel = document.getElementById("level-label")
+const yearPaperLabel = document.getElementById("year-paper-label")
 
 const n5Button = document.getElementById("n5-button")
 const nhButton = document.getElementById("nh-button")
