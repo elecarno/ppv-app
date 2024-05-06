@@ -4,7 +4,7 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="style.css" type="text/css"/>
-        <title>SQA Past Paper Viewer</title>
+        <title>Past Paper Viewer</title>
         <!-- pdf.js -->
         <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script> -->
@@ -20,7 +20,7 @@
         <main>
             <!-- Home Page -->
             <div id="menu-ui" style="margin-top: 70px; margin-left: 180px; height: 880px;">
-                <h1>SQA Past Paper Viewer</h1>
+                <h1>Past Paper Viewer</h1>
                 <div id="subject-custom-container">
                     <!-- Native PDF selection -->
                     <div id="subject-container">
@@ -30,9 +30,11 @@
                     <!-- Load PDFs from computer -->
                     <div id="custom-container">
                         <h2 id="step-label"><span class="notbold">Load PDFs from Computer</span></h2>
-                        <div id="custom-selection" class="btn-group">
-                            <input type="file" id="load-qp-button" style="display: block;" accept="application/pdf" multiple="multiple" onchange="getCustomQP(event)"> - Select Question Paper <b>First</b><br> - Select Marking Instructions <b>Second</b></input>
-                            <button id="load-custom-button" style="border: none; border-top: solid 5px white; height: 60px; margin-top: 15px;">View PDFs</button>
+                        <div id="custom-selection" class="btn-group" style="width: 600px;">
+                            <input type="file" id="load-qp-button" accept="application/pdf" onchange="getCustomQP(event)">Select Question Paper</input>
+                            <input type="file" id="load-mi-button" style="margin-top: 10px;" accept="application/pdf" onchange="getCustomMI(event)">Select Marking Instructions</input>
+                            <input type="file" id="load-sp-button" style="margin-top: 10px;" accept="application/pdf" onchange="getCustomSP(event)">Select Supplementary Sheet (If Applicable)</input>
+                            <button id="load-custom-button" style="border: none; border-top: solid 5px white; height: 60px; margin-top: 15px;">View Loaded PDFs</button>
                         </div>
                     </div>
                 </div>
@@ -77,13 +79,13 @@
                         </button>
                         <div style="border-left: 3px solid grey; height: 30px; margin-left: 5px; margin-right: 5px;"></div>
                         <!-- Paper Toggles -->
-                        <button id="toggle-sp-button" class="toolbar-button">
+                        <button title="Toggle Supplementary Sheets" id="toggle-sp-button" class="toolbar-button">
                             <ion-icon name="document-outline"></ion-icon>
                         </button>
-                        <button id="toggle-qp-button" class="toolbar-button">
+                        <button title="Toggle Question Paper" id="toggle-qp-button" class="toolbar-button">
                             <ion-icon name="reader"></ion-icon>
                         </button>
-                        <button id="toggle-mi-button" class="toolbar-button">
+                        <button title="Toggle Marking Instructions" id="toggle-mi-button" class="toolbar-button">
                             <ion-icon name="clipboard-outline"></ion-icon>
                         </button>
                     </div>
@@ -131,10 +133,84 @@
                     </div>
                 </div>
             </div>  
+            <!-- Footer Pages -->
+            <div id="license-ui" style="display: none;">
+                <p style="margin: 0 auto; width: 500px; text-align: justify; margin-top: 20px;">
+                    MIT License - Modified (Non-Commercial Use Only)
+                    <br><br>
+                    Copyright (c) 2024 Benjamin McEwan
+                    <br><br>
+                    Permission is hereby granted, free of charge, to any person obtaining a copy
+                    of this software and associated documentation files (the "Software"), to deal
+                    in the Software without restriction, including without limitation the rights
+                    to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+                    copies of the Software for non-commercial purposes only, subject to the following conditions:
+                    <br><br>
+                    The above copyright notice and this permission notice shall be included in all
+                    copies or substantial portions of the Software.
+                    <br><br>
+                    For any commercial use or redistribution, express written permission must be obtained 
+                    from the copyright holder.
+                    <br><br>
+                    Redistribution Limitation Clause:
+                    <br><br>
+                    You are not permitted to redistribute a free version of the Software in a 
+                    manner that would directly compete with or negatively impact the sale or 
+                    distribution of any paid version of the Software offered by the copyright holder. 
+                    This includes, but is not limited to, bundling the free version with competing 
+                    products, offering the free version as part of a competing software package, 
+                    or promoting the free version in a way that disparages the paid version.
+                    <br><br>
+                    Any violation of this clause may result in the termination of your right to use, 
+                    modify, or distribute the Software, as determined by the copyright holder.
+                    <br><br>
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                    SOFTWARE.
+                    <br><br>
+                    NOTICE: THIS LICENSE APPLIES ONLY TO THE SOFTWARE AND NOT TO THE SQA MATERIALS
+                    THAT HAVE BEEN PACKAGED AND REDISTRIBUTED WITHIN THE SOFTWARE.
+
+                </p>
+            </div>
+            <div id="patchnotes-ui" style="display: none; margin: 0 auto; width: 500px; text-align: justify; margin-top: 20px;">
+                <h2>v1.1</h2>
+                <h3>Updates</h3>
+                <p>
+                    - Renamed Application from "SQA Past Paper Viewer" to "Past Paper Viewer"<br>
+                    - Added Functionality for Supplementary Sheets<br>
+                    - Viewer UI Overhaul<br>
+                    - Improved Custom PDF Loading<br>
+                    - Updated Licensing & Added License Page<br>
+
+                </p>
+                <h3>Bug Fixes</h3>
+                <p>
+                    - Fixed Paper Selection Header<br>
+                    - Fixed Level's for Subject detection.<br>
+                    - Fixed Various HTML/CSS Formatting Issues
+                </p>
+
+                <h2>v1.0</h2>
+                <p>- Initial Release</p>
+            </div>
         </main>
         <!-- Footer -->
-        <a style="clear: both; float: right; margin-right: 1rem;" href="https://docs.google.com/forms/d/e/1FAIpQLScLeYaD3txzzMaY8tYa1zMVtgP5kJkifgNjdUzTBaLIto3hiA/viewform?usp=sf_link">Feedback Form</a>
-        <p style="clear: both; float: right; margin-right: 1rem;">SQA Past Paper Viewer v1.1, github.com/elecarno</p>
+        <div id="footer" style="display: flex; flex-direction: row; justify-content: flex-end; align-items: center; margin-top: 50px;">
+            <a href="https://www.sqa.org.uk/sqa/74903.html">Contains Redistributed SQA Past Papers</a>
+            <p style="margin: 10px;">•</p>
+            <a href="javascript:ShowLicense();">(c) 2024 Benjamin McEwan</a>
+            <p style="margin: 10px;">•</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLeYaD3txzzMaY8tYa1zMVtgP5kJkifgNjdUzTBaLIto3hiA/viewform?usp=sf_link">Feedback Form</a>
+            <p style="margin: 10px;">•</p>
+            <a href="javascript:ShowPatchNotes();">Patch Notes</a>
+            <p style="margin: 10px;">•</p>
+            <a style="margin-right: 1rem;" href="javascript:ShowHomepage();">Past Paper Viewer v1.1</a>
+        </div>
         <!-- Scripts -->
         <script src="./pdf.min.mjs" type="module"></script>
         <script src="./pdf.worker.min.mjs" type="module"></script>

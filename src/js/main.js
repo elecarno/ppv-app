@@ -3,6 +3,7 @@ let selectedLevel = ""
 
 let customQPURL = ""
 let customMIURL = ""
+let customSPURL = ""
 
 // create subject selection buttons
 function loadSubjects() {
@@ -189,26 +190,74 @@ function paperClickHandler(qpPath, miPath, spPath, paperFullname) {
 // load custom PDFs
 function getCustomQP(event) {
     const inputQP = event.target.files[0];
-    const inputMI = event.target.files[1];
 
     const readerQP = new FileReader();
     readerQP.readAsDataURL(inputQP);
     readerQP.onload = () => {
-        loadPDF(readerQP.result, "qp");
+        customQPURL = readerQP.result
     };
+}
+
+function getCustomMI(event) {
+    const inputMI = event.target.files[0];
 
     const readerMI = new FileReader();
     readerMI.readAsDataURL(inputMI);
     readerMI.onload = () => {
-        loadPDF(readerMI.result, "mi");
+        customMIURL = readerMI.result
+    };
+}
+
+function getCustomSP(event) {
+    const inputSP = event.target.files[0];
+
+    const readerSP = new FileReader();
+    readerSP.readAsDataURL(inputSP);
+    readerSP.onload = () => {
+        customSPURL = readerSP.result
     };
 }
 
 // switch to viewer 'page' when "View PDFs" button pressed
 loadCustomPDFs.addEventListener("click", () => {
+    if (customQPURL != ""){
+        loadPDF(customQPURL, "qp");
+    }
+    if (customMIURL != ""){
+        loadPDF(customMIURL, "mi");
+    }
+    if (customSPURL != ""){
+        loadPDF(customSPURL, "sp");
+    }
+
     menuUI.style.display = "none"
     viewerUI.style.display = "block"
 })
+
+// footer buttons
+function ShowLicense() {
+    document.getElementById("license-ui").style.display = "block"
+    document.getElementById("patchnotes-ui").style.display = "none"
+
+    menuUI.style.display = "none"
+    viewerUI.style.display = "none"
+}
+
+function ShowPatchNotes() {
+    document.getElementById("patchnotes-ui").style.display = "block"
+    document.getElementById("license-ui").style.display = "none"
+
+    menuUI.style.display = "none"
+    viewerUI.style.display = "none"
+}
+
+function ShowHomepage() {
+    document.getElementById("patchnotes-ui").style.display = "none"
+    document.getElementById("license-ui").style.display = "none"
+
+    menuUI.style.display = "block"
+    viewerUI.style.display = "none"
+}
 
 // paper counting functions
 function countSubjectPapers(subject){

@@ -16,9 +16,10 @@ Notice: This project contains test files taken from the SQA website. I do not ow
 ### v1.0 - Initial Testing Release
 
 ### v1.1
-**Features:**
-- Viewer UI Overhaul
+**Updates:**
 - Added Functionality for Supplementary Sheets
+- Viewer UI Overhaul
+- Improved Custom PDF Loading
 
 **Bug Fixes:**
 - Fixed Paper Selection Header
