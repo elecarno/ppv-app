@@ -11,6 +11,8 @@ Notice: This project contains test files taken from the SQA website. I do not ow
 
 **To-do:**
 - Add audio player for listening papers
+- Subject based "package drap & drop" system (package subjects individually and allow them to be dragged into the application)
+- Complete fully-offline transition (use local ionicons)
 
 ## Patch Notes
 ### v1.0 - Initial Testing Release
