@@ -22,6 +22,7 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "electron": "^30.0.2",
+    "feather-icons": "^4.29.2",
     "pdfjs-dist": "^4.2.67"
   },
   "dependencies": {

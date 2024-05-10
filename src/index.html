@@ -5,16 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="style.css" type="text/css"/>
         <title>Past Paper Viewer</title>
-        <!-- pdf.js -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script> -->
-        <!-- Ion Icons -->
-        <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
-        <!-- Font: Atkinson Hyperlegible -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+        <!-- Feather Icons -->
+        <script src="modules/feather.min.js"></script>
     </head>    
     <body>
         <main>
@@ -59,15 +51,15 @@
             <div id="viewer-ui" style="display: none;">
                 <!-- Toolbar -->
                 <div id="toolbar" style="height: 70px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                    <button id="viewer-back-button" class="toolbar-button" style="width: 120px; border-radius: 15px; float: left; background-color: lightgrey; color: black; font-size: 14px;">Back to Papers</button>
+                    <button id="viewer-back-button" class="toolbar-button" style="width: 120px; border-radius: 15px; float: left; background-color: var(--button-grey); color: black; font-size: 14px;">Back to Papers</button>
                     <!-- Question Navigation -->
                     <div id="q-navigation">
                         <button id="previous-button" class="nav-button" style="float: left; margin-left: 5px; margin-right: auto;">
-                            <ion-icon name="chevron-back-outline"></ion-icon>
+                            <i data-feather="chevron-left"></i>
                         </button>
                         <p id="question-label" style="text-align: center;">Question: N/A</p>
                         <button id="next-button" class="nav-button" style="float: right; margin-right: 5px; margin-left: auto;">
-                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                            <i data-feather="chevron-right"></i>
                         </button>
                     </div>
                     <!-- Control Buttons -->
@@ -75,18 +67,19 @@
                         <!-- Global Toggles -->
                         <button id="toggle-nav-button" class="toolbar-button" style="width: 150px; border-radius: 15px; font-size: 14px;">Switch to <br>Separate Navigation</button>
                         <button id="toggle-scale-button" class="toolbar-button">
-                            <ion-icon name="expand-outline"></ion-icon>
+                            <i data-feather="maximize"></i>
                         </button>
-                        <div style="border-left: 3px solid grey; height: 30px; margin-left: 5px; margin-right: 5px;"></div>
+                        <!-- Separato -->
+                        <div style="border-left: 3px solid var(--separator-grey); height: 30px; margin-left: 5px; margin-right: 5px;"></div>
                         <!-- Paper Toggles -->
-                        <button title="Toggle Supplementary Sheets" id="toggle-sp-button" class="toolbar-button">
-                            <ion-icon name="document-outline"></ion-icon>
+                        <button title="Toggle Supplementary Sheets" id="toggle-sp-button" class="toolbar-button" style="background-color: var(--button-toggle-off);">
+                            <i data-feather="file-text"></i>
                         </button>
                         <button title="Toggle Question Paper" id="toggle-qp-button" class="toolbar-button">
-                            <ion-icon name="reader"></ion-icon>
+                            <i data-feather="book-open"></i>
                         </button>
-                        <button title="Toggle Marking Instructions" id="toggle-mi-button" class="toolbar-button">
-                            <ion-icon name="clipboard-outline"></ion-icon>
+                        <button title="Toggle Marking Instructions" id="toggle-mi-button" class="toolbar-button" style="background-color: var(--button-toggle-off);">
+                            <i data-feather="pen-tool"></i>
                         </button>
                     </div>
                 </div>
@@ -96,11 +89,11 @@
                     <div id="sp-viewer" class="viewer" style="display: none;">
                         <div class="s-nav-holder">
                             <button id="sp-left-button" class="nav-button" style="float: left; display: none;">
-                                <ion-icon name="chevron-back-outline"></ion-icon>
+                                <i data-feather="chevron-left"></i>
                             </button>
                             <p id="sp-pagecount" class="pagecount">1 / 1</p>
                             <button id="sp-right-button" class="nav-button" style="display: none;">
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <i data-feather="chevron-right"></i>
                             </button>
                         </div>
                         <canvas id="sp-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
@@ -109,11 +102,11 @@
                     <div id="qp-viewer" class="viewer">
                         <div class="s-nav-holder">
                             <button id="qp-left-button" class="nav-button" style="float: left; display: none;">
-                                <ion-icon name="chevron-back-outline"></ion-icon>
+                                <i data-feather="chevron-left"></i>
                             </button>
                             <p id="qp-pagecount" class="pagecount">1 / 1</p>
                             <button id="qp-right-button" class="nav-button" style="display: none;">
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <i data-feather="chevron-right"></i>
                             </button>
                         </div>
                         <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
@@ -122,11 +115,11 @@
                     <div id="mi-viewer" class="viewer" style="display: none;">
                         <div class="s-nav-holder">
                             <button id="mi-left-button" class="nav-button" style="float: left; display: none;">
-                                <ion-icon name="chevron-back-outline"></ion-icon>
+                                <i data-feather="chevron-left"></i>
                             </button>
                             <p id="mi-pagecount" class="pagecount">1 / 1</p>
                             <button id="mi-right-button" class="nav-button" style="display: none;">
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <i data-feather="chevron-right"></i>
                             </button>
                         </div>
                         <canvas id="mi-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
@@ -212,9 +205,9 @@
             <a style="margin-right: 1rem;" href="javascript:ShowHomepage();">Past Paper Viewer v1.1</a>
         </div>
         <!-- Scripts -->
-        <script src="./pdf.min.mjs" type="module"></script>
-        <script src="./pdf.worker.min.mjs" type="module"></script>
-        <script src="./pdf.mjs" type="module"></script>
+        <script src="./modules/pdf.min.mjs" type="module"></script>
+        <script src="./modules/pdf.worker.min.mjs" type="module"></script>
+        <script src="./modules/pdf.mjs" type="module"></script>
         <script src="./js/refs/imports.js" type="module"></script>
         <script src="./js/refs/sqa_files.js"></script>
         <script src="./js/refs/display_names.js"></script>
@@ -222,5 +215,8 @@
         <script src="./js/viewer.js"></script>
         <script src="./js/viewer_interaction.js"></script>
         <script src="./js/main.js"></script>
+        <script>
+            feather.replace();
+        </script>
     </body>
 </html>

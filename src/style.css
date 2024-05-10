@@ -1,18 +1,43 @@
+:root {
+    /* colour definitions */
+    --button-active: #2c2cb7;
+    --button-text: #ffffff;
+    --button-toggle-off: #555555; 
+    --button-border: #25259c;
+    --button-hover: #20208a;
+    --button-grey: #d3d3d3;
+    
+    --panel-grey: #d3d3d3;
+
+    --viewer-border: #303030;
+
+    --separator-grey: #808080;
+}
+
+@font-face {
+    font-family: "Atkinson Hyperlegible";
+    src: url("./atkinson_hyperlegible/AtkinsonHyperlegible-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Atkinson Hyperlegible";
+    src: url("./atkinson_hyperlegible/AtkinsonHyperlegible-Bold.ttf");
+    font-weight: bold;
+}
+
 * {
-    /* font-family: 'Tahoma'; */
-    /* font-family: 'Trebuchet MS'; */
     font-family: "Atkinson Hyperlegible";
 }
 
 button {
-    background-color: #2c2cb7; /* Green background */
-    border: 1px solid #25259c; /* Green border */
-    color: white; /* White text */
+    background-color: var(--button-active); /* Green background */
+    border: 1px solid var(--button-border); /* Green border */
+    color: var(--button-text); /* White text */
     cursor: pointer; /* Pointer/hand icon */
 }
 
 button:hover {
-    background-color: #20208a;
+    background-color: var(--button-hover);
 }
 
 .notbold{
@@ -68,9 +93,9 @@ button:hover {
 }
 
 .btn-group button {
-    background-color: #2c2cb7; /* Green background */
-    border: 1px solid #25259c; /* Green border */
-    color: white; /* White text */
+    background-color: var(--button-active); /* Green background */
+    border: 1px solid var(--button-border); /* Green border */
+    color: var(--button-text); /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     width: 250px; /* Set a width if needed */
@@ -84,7 +109,7 @@ button:hover {
 }
   
 .btn-group button:hover {
-    background-color: #20208a;
+    background-color: var(--button-hover);
 }
 
 .navbar {
@@ -127,7 +152,7 @@ button:hover {
     align-items: center;
     border: none;
     border-radius: 12px;
-    background-color: lightgrey;
+    background-color: var(--panel-grey);
     padding-left: 5px;
     padding-right: 5px;
     margin-left: 20px;
@@ -142,7 +167,7 @@ button:hover {
     justify-content: center; 
     align-items: center;
     border-radius: 12px;
-    background-color: lightgrey;
+    background-color: var(--panel-grey);
 }
 
 .s-nav-holder {
@@ -164,15 +189,13 @@ button:hover {
 .viewer {
     width: 70%;
     text-align: center;
-    border-radius: 3px;
-    border-color: black;
-    border: solid;
+    border: 3px solid var(--viewer-border);
     margin: 0.25rem;
 }
 
 .pdf-viewer {
     width: 100%;
     border-top: solid;
-    border-color: grey;
+    border-color: var(--separator-grey);
     border-top-width: 3px;
 }

@@ -1,5 +1,7 @@
 let usingQuestionNavigation = true
+let showQP = true
 let showMI = false
+let showSP = false
 let isEnlarged = false
 
 // add functionality to navigation toggle button
@@ -41,74 +43,66 @@ scaleToggleButton.addEventListener("click", () => {
     isEnlarged = !isEnlarged
 
     scaleToggleButton.innerHTML = ""
-    var icon = document.createElement("ion-icon")
+    var icon = document.createElement("i")
 
     if (isEnlarged) {
-        icon.setAttribute("name", "contract-outline")
+        icon.setAttribute("data-feather", "minimize")
         qpViewerHolder.style.width = "100%"
         miViewerHolder.style.width = "100%"
         spViewerHolder.style.width = "100%"
     }
     else {
-        icon.setAttribute("name", "expand-outline")
+        icon.setAttribute("data-feather", "maximize")
         qpViewerHolder.style.width = "70%"
         miViewerHolder.style.width = "70%"
         spViewerHolder.style.width = "70%"
     }
 
     scaleToggleButton.append(icon)
+    feather.replace()
 })
 
 // add functionality to paper visibility toggles
 qpVisToggleButton.addEventListener("click", () => {
-    showMI = !showMI
+    showQP = !showQP
 
-    qpVisToggleButton.innerHTML = ""
-    var icon = document.createElement("ion-icon")
-
-    if (showMI) {
-        icon.setAttribute("name", "reader")
+    if (showQP) {
         qpViewerHolder.style.display = "block"
+        qpVisToggleButton.style.backgroundColor = "var(--button-active)"
     } else {
-        icon.setAttribute("name", "reader-outline")
         qpViewerHolder.style.display = "none"
+        qpVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
     }
 
-    qpVisToggleButton.append(icon)
+    //qpVisToggleButton.append(icon)
 })
 
 miVisToggleButton.addEventListener("click", () => {
     showMI = !showMI
 
-    miVisToggleButton.innerHTML = ""
-    var icon = document.createElement("ion-icon")
-
     if (showMI) {
-        icon.setAttribute("name", "clipboard")
         miViewerHolder.style.display = "block"
+        miVisToggleButton.style.backgroundColor = "var(--button-active)"
     } else {
-        icon.setAttribute("name", "clipboard-outline")
         miViewerHolder.style.display = "none"
+        miVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
     }
 
-    miVisToggleButton.append(icon)
+    //miVisToggleButton.append(icon)
 })
 
 spVisToggleButton.addEventListener("click", () => {
-    showMI = !showMI
+    showSP = !showSP
 
-    spVisToggleButton.innerHTML = ""
-    var icon = document.createElement("ion-icon")
-
-    if (showMI) {
-        icon.setAttribute("name", "document")
+    if (showSP) {
         spViewerHolder.style.display = "block"
+        spVisToggleButton.style.backgroundColor = "var(--button-active)"
     } else {
-        icon.setAttribute("name", "document-outline")
         spViewerHolder.style.display = "none"
+        spVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
     }
 
-    spVisToggleButton.append(icon)
+    //spVisToggleButton.append(icon)
 })
 
 // add functionality to seperate navigation buttons

@@ -1,4 +1,4 @@
-This project uses Iconicons (https://github.com/ionic-team/ionicons)
+This project uses Feather Icons (https://feathericons.com/)
 
 Notice: This project contains test files taken from the SQA website. I do not own the copyrights to these files.
 
@@ -15,7 +15,15 @@ Notice: This project contains test files taken from the SQA website. I do not ow
 - Complete fully-offline transition (use local ionicons)
 
 ## Patch Notes
-### v1.0 - Initial Testing Release
+### v1.2
+**Updates:**
+- Improved Visuals for Paper Visiblility Toggles
+- Completed offline functionality transition
+    - Migrated from Ionicons to Feather Icons
+    - Migrated from Google Fonts to local .ttf files Atkinson Hyperlegible
+
+**Bug Fixes:**
+- Fixed reliability with Paper Visibility Toggles
 
 ### v1.1
 **Updates:**
@@ -27,3 +35,5 @@ Notice: This project contains test files taken from the SQA website. I do not ow
 - Fixed Paper Selection Header
 - Fixed Level's for Subject detection.
 - Fixed Various HTML/CSS Formatting Issues
+
+### v1.0 - Initial Testing Release
