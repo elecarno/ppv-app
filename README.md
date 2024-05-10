@@ -23,7 +23,7 @@ Notice: This project contains test files taken from the SQA website. I do not ow
     - Migrated from Google Fonts to local .ttf files Atkinson Hyperlegible
 
 **Bug Fixes:**
-- Fixed reliability with Paper Visibility Toggles
+- Fixed reliability issues with Paper Visibility Toggles
 
 ### v1.1
 **Updates:**
