@@ -78,13 +78,15 @@ function loadPDF(pdfURL, pdfType) {
         if (pdfType == "qp") {
             questionsQP = questionsDict
             console.log(questionsQP)
-        } else if (pdfType == "mi") {
+        } 
+        else if (pdfType == "mi") {
             questionsMI = questionsDict
             console.log(questionsMI)
-        } else if (pdfType == "sp") {
-            questionsSP = questionsDict
-            console.log(questionsSP)
-        }
+        } 
+        // else if (pdfType == "sp") {
+        //     questionsSP = questionsDict
+        //     console.log(questionsSP)
+        // }
     })
 }
 
@@ -107,48 +109,81 @@ function renderCurrentPage(currentPDF, viewer) {
 
 // question outliner
 function outlinePDF(doc, pdfType) {
-    let questionsDict = {}
-    let isMI = false
+    let questionsDict = {};
 
-    if (pdfType == "mi"){
-        isMI = true
+    // Create an array to hold promises for each page's text content
+    const promises = [];
+
+    // Iterate through each page
+    for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
+        // Push the promise for each page's text content into the array
+        promises.push(doc.getPage(pageNumber).then(page => {
+            // Get the text content of the page
+            return page.getTextContent().then(textContent => {
+                let pageText = ""
+                let lastY = -1;
+
+                // check for newlines
+                textContent.items.forEach(function (i) {
+                    if (lastY != i.transform[5]) {
+                        lastY = i.transform[5];
+                    }
+                    // add newline indictators to page text string
+                    pageText += "\\n" + i.str + " ";
+                });
+
+                // Return the page number and text content
+                return { pageNumber, pageText };
+            });
+        }));
     }
 
-    for (let pageNumber = 1; pageNumber <= doc.numPages; pageNumber++) {
-        getPageText(doc, pageNumber).then(function(pageText) {
-            //console.log(pageNumber, pageText)        
-            for (let questionNumber = 1; questionNumber <= 50; questionNumber++){
-                if (pageText.includes("MARGIN" + questionNumber + ". ") 
-                || pageText.includes("questions" + questionNumber + ". ") 
-                || pageText.includes("guidance" + questionNumber + ". ")
-                || pageText.includes("." + questionNumber + ". ")
-                || pageText.includes("accept:" + questionNumber + ". ")) {
-                    if (questionsDict[questionNumber] == null){
-                        questionsDict[questionNumber] = [[], {}]
-                    }
-                    questionsDict[questionNumber][0].push(pageNumber)  
-                    questionsDict[questionNumber][0] = sortNumericalArray(questionsDict[questionNumber][0])
-                    
+    // Wait for all promises to resolve
+    Promise.all(promises).then(pageContents => {
+        // Sort the page contents based on page number
+        pageContents.sort((a, b) => a.pageNumber - b.pageNumber);
+
+        // Log the text content of each page in order
+        pageContents.forEach(pageContent => {
+            let pageText = pageContent.pageText
+            let pageNumber = pageContent.pageNumber
+            //console.log(`Text from page ${pageContent.pageNumber}: ${pageContent.pageText}`);
+
+            // loop through hypothetical questions 1-50
+            for (let questionNumber = 1; questionNumber <= 50; questionNumber++) {
+                // check for question number
+                if (pageText.includes("\\n" + questionNumber + ". ")) {
+                    let questionKey = questionNumber;
+                    let previousArticle = 0
+
+                    // loop through a-z
                     for (i = 0; i < 26; i++) {
-                        let searchString = "(" + (i+10).toString(36) + ")"
-                        //console.log(searchString)
-                        if (pageText.includes(searchString)) {
-                            if (questionsDict[questionNumber][1][i] == null){
-                                questionsDict[questionNumber][1][i] = []
+                        let currentArticle = (i+10).toString(36)
+                        let searchCurrent = "(" + currentArticle + ") "
+
+                        if (pageText.includes(searchCurrent)) {
+                            if (i == 0 || previousArticle == (i-1)){
+                                previousArticle = i
+                                questionKey = questionNumber + currentArticle
                             }
-                            questionsDict[questionNumber][1][i].push(pageNumber)
-                            questionsDict[questionNumber][1][i] = sortNumericalArray(questionsDict[questionNumber][1][i])
-                            questionsDict[questionNumber][1][i] = removeNonConsecutiveNumbersArray(questionsDict[questionNumber][1][i])
-                            questionsDict[questionNumber][1] = removeNonConsecutiveNumbers(questionsDict[questionNumber][1])
-                            //questionsDict[questionNumber][1] = removeNonConsecutiveEntries(questionsDict[questionNumber][1])
                         }
+
+                        questionsDict[questionKey] = pageNumber
+
+                        // if (questionsDict[questionKey] == undefined){
+                        //     questionsDict[questionKey] = [pageNumber]
+                        // } else {
+                        //     questionsDict[questionKey].push(pageNumber)
+                        //     questionsDict[questionKey] = sortNumericalArray(questionsDict[questionKey])
+                        // }
                     }
                 }
-
-                //questionsDict[questionNumber][0] = removeNonConsecutiveNumbersArray(questionsDict[questionNumber][0])
             }
         });
-    }
+
+    }).catch(error => {
+        console.error('Error while extracting text content:', error);
+    });
 
     return questionsDict
 }
@@ -159,6 +194,12 @@ const getPageText = async (pdf, pageNo) => {
     const tokenizedText = await page.getTextContent();
     const pageText = tokenizedText.items.map(token => token.str).join("");
     return pageText;
+};
+
+const getPageTextRaw = async (pdf, pageNo) => {
+    const page = await pdf.getPage(pageNo);
+    const tokenizedText = await page.getTextContent();
+    return tokenizedText;
 };
 
 function removeNonConsecutiveAlphabets(dictionary) {
@@ -225,4 +266,17 @@ function sortNumericalArray(arr) {
     // Use the sort method with a compare function
     arr = removeNonConsecutiveNumbersArray(arr)
     return arr.slice().sort((a, b) => a - b);
+}
+
+function extractPageNumberFromString(inputString) {
+    // Regular expression to match "page" followed by one or two digits
+    const regex = /page\s+(\d+)/i;
+    // Match the regex against the input string
+    const match = inputString.match(regex);
+    // If there's a match, extract the number from the matched group
+    if (match) {
+        return parseInt(match[1], 10); // Parse the matched number as an integer
+    } else {
+        return null; // Return null if no match found
+    }
 }
