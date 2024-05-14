@@ -4,6 +4,16 @@ let showMI = false
 let showSP = false
 let isEnlarged = false
 
+// counters for question navigation
+let currentQuestion = 1 // 1a, 1b, 2a, 2b, 2c, 3, 4, 5a, 5b
+let currentQuestionIndex = 0 // 1a = 0, 1b = 1, 2a = 2
+let currentQuestionPageQP = 0 // page of current question
+let currentQuestionPageMI = 0
+let currentQuestionPageSP = 0 
+let atEndOfQP = false
+let atEndOfMI = true
+let atEndOfSP = false
+
 // add functionality to navigation toggle button
 navToggleButton.addEventListener("click", () => {
     usingQuestionNavigation = !usingQuestionNavigation
@@ -152,34 +162,32 @@ spPreviousButton.addEventListener("click", () => {
 nextButton.addEventListener("click", () => {
     // If on first page, move to first page of first question
     if (currentQP.currentPage == 1) {
-        currentQP.currentPage = questionsQP[currentQuestion][1][0][0]
-        currentMI.currentPage = questionsMI[currentQuestion][1][0][0]
-        console.log("qp: moved to first page of first question")
+        currentQuestion = Object.keys(questionsQP)[currentQuestionIndex]
+        currentQP.currentPage = questionsQP[currentQuestion][0]
     } else {
-        // check if still on current question
-        if (currentArticle+1 < questionsQP[currentQuestion][0].length && questionsQP[currentQuestion][1][0] != undefined){
-            // check if still within current article
-            if (currentArticlePage+1 < questionsQP[currentQuestion][1][currentArticle].length) {
-                currentArticlePage += 1
-                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
-                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage]
-                console.log("qp: set to next page of current article")
-            } else { // move to next article if at end of current article
-                currentArticlePage = 0
-                currentArticle += 1
-                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][0]
-                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][0] 
-                console.log("qp: set to page of next article")
-            }
-        } else { // move to next question if at end of current question
-            currentArticlePage = 0
-            currentArticle = 0
-            currentQuestion += 1
-            currentQP.currentPage = questionsQP[currentQuestion][0][0]
-            currentMI.currentPage = questionsMI[currentQuestion][0][0]
-            console.log("qp: moved to first page of next question")
+        if (currentQuestionPageQP != questionsQP[currentQuestion].length-1){
+            currentQuestionPageQP += 1
+            currentQP.currentPage = questionsQP[currentQuestion][currentQuestionPageQP]
+        } else { 
+            atEndOfQP = true 
+            currentQuestionPageQP = 0
+            console.log("(qp) at end of question " + currentQuestion)
         }
+        if (currentQuestionPageMI != questionsMI[currentQuestion].length-1){
+            currentQuestionPageMI += 1
+            currentQP.currentPage = questionsMI[currentQuestion][currentQuestionPageMI]
+        } else { atEndOfMI = true }
+
+        if (atEndOfQP) {
+            currentQuestionIndex += 1
+            currentQuestion = Object.keys(questionsQP)[currentQuestionIndex]
+            currentQP.currentPage = questionsQP[currentQuestion][0]
+            atEndOfQP = false
+        }
+        
     }
+
+    console.log("(qp) moved to page " + (currentQuestionPageQP+1) + "/" + questionsQP[currentQuestion].length + " of question " + currentQuestion)
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
@@ -187,39 +195,7 @@ nextButton.addEventListener("click", () => {
 })
 
 previousButton.addEventListener("click", () => {
-    // If on first page, move to first page of first question
-    if (currentQP.currentPage == 1) {
-        currentQP.currentPage = questionsQP[currentQuestion][1][0][0]
-        currentMI.currentPage = questionsMI[currentQuestion][1][0][0]
-        console.log("qp: moved to first page of first question")
-    } else {
-        // check if not on first article
-        if (currentArticle > 0){
-            // if no, check if not on current article's first page
-            if (currentArticlePage > 0) {
-                // if no, move to previous page of current article
-                currentArticlePage -= 1
-                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle][currentArticlePage]
-                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle][currentArticlePage]
-                console.log("qp: moved to previous page of current article")
-            } else {
-                // if yes, move to previous article
-                currentArticle -= 1
-                currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
-                currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle].at(-1)
-                currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle].at(-1)
-                console.log("qp: moved to last page of previous article")
-            }
-        } else {
-            // if yes, move to previous question
-            currentQuestion -= 1
-            currentArticle = Object.keys(questionsQP[currentQuestion]).length - 1
-            currentArticlePage = (questionsQP[currentQuestion][1][currentArticle].length -1)
-            currentQP.currentPage = questionsQP[currentQuestion][1][currentArticle].at(-1)
-            currentMI.currentPage = questionsMI[currentQuestion][1][currentArticle].at(-1)
-            console.log("qp: moved to last page of previous question")
-        }
-    }
+    // do stuff
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
@@ -228,26 +204,7 @@ previousButton.addEventListener("click", () => {
 
 // update displays
 function updateQuestionLabel(){
-    // check if question has article or is standalone
-    if (questionsQP[currentQuestion][1][currentArticle] != undefined){
-        // check if article has mulitple pages
-        if (questionsQP[currentQuestion][1][currentArticle].length > 1){
-            // render display with page number of article
-            questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ") - page " + (currentArticlePage+1)
-        } else {
-            // display standalone question and article
-            questionLabel.innerHTML = currentQuestion + ". (" + (currentArticle+10).toString(36) + ")"
-        }
-    } else {
-        // display standalone question number
-        questionLabel.innerHTML = currentQuestion + "."
-    }
-
-    // log question navigation counters for debugging purposes
-    console.log("currentPage: ", currentQP.currentPage, ", final page of question: ", questionsQP[currentQuestion][0].at(-1)
-    , "\ncurrentQuestion: ", currentQuestion, ", number of pages: ", questionsQP[currentQuestion][0].length
-    , "\ncurrentArticle: ", currentArticle, ", number of pages: ", questionsQP[currentQuestion][1][currentArticle].length
-    , "\ncurrentArticlePage: ", currentArticlePage, ", actual page: ", questionsQP[currentQuestion][1][currentArticle][currentArticlePage])
+    //console.log(currentQuestion)
 }
 
 function updatePageCounts(){

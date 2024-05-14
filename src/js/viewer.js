@@ -12,11 +12,6 @@ let questionsQP = {};
 let questionsMI = {};
 let questionsSP = {};
 
-// counters for question navigation
-let currentQuestion = 1 // 1. , 2. , 3.
-let currentArticle = 0 // (a) , (b) , (c)
-let currentArticlePage = 0 // page of current article
-
 // reset PDF data stores
 function resetCurrentPDFs() {
     currentQP = {
@@ -153,7 +148,7 @@ function outlinePDF(doc, pdfType) {
             for (let questionNumber = 1; questionNumber <= 50; questionNumber++) {
                 // check for question number
                 if (pageText.includes("\\n" + questionNumber + ". ")) {
-                    let questionKey = questionNumber;
+                    let questionKey = questionNumber + " ";
                     let previousArticle = -1
 
                     let firstDetectedArticle = 0
@@ -163,7 +158,6 @@ function outlinePDF(doc, pdfType) {
                     for (i = 0; i < 26; i++) {
                         let currentArticle = (i+10).toString(36)
                         let searchCurrent = "(" + currentArticle + ") "
-                        let previousArticleString
 
                         if (pageText.includes(searchCurrent)) {
                             if (!firstArticleReached){
