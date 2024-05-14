@@ -154,28 +154,50 @@ function outlinePDF(doc, pdfType) {
                 // check for question number
                 if (pageText.includes("\\n" + questionNumber + ". ")) {
                     let questionKey = questionNumber;
-                    let previousArticle = 0
+                    let previousArticle = -1
+
+                    let firstDetectedArticle = 0
+                    let firstArticleReached = false
 
                     // loop through a-z
                     for (i = 0; i < 26; i++) {
                         let currentArticle = (i+10).toString(36)
                         let searchCurrent = "(" + currentArticle + ") "
+                        let previousArticleString
 
                         if (pageText.includes(searchCurrent)) {
-                            if (i == 0 || previousArticle == (i-1)){
-                                previousArticle = i
-                                questionKey = questionNumber + currentArticle
+                            if (!firstArticleReached){
+                                firstDetectedArticle = i;
+                                previousArticle = firstDetectedArticle-1;
+                                firstArticleReached = true;
+
+                                previousArticleString = ((i-1)+10).toString(36)
+                                //console.log("reached first article " + questionNumber + currentArticle + " on page: " + pageNumber," (previous: " + previousArticleString + ")")
+                            }                            
+
+                            if (firstArticleReached && previousArticle == (i-1)){
+                                if (i == 0 || questionsDict[questionNumber + "a"] != undefined){
+                                    previousArticle += 1
+                                    questionKey = questionNumber + currentArticle
+                                   
+                                    if (questionsDict[questionKey] == undefined){
+                                        questionsDict[questionKey] = [pageNumber]
+                                    } else {
+                                        questionsDict[questionKey].push(pageNumber)
+                                        questionsDict[questionKey] = sortNumericalArray(questionsDict[questionKey])
+                                    }
+                                }
                             }
                         }
+                    }
 
-                        questionsDict[questionKey] = pageNumber
-
-                        // if (questionsDict[questionKey] == undefined){
-                        //     questionsDict[questionKey] = [pageNumber]
-                        // } else {
-                        //     questionsDict[questionKey].push(pageNumber)
-                        //     questionsDict[questionKey] = sortNumericalArray(questionsDict[questionKey])
-                        // }
+                    if (questionsDict[questionNumber + "a"] == undefined){ 
+                        if (questionsDict[questionKey] == undefined){
+                            questionsDict[questionKey] = [pageNumber]
+                        } else {
+                            questionsDict[questionKey].push(pageNumber)
+                            questionsDict[questionKey] = sortNumericalArray(questionsDict[questionKey])
+                        }
                     }
                 }
             }
