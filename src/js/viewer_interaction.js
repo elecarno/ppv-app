@@ -1,18 +1,18 @@
 let usingQuestionNavigation = true
-let showQP = true
-let showMI = false
-let showSP = false
-let isEnlarged = false
+let showQP                  = true
+let showMI                  = false
+let showSP                  = false
+let isEnlarged              = false
 
 // counters for question navigation
-let currentQuestion = 1 // 1a, 1b, 2a, 2b, 2c, 3, 4, 5a, 5b
-let currentQuestionIndex = 0 // 1a = 0, 1b = 1, 2a = 2
-let currentQuestionPageQP = 0 // page of current question
-let currentQuestionPageMI = 0
-let currentQuestionPageSP = 0 
-let atEndOfQP = false
-let atEndOfMI = true
-let atEndOfSP = false
+let currentQuestion         = 1 // 1a, 1b, 2a, 2b, 2c, 3, 4, 5a, 5b
+let currentQuestionIndex    = 0 // 1a = 0, 1b = 1, 2a = 2
+let currentQuestionPageQP   = 0 // page of current question
+let currentQuestionPageMI   = 0
+let currentQuestionPageSP   = 0 
+let atEndOfQP               = false
+let atEndOfMI               = true
+let atEndOfSP               = false
 
 // add functionality to navigation toggle button
 navToggleButton.addEventListener("click", () => {
@@ -29,7 +29,7 @@ navToggleButton.addEventListener("click", () => {
         spNextButton.style.display = "none"
         spPreviousButton.style.display = "none"
     } else {
-         // update navToggleButton
+        // update navToggleButton
         navToggleButton.innerHTML = "Switch to<br>Question Navigation"
         questionNavigationPanel.style.display = "none"
         // show all "s-nav-button"s
