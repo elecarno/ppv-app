@@ -211,56 +211,11 @@ function outlinePDF(doc, pdfType) {
 }
 
 // functions for the outliner
-const getPageText = async (pdf, pageNo) => {
-    const page = await pdf.getPage(pageNo);
-    const tokenizedText = await page.getTextContent();
-    const pageText = tokenizedText.items.map(token => token.str).join("");
-    return pageText;
-};
-
 const getPageTextRaw = async (pdf, pageNo) => {
     const page = await pdf.getPage(pageNo);
     const tokenizedText = await page.getTextContent();
     return tokenizedText;
 };
-
-function removeNonConsecutiveAlphabets(dictionary) {
-    // Convert dictionary keys to an array and sort it
-    const keys = Object.keys(dictionary).sort();
-
-    // Initialize a new dictionary to store consecutive keys and their corresponding values
-    const resultDictionary = {};
-
-    // Iterate through the sorted keys
-    for (let i = 0; i < keys.length; i++) {
-        // Check if it's the first key or if the character code is consecutive with the previous one
-        if (i === 0 || keys[i].charCodeAt(0) === keys[i - 1].charCodeAt(0) + 1) {
-            // If consecutive, add it to the result dictionary
-            resultDictionary[keys[i]] = dictionary[keys[i]];
-        }
-    }
-
-    return resultDictionary;
-}
-
-function removeNonConsecutiveNumbers(dictionary) {
-    // Convert dictionary keys to an array of numbers and sort it
-    const keys = Object.keys(dictionary).map(Number).sort((a, b) => a - b);
-
-    // Initialize a new dictionary to store consecutive keys and their corresponding values
-    const resultDictionary = {};
-
-    // Iterate through the sorted keys
-    for (let i = 0; i < keys.length; i++) {
-        // Check if it's the first key or if the number is consecutive with the previous one
-        if (i === 0 || keys[i] === keys[i - 1] + 1) {
-            // If consecutive, add it to the result dictionary
-            resultDictionary[keys[i]] = dictionary[keys[i]];
-        }
-    }
-
-    return resultDictionary;
-}
 
 function removeNonConsecutiveNumbersArray(arr) {
     // Convert array elements to numbers and sort it
@@ -288,17 +243,4 @@ function sortNumericalArray(arr) {
     // Use the sort method with a compare function
     arr = removeNonConsecutiveNumbersArray(arr)
     return arr.slice().sort((a, b) => a - b);
-}
-
-function extractPageNumberFromString(inputString) {
-    // Regular expression to match "page" followed by one or two digits
-    const regex = /page\s+(\d+)/i;
-    // Match the regex against the input string
-    const match = inputString.match(regex);
-    // If there's a match, extract the number from the matched group
-    if (match) {
-        return parseInt(match[1], 10); // Parse the matched number as an integer
-    } else {
-        return null; // Return null if no match found
-    }
 }
