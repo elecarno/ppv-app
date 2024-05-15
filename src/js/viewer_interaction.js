@@ -1,52 +1,7 @@
-let usingQuestionNavigation = true
 let showQP                  = true
 let showMI                  = false
 let showSP                  = false
 let isEnlarged              = false
-
-// counters for question navigation
-let currentQuestion         = 1 // 1a, 1b, 2a, 2b, 2c, 3, 4, 5a, 5b
-let currentQuestionIndex    = 0 // 1a = 0, 1b = 1, 2a = 2
-let currentQuestionPageQP   = 0 // page of current question
-let currentQuestionPageMI   = 0
-let currentQuestionPageSP   = 0 
-let atEndOfQP               = false
-let atEndOfMI               = true
-let atEndOfSP               = false
-
-// add functionality to navigation toggle button
-navToggleButton.addEventListener("click", () => {
-    usingQuestionNavigation = !usingQuestionNavigation
-    if (usingQuestionNavigation) {
-        // update navToggleButton
-        navToggleButton.innerHTML = "Switch to<br>Separate Navigation"
-        questionNavigationPanel.style.display = "flex"
-        // hide all "s-nav-button"s
-        qpNextButton.style.display = "none"
-        qpPreviousButton.style.display = "none"
-        miNextButton.style.display = "none"
-        miPreviousButton.style.display = "none"
-        spNextButton.style.display = "none"
-        spPreviousButton.style.display = "none"
-    } else {
-        // update navToggleButton
-        navToggleButton.innerHTML = "Switch to<br>Question Navigation"
-        questionNavigationPanel.style.display = "none"
-        // show all "s-nav-button"s
-        qpNextButton.style.display = "block"
-        qpPreviousButton.style.display = "block"
-        miNextButton.style.display = "block"
-        miPreviousButton.style.display = "block"
-        spNextButton.style.display = "block"
-        spPreviousButton.style.display = "block"
-        
-    }
-    // reset counters and display for question navigation
-    currentQuestion = 1
-    currentArticle = 0
-    currentArticlePage = 0
-    questionLabel.innerHTML = "Question: N/A"
-})
 
 // add functionality to enlarge/minimise button
 scaleToggleButton.addEventListener("click", () => {
@@ -159,44 +114,7 @@ spPreviousButton.addEventListener("click", () => {
 })
 
 // add functionality to question navigation buttons
-nextButton.addEventListener("click", () => {
-    // If on first page, move to first page of first question
-    if (currentQP.currentPage == 1) {
-        currentQuestion = Object.keys(questionsQP)[currentQuestionIndex]
-        currentQP.currentPage = questionsQP[currentQuestion][0]
-    } else {
-        if (currentQuestionPageQP != questionsQP[currentQuestion].length-1){
-            currentQuestionPageQP += 1
-            currentQP.currentPage = questionsQP[currentQuestion][currentQuestionPageQP]
-        } else { 
-            atEndOfQP = true 
-            currentQuestionPageQP = 0
-            console.log("(qp) at end of question " + currentQuestion)
-        }
-        if (currentQuestionPageMI != questionsMI[currentQuestion].length-1){
-            currentQuestionPageMI += 1
-            currentQP.currentPage = questionsMI[currentQuestion][currentQuestionPageMI]
-        } else { atEndOfMI = true }
-
-        if (atEndOfQP) {
-            currentQuestionIndex += 1
-            currentQuestion = Object.keys(questionsQP)[currentQuestionIndex]
-            currentQP.currentPage = questionsQP[currentQuestion][0]
-            atEndOfQP = false
-        }
-        
-    }
-
-    console.log("(qp) moved to page " + (currentQuestionPageQP+1) + "/" + questionsQP[currentQuestion].length + " of question " + currentQuestion)
-
-    renderCurrentPage(currentQP, qpViewer);
-    renderCurrentPage(currentMI, miViewer);
-    updateQuestionLabel();
-})
-
-previousButton.addEventListener("click", () => {
-    // do stuff
-
+qNavButton.addEventListener("click", () => {
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
     updateQuestionLabel();

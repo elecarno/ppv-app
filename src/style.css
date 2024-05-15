@@ -159,6 +159,13 @@ button:hover {
     margin-right: 20px;
 }
 
+#question-selection {
+    display: inline;
+    float: right;
+    width: 250px;
+    background-color: var(--panel-grey);
+}
+
 #toolbar-button-holder {
     /* width: 370px;  */
     height: 50px;

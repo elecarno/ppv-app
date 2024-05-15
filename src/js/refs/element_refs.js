@@ -1,14 +1,12 @@
 const menuUI                    = document.getElementById("menu-ui")
 const viewerUI                  = document.getElementById("viewer-ui")
 
-const navToggleButton           = document.getElementById("toggle-nav-button")
 const spVisToggleButton         = document.getElementById("toggle-sp-button")
 const miVisToggleButton         = document.getElementById("toggle-mi-button")
 const qpVisToggleButton         = document.getElementById("toggle-qp-button")
 const scaleToggleButton         = document.getElementById("toggle-scale-button")
 
-const nextButton                = document.getElementById("next-button")
-const previousButton            = document.getElementById("previous-button")
+const qNavButton                = document.getElementById("q-nav-button")
 const qpNextButton              = document.getElementById("qp-right-button")
 const qpPreviousButton          = document.getElementById("qp-left-button")
 const miNextButton              = document.getElementById("mi-right-button")

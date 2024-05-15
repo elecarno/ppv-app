@@ -175,7 +175,7 @@ function yearBackButton(){
 
 // load PDFs from pressed paper and open viewer
 function paperClickHandler(qpPath, miPath, spPath, paperFullname) {
-    console.log(qpPath, miPath, spPath, paperFullname)
+    console.log(paperFullname + "\nqp: " + qpPath + "\nmi: " + miPath + "\nsp: " + spPath)
     loadPDF(qpPath, "qp")
     loadPDF(miPath, "mi")
     // check for supplementary sheet
