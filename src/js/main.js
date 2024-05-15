@@ -182,6 +182,7 @@ function paperClickHandler(qpPath, miPath, spPath, paperFullname) {
     if (spPath != undefined){
         loadPDF(spPath, "sp")
     }
+
     // switch to viewer 'page'
     menuUI.style.display = "none"
     viewerUI.style.display = "block"

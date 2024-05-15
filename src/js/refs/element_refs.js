@@ -15,6 +15,7 @@ const spNextButton              = document.getElementById("sp-right-button")
 const spPreviousButton          = document.getElementById("sp-left-button")
 
 const questionNavigationPanel   = document.getElementById("q-navigation")
+const questionSelectionPanel    = document.getElementById("question-selection")
 
 const questionLabel             = document.getElementById("question-label")
 const qpNavLabel                = document.getElementById("qp-pagecount")

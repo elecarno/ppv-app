@@ -115,10 +115,30 @@ spPreviousButton.addEventListener("click", () => {
 
 // add functionality to question navigation buttons
 qNavButton.addEventListener("click", () => {
+    // load question navigation
+    for(let question in questionsQP){
+        (function(question) {
+            //create subject button
+            var button = document.createElement("button");
+            button.innerHTML = question // paper count display
+            button.setAttribute("id", question);
+            button.style.display = "block"
+            // attach subject button functionality & append
+            button.addEventListener("click", function() {
+                questionClickHandler(question);
+            });
+            questionSelectionPanel.appendChild(button);
+        })(question);
+    }
+})
+
+function questionClickHandler(question) {
+    currentQP.currentPage = questionsQP[question][0]
+
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
     updateQuestionLabel();
-})
+}
 
 // update displays
 function updateQuestionLabel(){

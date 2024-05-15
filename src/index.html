@@ -81,52 +81,52 @@
                 </div>
                 <!-- PDF Viewers -->
                 <div id="sidebar-viewer-holder" style="display: flex;">
-                    <div id="viewer-holder" style="width: 100%">
-                        <!-- Supplementary Sheet Viewer -->
-                        <div id="sp-viewer" class="viewer" style="display: none;">
-                            <div class="s-nav-holder">
-                                <button id="sp-left-button" class="nav-button" style="float: left;">
-                                    <i data-feather="chevron-left"></i>
-                                </button>
-                                <p id="sp-pagecount" class="pagecount">1 / 1</p>
-                                <button id="sp-right-button" class="nav-button">
-                                    <i data-feather="chevron-right"></i>
-                                </button>
+                    <div id="viewer-antiflex-holder">
+                        <div id="viewer-holder" style="width: 100%">
+                            <!-- Supplementary Sheet Viewer -->
+                            <div id="sp-viewer" class="viewer" style="display: none;">
+                                <div class="s-nav-holder">
+                                    <button id="sp-left-button" class="nav-button" style="float: left;">
+                                        <i data-feather="chevron-left"></i>
+                                    </button>
+                                    <p id="sp-pagecount" class="pagecount">1 / 1</p>
+                                    <button id="sp-right-button" class="nav-button">
+                                        <i data-feather="chevron-right"></i>
+                                    </button>
+                                </div>
+                                <canvas id="sp-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
                             </div>
-                            <canvas id="sp-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
-                        </div>
-                        <!-- Question Paper Viewer -->
-                        <div id="qp-viewer" class="viewer">
-                            <div class="s-nav-holder">
-                                <button id="qp-left-button" class="nav-button" style="float: left;">
-                                    <i data-feather="chevron-left"></i>
-                                </button>
-                                <p id="qp-pagecount" class="pagecount">1 / 1</p>
-                                <button id="qp-right-button" class="nav-button">
-                                    <i data-feather="chevron-right"></i>
-                                </button>
+                            <!-- Question Paper Viewer -->
+                            <div id="qp-viewer" class="viewer">
+                                <div class="s-nav-holder">
+                                    <button id="qp-left-button" class="nav-button" style="float: left;">
+                                        <i data-feather="chevron-left"></i>
+                                    </button>
+                                    <p id="qp-pagecount" class="pagecount">1 / 1</p>
+                                    <button id="qp-right-button" class="nav-button">
+                                        <i data-feather="chevron-right"></i>
+                                    </button>
+                                </div>
+                                <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
                             </div>
-                            <canvas id="qp-pdf-viewer" class="pdf-viewer" style="float: left"></canvas>
-                        </div>
-                        <!-- Marking Instructions Viewer -->
-                        <div id="mi-viewer" class="viewer" style="display: none;">
-                            <div class="s-nav-holder">
-                                <button id="mi-left-button" class="nav-button" style="float: left;">
-                                    <i data-feather="chevron-left"></i>
-                                </button>
-                                <p id="mi-pagecount" class="pagecount">1 / 1</p>
-                                <button id="mi-right-button" class="nav-button">
-                                    <i data-feather="chevron-right"></i>
-                                </button>
+                            <!-- Marking Instructions Viewer -->
+                            <div id="mi-viewer" class="viewer" style="display: none;">
+                                <div class="s-nav-holder">
+                                    <button id="mi-left-button" class="nav-button" style="float: left;">
+                                        <i data-feather="chevron-left"></i>
+                                    </button>
+                                    <p id="mi-pagecount" class="pagecount">1 / 1</p>
+                                    <button id="mi-right-button" class="nav-button">
+                                        <i data-feather="chevron-right"></i>
+                                    </button>
+                                </div>
+                                <canvas id="mi-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
                             </div>
-                            <canvas id="mi-pdf-viewer" class="pdf-viewer" style="float: right"></canvas>
                         </div>
                     </div>
-                    <div id="question-selection">
-                        HELLO
-                    </div>
+                    <div id="question-selection" class="btn-group"></div>
                 </div>
-            </div>  
+            </div>
             <!-- Footer Pages -->
             <div id="license-ui" style="display: none;">
                 <p style="margin: 0 auto; width: 500px; text-align: justify; margin-top: 20px;">
