@@ -2,6 +2,7 @@ let showQP                  = true
 let showMI                  = false
 let showSP                  = false
 let isEnlarged              = false
+let showingQuestionOutline  = false
 
 // add functionality to enlarge/minimise button
 scaleToggleButton.addEventListener("click", () => {
@@ -34,9 +35,11 @@ qpVisToggleButton.addEventListener("click", () => {
     if (showQP) {
         qpViewerHolder.style.display = "block"
         qpVisToggleButton.style.backgroundColor = "var(--button-active)"
+        qpVisToggleButton.style.color = "var(--button-text)"
     } else {
         qpViewerHolder.style.display = "none"
         qpVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
+        qpVisToggleButton.style.color = "var(--button-toggle-off-text)"
     }
 
     //qpVisToggleButton.append(icon)
@@ -48,9 +51,11 @@ miVisToggleButton.addEventListener("click", () => {
     if (showMI) {
         miViewerHolder.style.display = "block"
         miVisToggleButton.style.backgroundColor = "var(--button-active)"
+        miVisToggleButton.style.color = "var(--button-text)"
     } else {
         miViewerHolder.style.display = "none"
         miVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
+        miVisToggleButton.style.color = "var(--button-toggle-off-text)"
     }
 
     //miVisToggleButton.append(icon)
@@ -62,9 +67,11 @@ spVisToggleButton.addEventListener("click", () => {
     if (showSP) {
         spViewerHolder.style.display = "block"
         spVisToggleButton.style.backgroundColor = "var(--button-active)"
+        spVisToggleButton.style.color = "var(--button-text)"
     } else {
         spViewerHolder.style.display = "none"
         spVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
+        spVisToggleButton.style.color = "var(--button-toggle-off-text)"
     }
 
     //spVisToggleButton.append(icon)
@@ -115,34 +122,124 @@ spPreviousButton.addEventListener("click", () => {
 
 // add functionality to question navigation buttons
 qNavButton.addEventListener("click", () => {
-    // load question navigation
-    for(let question in questionsQP){
-        (function(question) {
-            //create subject button
-            var button = document.createElement("button");
-            button.innerHTML = question // paper count display
-            button.setAttribute("id", question);
-            button.style.display = "block"
-            // attach subject button functionality & append
-            button.addEventListener("click", function() {
-                questionClickHandler(question);
-            });
-            questionSelectionPanel.appendChild(button);
-        })(question);
+    showingQuestionOutline = !showingQuestionOutline
+
+    if (showingQuestionOutline) {
+        questionSelectionPanel.innerHTML = ""
+        // load question navigation
+        for(let question in questionsQP){
+            (function(question) {
+                //create subject button
+                var button = document.createElement("button");
+                var questionDislay = document.createElement("span")
+                var articleDisplay = document.createElement("span")
+                var pageDisplayQP = document.createElement("span")
+                var pageDisplayMI = document.createElement("span")
+                
+                questionDislay.style.width = "30px"
+                questionDislay.style.display = "inline-block"
+                questionDislay.style.fontWeight = "bold"
+                articleDisplay.style.fontWeight = "bold"
+                pageDisplayQP.style.float = "right"
+                pageDisplayQP.style.width = "70px"
+                pageDisplayQP.style.display = "inline-block"
+                pageDisplayMI.style.float = "right"
+                pageDisplayMI.style.width = "70px"
+                pageDisplayMI.style.display = "inline-block"
+
+                pageDisplayQP.innerHTML = "QP: " + questionsQP[question][0]
+                if (questionsQP[question].length > 1){
+                    pageDisplayQP.innerHTML += "-" + questionsQP[question].at(-1)
+                }
+
+                if (questionsMI[question] != undefined){
+                    pageDisplayMI.innerHTML = " MI: " + questionsMI[question][0]
+                    if (questionsMI[question].length > 1){
+                        pageDisplayMI.innerHTML += "-" + questionsMI[question].at(-1)
+                    }
+                } else {
+                    pageDisplayMI.innerHTML += "MI: N/A"
+                }
+    
+                if (extractArticle(question) == "a"){
+                    questionDislay.innerHTML = extractNumber(question) + "."
+                    articleDisplay.innerHTML = "(" +  extractArticle(question) + ")"
+                } else if (extractArticle(question) == question){
+                    questionDislay.innerHTML = extractNumber(question) + "."
+                } else {
+                    articleDisplay.innerHTML = "(" +  extractArticle(question) + ")"
+                }
+    
+                button.appendChild(questionDislay)
+                button.appendChild(articleDisplay)
+                button.appendChild(pageDisplayMI)
+                button.appendChild(pageDisplayQP)
+    
+                //button.innerHTML = questionDisplayString
+                button.setAttribute("id", question);
+                button.style.display = "block"
+                // attach subject button functionality & append
+                button.addEventListener("click", function() {
+                    questionClickHandler(question);
+                });
+                questionSelectionPanel.appendChild(button);
+            })(question);
+        }
+
+        qNavButton.innerHTML = "Hide<br>Questions Outline"
+        questionSelectionPanelHolder.style.display = "block"
+    } else {
+        qNavButton.innerHTML = "Show<br>Questions Outline"
+        questionSelectionPanelHolder.style.display = "none"
     }
 })
 
+function convertString(str) {
+    // Use a regular expression to capture the numeric and alphabetic parts
+    const match = str.match(/^(\d+)([a-zA-Z])$/);
+    if (match) {
+        const number = match[1];
+        const letter = match[2];
+        // Format the string as "number. (letter)"
+        return `${number}. (${letter})`;
+    }
+    return str; // Return the original string if it doesn't match the pattern
+}
+
+function extractArticle(str) {
+    // Use a regular expression to capture the numeric and alphabetic parts
+    const match = str.match(/^(\d+)([a-zA-Z])$/);
+    if (match) {
+        const letter = match[2];
+        // Format the string as "number. (letter)"
+        return `${letter}`;
+    }
+    return str; // Return the original string if it doesn't match the pattern
+}
+
+function extractNumber(str) {
+    // Use a regular expression to find the numeric part
+    const match = str.match(/\d+/);
+    if (match) {
+        return parseInt(match[0], 10); // Convert the matched string to an integer
+    }
+    return null; // Return null if no number is found
+}
+
 function questionClickHandler(question) {
     currentQP.currentPage = questionsQP[question][0]
+    if (questionsMI[question] != undefined){
+        currentMI.currentPage = questionsMI[question][0]
+    }
+    if (questionsSP[question] != undefined){
+        currentSP.currentPage = questionsSP[question][0]
+    }
 
     renderCurrentPage(currentQP, qpViewer);
     renderCurrentPage(currentMI, miViewer);
-    updateQuestionLabel();
-}
-
-// update displays
-function updateQuestionLabel(){
-    //console.log(currentQuestion)
+    if (currentSP.file != null) {
+        renderCurrentPage(currentSP, spViewer);
+    }
 }
 
 function updatePageCounts(){

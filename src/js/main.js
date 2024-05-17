@@ -22,6 +22,8 @@ function loadSubjects() {
         subjectSelection.appendChild(button);
         })(subject);
     }
+
+    window.scrollTo({top: 0})
 }
 
 // create level selection for pressed subject
@@ -60,6 +62,8 @@ function subjectClickHandler(subject) {
             levelClickHandler(subject, "ah");
         });
     }
+
+    window.scrollTo({top: 0})
 }
 
 // create year selection for pressed level
@@ -116,12 +120,16 @@ function levelClickHandler(subject, level) {
             yearSelection.appendChild(button);
         })(year);
     }
+
+    window.scrollTo({top: 0})
 }
 
 // add functionality to "Back to Subjects" button on level selection 'page 
 document.getElementById("level-back-button").addEventListener("click", () => {
     subjectCustomContainer.style.display = "flex"
     levelSelection.style.display = "none"
+
+    window.scrollTo({top: 0})
 })
 
 // create paper buttons for selected year
@@ -164,6 +172,8 @@ function yearClickHandler(subject, level, year) {
             paperSelection.appendChild(button);
         })(paper);
     }
+
+    window.scrollTo({top: 0})
 }
 
 // add functionality to "Back to Levels" button
@@ -171,6 +181,8 @@ function yearBackButton(){
     levelSelection.style.display = "block";
     document.getElementById("year-paper-container").style.display = "none"
     paperSelection.innerHTML = ""
+
+    window.scrollTo({top: 0})
 }
 
 // load PDFs from pressed paper and open viewer
@@ -183,9 +195,17 @@ function paperClickHandler(qpPath, miPath, spPath, paperFullname) {
         loadPDF(spPath, "sp")
     }
 
+    paperLabel.innerHTML = paperFullname
+
     // switch to viewer 'page'
     menuUI.style.display = "none"
     viewerUI.style.display = "block"
+
+    showingQuestionOutline = false
+    qNavButton.innerHTML = "Show<br>Questions Outline"
+    questionSelectionPanelHolder.style.display = "none"
+    
+    window.scrollTo({top: 0})
 }
 
 // load custom PDFs

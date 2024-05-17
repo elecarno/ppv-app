@@ -1,17 +1,20 @@
 :root {
     /* colour definitions */
-    --button-active: #2c2cb7;
-    --button-text: #ffffff;
-    --button-toggle-off: #555555; 
-    --button-border: #25259c;
-    --button-hover: #20208a;
-    --button-grey: #d3d3d3;
+    --button-active:            #2c2cb7;
+    --button-text:              #ffffff;
+    --default-text:             #000000;
+    --button-toggle-off:        #555555; 
+    --button-toggle-off-text:   #d3d3d3; 
+    --button-border:            #25259c;
+    --button-hover:             #20208a;
+    --button-grey:              #d3d3d3;
+    --button-grey-hover:        #c3c3c3;
     
-    --panel-grey: #d3d3d3;
+    --panel-grey:               #d3d3d3;
 
-    --viewer-border: #303030;
+    --viewer-border:            #303030;
 
-    --separator-grey: #808080;
+    --separator-grey:           #808080;
 }
 
 @font-face {
@@ -131,6 +134,22 @@ button:hover {
     align-items: center;
 }
 
+.separator {
+    border-left: 3px solid var(--separator-grey); 
+    height: 30px; 
+    margin-left: 5px; 
+    margin-right: 5px;
+}
+
+#q-nav-button {
+    float: right; 
+    margin-right: 5px; 
+    margin-left: auto; 
+    font-size: 15px; 
+    width: 140px;
+    border-radius: 10px;
+}
+
 .toolbar-button {
     font-size: 22px;
     width: 40px;
@@ -145,7 +164,7 @@ button:hover {
 }
 
 #q-navigation {
-    width: 240px; 
+    /* width: 240px;  */
     height: 50px; 
     display: flex; 
     justify-content: center; 
@@ -159,15 +178,42 @@ button:hover {
     margin-right: 20px;
 }
 
-#question-selection {
-    display: inline;
-    float: right;
-    width: 250px;
+.outline-btn-group button{
+    background-color: var(--button-grey);
+    border-width: 0px;
+    color: var(--default-text);
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 250px; /* Set a width if needed */
+    height: 44px;
+    display: block; /* Make the buttons appear below each other */
+    text-align: left;
+}
+
+.outline-btn-group button:hover{
+    background-color: var(--button-grey-hover);
+}
+
+#question-selection-holder {
+    /* position: fixed;
+    top: 75px;
+    right: 15px; */
+    display: inline-block;
+    min-width: 250px;
+    height: 750px;
+    overflow: scroll;
+    overflow-x: hidden;
     background-color: var(--panel-grey);
+    margin-left: 10px;
+    border: 3px solid var(--viewer-border);
+    margin-top: 4px;
 }
 
 #toolbar-button-holder {
     /* width: 370px;  */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     height: 50px;
     display: flex; 
     flex-direction: row; 

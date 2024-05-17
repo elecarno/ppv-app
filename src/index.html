@@ -50,15 +50,9 @@
             <!-- PDF Viewer -->
             <div id="viewer-ui" style="display: none;">
                 <!-- Toolbar -->
-                <div id="toolbar" style="height: 70px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                <div id="toolbar" style="height: 70px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <!-- Back Button -->
                     <button id="viewer-back-button" class="toolbar-button" style="width: 120px; border-radius: 15px; float: left; background-color: var(--button-grey); color: black; font-size: 14px;">Back to Papers</button>
-                    <!-- Question Navigation -->
-                    <div id="q-navigation">
-                        <p id="question-label" style="margin-left: 15px; text-align: left;">Question: N/A</p>
-                        <button id="q-nav-button" class="nav-button" style="float: right; margin-right: 5px; margin-left: auto;">
-                            <i data-feather="chevron-down"></i>
-                        </button>
-                    </div>
                     <!-- Control Buttons -->
                     <div id="toolbar-button-holder">
                         <!-- Global Toggles -->
@@ -66,22 +60,29 @@
                             <i data-feather="maximize"></i>
                         </button>
                         <!-- Separator -->
-                        <div style="border-left: 3px solid var(--separator-grey); height: 30px; margin-left: 5px; margin-right: 5px;"></div>
+                        <div class="separator"></div>
                         <!-- Paper Toggles -->
-                        <button title="Toggle Supplementary Sheets" id="toggle-sp-button" class="toolbar-button" style="background-color: var(--button-toggle-off);">
+                        <button title="Toggle Supplementary Sheets" id="toggle-sp-button" class="toolbar-button" style="background-color: var(--button-toggle-off); color: var(--button-toggle-off-text);">
                             <i data-feather="file-text"></i>
                         </button>
                         <button title="Toggle Question Paper" id="toggle-qp-button" class="toolbar-button">
                             <i data-feather="book-open"></i>
                         </button>
-                        <button title="Toggle Marking Instructions" id="toggle-mi-button" class="toolbar-button" style="background-color: var(--button-toggle-off);">
+                        <button title="Toggle Marking Instructions" id="toggle-mi-button" class="toolbar-button" style="background-color: var(--button-toggle-off); color: var(--button-toggle-off-text);">
                             <i data-feather="pen-tool"></i>
                         </button>
+                    </div>
+                    <!-- Question Navigation -->
+                    <div id="q-navigation">
+                        <p id="paper-label" style="margin-left: 15px; text-align: left;">No Paper Loaded</p>
+                        <!-- Separator -->
+                        <div class="separator" style="margin-left: 15px; margin-right: 15px;"></div>
+                        <button id="q-nav-button" class="toolbar-button">Show<br>Questions Outline</button>
                     </div>
                 </div>
                 <!-- PDF Viewers -->
                 <div id="sidebar-viewer-holder" style="display: flex;">
-                    <div id="viewer-antiflex-holder">
+                    <div id="viewer-antiflex-holder" style="width: 100%;">
                         <div id="viewer-holder" style="width: 100%">
                             <!-- Supplementary Sheet Viewer -->
                             <div id="sp-viewer" class="viewer" style="display: none;">
@@ -124,7 +125,9 @@
                             </div>
                         </div>
                     </div>
-                    <div id="question-selection" class="btn-group"></div>
+                    <div id="question-selection-holder" style="display: none;">
+                            <div id="question-selection" class="outline-btn-group"></div>
+                    </div>
                 </div>
             </div>
             <!-- Footer Pages -->

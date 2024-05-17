@@ -78,10 +78,10 @@ function loadPDF(pdfURL, pdfType) {
             questionsMI = questionsDict
             console.log(questionsMI)
         } 
-        // else if (pdfType == "sp") {
-        //     questionsSP = questionsDict
-        //     console.log(questionsSP)
-        // }
+        else if (pdfType == "sp") {
+            questionsSP = questionsDict
+            console.log(questionsSP)
+        }
     })
 }
 
