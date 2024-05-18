@@ -1,6 +1,6 @@
 {
   "name": "past_paper_viewer",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "A viewer for SQA Past Papers. Notice: This project contains test files taken from the SQA website. I do not own the copyrights to these files.",
   "main": "index.js",
   "scripts": {
