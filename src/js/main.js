@@ -7,6 +7,8 @@ let customSPURL = ""
 
 // create subject selection buttons
 function loadSubjects() {
+    subjectSelection.innerHTML = ""
+
     // loop through all subjects
     for(let subject in sqaFiles){
         (function(subject) {
