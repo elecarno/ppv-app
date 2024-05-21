@@ -36,14 +36,14 @@ function loadCoursePackage(event) {
                       const fixedPathMi = `${zipFileName}/` + reformatPath(item.mi.path);
                       const pdfBlobMi = await zip.file(fixedPathMi).async("blob");
                       const pdfUrlMi = URL.createObjectURL(pdfBlobMi);
-                      item.mi.pdfObject = await pdfjsLib.getDocument(pdfUrlMi);
+                      item.mi.path = await pdfjsLib.getDocument(pdfUrlMi);
                     }
                     if (item.sp && item.sp.path) {
                       // Get PDF document for sp
                       const fixedPathSp = `${zipFileName}/` + reformatPath(item.sp.path);
                       const pdfBlobSp = await zip.file(fixedPathSp).async("blob");
                       const pdfUrlSp = URL.createObjectURL(pdfBlobSp);
-                      item.sp.pdfObject = await pdfjsLib.getDocument(pdfUrlSp);
+                      item.sp.path = await pdfjsLib.getDocument(pdfUrlSp);
                     }
                   });
                 }
