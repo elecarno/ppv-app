@@ -12,28 +12,8 @@ Notice: This project contains test files taken from the SQA website. I do not ow
 **To-do:**
 - Add audio player for listening papers
 - Subject based "package drap & drop" system (package subjects individually and allow them to be dragged into the application)
-- Complete fully-offline transition (use local ionicons)
 
-## Patch Notes
-### v1.2
-**Updates:**
-- Improved Visuals for Paper Visiblility Toggles
-- Completed offline functionality transition
-    - Migrated from Ionicons to Feather Icons
-    - Migrated from Google Fonts to local .ttf files Atkinson Hyperlegible
-
-**Bug Fixes:**
-- Fixed reliability issues with Paper Visibility Toggles
-
-### v1.1
-**Updates:**
-- Added Functionality for Supplementary Sheets
-- Viewer UI Overhaul
-- Improved Custom PDF Loading
-
-**Bug Fixes:**
-- Fixed Paper Selection Header
-- Fixed Level's for Subject detection.
-- Fixed Various HTML/CSS Formatting Issues
-
-### v1.0 - Initial Testing Release
+Plan:
+- Use electron.js based local storage to store copy of uploaded package zip
+- keep reference to this zip for each course ("sqaData" variable?)
+- when paper is being loaded -> load the zip corresponding to the course and use the path of the paper  in `sqaFiles` to load the correct paper

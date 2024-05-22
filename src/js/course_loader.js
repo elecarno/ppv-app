@@ -18,7 +18,7 @@ function loadCoursePackage(event) {
   
               // Create a key in sqaFiles with the course name and assign packageData to it
               const course = packageData.course;
-              sqaFiles[course] = packageData;
+              sqaFiles[course] = packageData.data;
   
               // Replace each path key with a PDF.js-readable object
               for (const level in packageData.data) {
@@ -27,23 +27,17 @@ function loadCoursePackage(event) {
                     if (item.path) {
                       // Get PDF document using pdfjs.getDocument
                       const fixedPath = `${zipFileName}/` + reformatPath(item.path);
-                      const pdfBlob = await zip.file(fixedPath).async("blob");
-                      const pdfUrl = URL.createObjectURL(pdfBlob);
-                      item.path = await pdfjsLib.getDocument(pdfUrl);
+                      item.path = fixedPath
                     }
                     if (item.mi && item.mi.path) {
                       // Get PDF document for mi
                       const fixedPathMi = `${zipFileName}/` + reformatPath(item.mi.path);
-                      const pdfBlobMi = await zip.file(fixedPathMi).async("blob");
-                      const pdfUrlMi = URL.createObjectURL(pdfBlobMi);
-                      item.mi.path = await pdfjsLib.getDocument(pdfUrlMi);
+                      item.mi.path = fixedPathMi
                     }
                     if (item.sp && item.sp.path) {
                       // Get PDF document for sp
                       const fixedPathSp = `${zipFileName}/` + reformatPath(item.sp.path);
-                      const pdfBlobSp = await zip.file(fixedPathSp).async("blob");
-                      const pdfUrlSp = URL.createObjectURL(pdfBlobSp);
-                      item.sp.path = await pdfjsLib.getDocument(pdfUrlSp);
+                      item.sp.path = fixedPathSp
                     }
                   });
                 }
@@ -51,6 +45,7 @@ function loadCoursePackage(event) {
   
               // Log the modified object to the console
               console.log(sqaFiles);
+              loadSubjects()
             }).catch(function (error) {
               console.error('Error reading package_data.json:', error);
             });
@@ -64,9 +59,9 @@ function loadCoursePackage(event) {
   
       reader.readAsArrayBuffer(file);
     }
-  }
+}
   
-  function reformatPath(str) {
-    return str.replace(/\\/g, '/');
-  }
+function reformatPath(str) {
+  return str.replace(/\\/g, '/');
+}
   

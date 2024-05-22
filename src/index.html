@@ -17,8 +17,8 @@
                     <!-- Native PDF selection -->
                     <div id="subject-container">
                         <h2><span class="notbold">Select Subject</span></h2>
+                        <input type="file" id="load-qp-button" onchange="loadCoursePackage(event)" style="margin-bottom: 20px;">Load Course Package</input>
                         <div id="subject-selection" class="btn-group"></div>
-                        <input type="file" id="load-qp-button" onchange="loadCoursePackage(event)">Load Course Package</input>
                     </div>
                     <!-- Load PDFs from computer -->
                     <div id="custom-container">
@@ -244,8 +244,8 @@
         <script src="./js/refs/element_refs.js"></script>
         <script src="./js/viewer.js"></script>
         <script src="./js/viewer_interaction.js"></script>
-        <script src="./js/course_loader.js"></script>
         <script src="./js/main.js"></script>
+        <script src="./js/course_loader.js"></script>
         <script>
             feather.replace();
         </script>
