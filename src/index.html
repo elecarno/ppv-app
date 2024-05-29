@@ -15,18 +15,30 @@
                 <h1>Past Paper Viewer</h1>
                 <div id="subject-custom-container">
                     <!-- Native PDF selection -->
-                    <div id="subject-container">
+                    <div id="subject-container" style="width: 250px;">
                         <h2><span class="notbold">Select Subject</span></h2>
-                        <input type="file" id="load-package-button" onchange="loadCoursePackage(event)" accept=".zip" style="margin-bottom: 20px;">Load Course Package</input>
+                        <label for="load-package-button" class="custom-file-upload" style="margin-bottom: 20px;">
+                            Load Course Package <span class="file-name"></span>
+                        </label>
+                        <input type="file" id="load-package-button" onchange="loadCoursePackage(event)" accept=".zip"></input>
                         <div id="subject-selection" class="btn-group"></div>
                     </div>
                     <!-- Load PDFs from computer -->
                     <div id="custom-container">
                         <h2 id="step-label"><span class="notbold">Load PDFs from Computer</span></h2>
-                        <div id="custom-selection" class="btn-group" style="width: 600px;">
-                            <input type="file" id="load-qp-button" accept="application/pdf" onchange="getCustomQP(event)">Select Question Paper</input>
-                            <input type="file" id="load-mi-button" style="margin-top: 10px;" accept="application/pdf" onchange="getCustomMI(event)">Select Marking Instructions</input>
-                            <input type="file" id="load-sp-button" style="margin-top: 10px;" accept="application/pdf" onchange="getCustomSP(event)">Select Supplementary Sheet (If Applicable)</input>
+                        <div id="custom-selection" class="btn-group" style="width: 400px;">
+                            <label for="load-qp-button" class="custom-file-upload">
+                                Select Question Paper <span class="file-name"></span>
+                            </label>
+                            <input type="file" id="load-qp-button" accept="application/pdf" onchange="getCustomQP(event)"></input>
+                            <label for="load-mi-button" class="custom-file-upload" style="border-top: none;">
+                                Select Marking Instructions <span class="file-name"></span>
+                            </label>
+                            <input type="file" id="load-mi-button" accept="application/pdf" onchange="getCustomMI(event)"></input>
+                            <label for="load-sp-button" class="custom-file-upload" style="border-top: none;">
+                                Select Supplementary Sheet <span class="file-name"></span>
+                            </label>
+                            <input type="file" id="load-sp-button" accept="application/pdf" onchange="getCustomSP(event)"></input>
                             <button id="load-custom-button" style="border: none; border-top: solid 5px white; height: 60px; margin-top: 15px;">View Loaded PDFs</button>
                         </div>
                     </div>

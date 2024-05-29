@@ -252,3 +252,26 @@ button:hover {
     border-color: var(--separator-grey);
     border-top-width: 3px;
 }
+
+input[type="file"] {
+    display: none;
+  }
+  
+.custom-file-upload {
+    border: solid 3px var(--button-grey-hover);
+    background-color: transparent;
+    display: block;
+    padding: 10px 24px;
+    cursor: pointer;
+    height: 25px;
+    display: block;
+    font-size: 15px;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--button-grey);
+}
+
+.file-name {
+    font-size: 10px;
+}

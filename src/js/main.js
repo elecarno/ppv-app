@@ -313,5 +313,21 @@ function countYearPapers(year) {
     return " • " + count
 }
 
+// Select all elements with the class 'custom-file-upload'
+document.querySelectorAll('.custom-file-upload').forEach(function(label) {
+    // Find the input element within the label
+    const fileInput = label.nextElementSibling;
+
+    // Find the span element with the class 'file-name' within the label
+    const fileNameSpan = label.querySelector('.file-name');
+
+    // Attach the change event listener to the input element
+    fileInput.addEventListener('change', function() {
+        // Set the text content of the span element to the selected file name
+        fileNameSpan.innerHTML = "(" + this.files[0].name + ")"
+    });
+});
+
+
 // initialse page
 loadSubjects()
