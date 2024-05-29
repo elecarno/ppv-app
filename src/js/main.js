@@ -165,10 +165,10 @@ function yearClickHandler(subject, level, year) {
                 // check if paper has supplementary sheet
                 if (paperData["sp"] != undefined){
                     // if yes, input path for supplementary sheet
-                    paperClickHandler(paperData["path"], paperData["mi"]["path"], paperData["sp"]["path"], paperFullname);
+                    paperClickHandler(paperData["path"], paperData["mi"]["path"], paperData["sp"]["path"], paperFullname, subject);
                 } else {
                     // if no, semd path for supplementary sheet as `undefined`
-                    paperClickHandler(paperData["path"], paperData["mi"]["path"], undefined, paperFullname);
+                    paperClickHandler(paperData["path"], paperData["mi"]["path"], undefined, paperFullname, subject);
                 }
             });
             paperSelection.appendChild(button);
@@ -188,10 +188,10 @@ function yearBackButton(){
 }
 
 // load PDFs from pressed paper and open viewer
-function paperClickHandler(qpPath, miPath, spPath, paperFullname) {
+function paperClickHandler(qpPath, miPath, spPath, paperFullname, subject) {
     console.log(paperFullname + "\nqp: " + qpPath + "\nmi: " + miPath + "\nsp: " + spPath)
-    loadPDF(qpPath, "qp")
-    loadPDF(miPath, "mi")
+    loadPDF(qpPath, "qp", subject)
+    loadPDF(miPath, "mi", subject)
     // check for supplementary sheet
     if (spPath != undefined){
         loadPDF(spPath, "sp")

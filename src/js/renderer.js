@@ -93,4 +93,60 @@ ipcRenderer.on('loaded-sqa-files', (event, data) => {
   }
 });
 
+function loadPDF(pdfURL, pdfType, subject) {
+  resetCurrentPDFs();
+
+  // Send IPC request to main process to get the PDF file from the ZIP
+  ipcRenderer.send('get-pdf-from-zip', { subject, pdfURL, pdfType });
+}
+
+// Listen for the response from the main process with the extracted PDF data
+ipcRenderer.on('pdf-from-zip', (event, { pdfData, pdfType }) => {
+  if (pdfData) {
+      const pdfArrayBuffer = new Uint8Array(pdfData).buffer;
+      const pdfFile = pdfjsLib.getDocument({ data: pdfArrayBuffer });
+      
+      pdfFile.promise.then(doc => {
+          // check for type and load to correct viewer
+          switch (pdfType) {
+              case "qp":
+                  currentQP.file = doc;
+                  currentQP.totalPages = doc.numPages;
+                  qpVisToggleButton.style.display = "flex";
+                  renderCurrentPage(currentQP, qpViewer);
+                  break;
+              case "mi":
+                  currentMI.file = doc;
+                  currentMI.totalPages = doc.numPages;
+                  miVisToggleButton.style.display = "flex";
+                  renderCurrentPage(currentMI, miViewer);
+                  break;
+              case "sp":
+                  currentSP.file = doc;
+                  currentSP.totalPages = doc.numPages;
+                  spVisToggleButton.style.display = "flex";
+                  renderCurrentPage(currentSP, spViewer);
+                  break;
+          } 
+
+          // outline questions
+          let questionsDict = outlinePDF(doc, pdfType);
+
+          console.log(pdfType);
+          if (pdfType == "qp") {
+              questionsQP = questionsDict;
+              console.log(questionsQP);
+          } else if (pdfType == "mi") {
+              questionsMI = questionsDict;
+              console.log(questionsMI);
+          } else if (pdfType == "sp") {
+              questionsSP = questionsDict;
+              console.log(questionsSP);
+          }
+      });
+  } else {
+      console.error('Failed to load PDF from ZIP.');
+  }
+});
+
 loadSqaFiles()

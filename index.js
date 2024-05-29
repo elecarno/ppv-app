@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path');
 const fs = require('fs');
+const JSZip = require('jszip');
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -83,6 +84,32 @@ ipcMain.on('load-sqa-files', (event) => {
       console.error('Error parsing sqaFiles.json:', parseErr);
       event.reply('loaded-sqa-files', null);
     }
+  });
+});
+
+ipcMain.on('get-pdf-from-zip', (event, { subject, pdfURL, pdfType }) => {
+  const appDataPath = app.getPath('userData');
+  const loadedPackagesPath = path.join(appDataPath, 'LoadedPackages');
+  const zipPath = path.join(loadedPackagesPath, `${subject}.zip`);
+
+  fs.readFile(zipPath, (err, data) => {
+    if (err) {
+      console.error('Failed to read ZIP file:', err);
+      event.reply('pdf-from-zip', { pdfData: null });
+      return;
+    }
+
+    JSZip.loadAsync(data).then(zip => {
+      zip.file(pdfURL).async("uint8array").then(pdfData => {
+        event.reply('pdf-from-zip', { pdfData, pdfType });
+      }).catch(err => {
+        console.error('Failed to extract PDF from ZIP:', err);
+        event.reply('pdf-from-zip', { pdfData: null });
+      });
+    }).catch(err => {
+      console.error('Failed to load ZIP file:', err);
+      event.reply('pdf-from-zip', { pdfData: null });
+    });
   });
 });
 
