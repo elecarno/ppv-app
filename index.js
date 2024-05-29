@@ -44,6 +44,48 @@ ipcMain.on('save-zip-file', (event, { name, data }) => {
   });
 });
 
+ipcMain.on('save-sqa-files', (event, sqaFiles) => {
+  const appDataPath = app.getPath('userData');
+  const loadedPackagesPath = path.join(appDataPath, 'LoadedPackages');
+
+  if (!fs.existsSync(loadedPackagesPath)) {
+    fs.mkdirSync(loadedPackagesPath);
+  }
+
+  const savePath = path.join(loadedPackagesPath, 'sqaFiles.json');
+
+  fs.writeFile(savePath, JSON.stringify(sqaFiles, null, 2), (err) => {
+    if (err) {
+      console.error('Failed to save sqaFiles.json:', err);
+      return;
+    }
+    console.log('sqaFiles.json saved successfully:', savePath);
+  });
+});
+
+
+ipcMain.on('load-sqa-files', (event) => {
+  const appDataPath = app.getPath('userData');
+  const loadedPackagesPath = path.join(appDataPath, 'LoadedPackages');
+  const loadPath = path.join(loadedPackagesPath, 'sqaFiles.json');
+
+  fs.readFile(loadPath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Failed to load sqaFiles.json:', err);
+      event.reply('loaded-sqa-files', null);
+      return;
+    }
+
+    try {
+      const sqaFiles = JSON.parse(data);
+      event.reply('loaded-sqa-files', sqaFiles);
+    } catch (parseErr) {
+      console.error('Error parsing sqaFiles.json:', parseErr);
+      event.reply('loaded-sqa-files', null);
+    }
+  });
+});
+
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
