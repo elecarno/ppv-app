@@ -7,6 +7,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
       width: 1280,
       height: 720,
+      autoHideMenuBar: true,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -14,7 +15,6 @@ const createWindow = () => {
     })
   
     win.loadFile('./src/index.html')
-
 }
 
 app.whenReady().then(() => {
