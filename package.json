@@ -23,10 +23,10 @@
     "@electron/fuses": "^1.8.0",
     "electron": "^30.0.2",
     "feather-icons": "^4.29.2",
-    "jszip": "^3.10.1",
     "pdfjs-dist": "^4.2.67"
   },
   "dependencies": {
+    "jszip": "^3.10.1",
     "electron-squirrel-startup": "^1.0.0"
   }
 }
