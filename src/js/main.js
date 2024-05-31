@@ -168,7 +168,7 @@ function yearClickHandler(subject, level, year) {
                     paperClickHandler(paperData["path"], paperData["mi"]["path"], paperData["sp"]["path"], paperFullname, subject);
                 } else {
                     // if no, semd path for supplementary sheet as `undefined`
-                    paperClickHandler(paperData["path"], paperData["mi"]["path"], undefined, paperFullname, subject);
+                    paperClickHandler(paperData["path"], paperData["mi"]["path"], "undefined", paperFullname, subject);
                 }
             });
             paperSelection.appendChild(button);
@@ -194,7 +194,7 @@ function paperClickHandler(qpPath, miPath, spPath, paperFullname, subject) {
     loadPDF(miPath, "mi", subject)
     // check for supplementary sheet
     if (spPath != undefined){
-        loadPDF(spPath, "sp")
+        loadPDF(spPath, "sp", subject)
     }
 
     paperLabel.innerHTML = paperFullname

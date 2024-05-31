@@ -88,6 +88,7 @@ ipcMain.on('load-sqa-files', (event) => {
 });
 
 ipcMain.on('get-pdf-from-zip', (event, { subject, pdfURL, pdfType }) => {
+  console.log(subject, pdfType, pdfURL)
   const appDataPath = app.getPath('userData');
   const loadedPackagesPath = path.join(appDataPath, 'LoadedPackages');
   const zipPath = path.join(loadedPackagesPath, `${subject}.zip`);
