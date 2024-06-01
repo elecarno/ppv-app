@@ -10,6 +10,7 @@ var subjectNames = {
     "grc": "Graphic Communication",
     "his": "History",
     "math": "Mathematics",
+    "med": "Media",
     "mod": "Modern Studies",
     "mus": "Music",
     "pe": "Physical Education",
@@ -47,4 +48,7 @@ var paperNames = {
     // History
     "bw": "British, European and World-History",
     "sh":"Scottish History",
+    // Media
+    "am": "Analysis of Media Content",
+    "rm": "The Role of Media",
 }
