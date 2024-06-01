@@ -43,5 +43,8 @@ var paperNames = {
     "wr": "Writing",
     // Geography
     "gg": "Global Issues and Geographical Skills",
-    "ph": "Physical and Human Environments"
+    "ph": "Physical and Human Environments",
+    // History
+    "bw": "British, European and World-History",
+    "sh":"Scottish History",
 }
