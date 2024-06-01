@@ -40,6 +40,7 @@ var paperNames = {
     "re": "Reading",
     "li": "Listening",
     "dw": "Directed Writing",
+    "wr": "Writing",
     // Geography
     "gg": "Global Issues and Geographical Skills",
     "ph": "Physical and Human Environments"
