@@ -27,14 +27,20 @@ var levelNames = {
 
 var paperNames = {
     "all": "All",
+    "qp": "Question Paper",
+    // Sciences & Mathematics
     "p1": "Paper 1",
     "p2": "Paper 2",
     "s1": "Section 1",
     "s2": "Section 2",
-    "qp": "Question Paper",
-    "re": "Reading",
-    "dw": "Directed Writing",
-    "li": "Listening",
+    // English
     "cr": "Critical Reading",
-    "ru": "RUAE"
+    "ru": "RUAE",
+    // Modern Languages
+    "re": "Reading",
+    "li": "Listening",
+    "dw": "Directed Writing",
+    // Geography
+    "gg": "Global Issues and Geographical Skills",
+    "ph": "Physical and Human Environments"
 }
