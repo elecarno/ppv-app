@@ -55,6 +55,52 @@ function renderCurrentPage(currentPDF, viewer) {
     updatePageCounts()
 }
 
+function loadCustomPDF(pdfURL, pdfType) {
+    resetCurrentPDFs();
+
+    const pdfFile = pdfjsLib.getDocument(pdfURL);
+    pdfFile.promise.then(doc => {
+        // check for type and load to correct viewer
+        switch (pdfType) {
+            case "qp":
+                currentQP.file = doc;
+                currentQP.totalPages = doc.numPages;
+                qpVisToggleButton.style.display = "flex"
+                renderCurrentPage(currentQP, qpViewer);
+                break;
+            case "mi":
+                currentMI.file = doc;
+                currentMI.totalPages = doc.numPages;
+                miVisToggleButton.style.display = "flex"
+                renderCurrentPage(currentMI, miViewer);
+                break;
+            case "sp":
+                currentSP.file = doc;
+                currentSP.totalPages = doc.numPages;
+                spVisToggleButton.style.display = "flex"
+                renderCurrentPage(currentSP, spViewer);
+                break;
+        } 
+
+        // outline questions
+        let questionsDict = outlinePDF(doc, pdfType)
+
+        console.log(pdfType)
+        if (pdfType == "qp") {
+            questionsQP = questionsDict
+            console.log(questionsQP)
+        } 
+        else if (pdfType == "mi") {
+            questionsMI = questionsDict
+            console.log(questionsMI)
+        } 
+        else if (pdfType == "sp") {
+            questionsSP = questionsDict
+            console.log(questionsSP)
+        }
+    })
+}
+
 // question outliner
 function outlinePDF(doc, pdfType) {
     let questionsDict = {};

@@ -25,7 +25,7 @@ def folder_to_dict(folder_path, root_path):
     return folder_dict
 
 def main():
-    root_dir = "./course_packages/grc"
+    root_dir = "./course_packages/bus"
     course_name = os.path.basename(root_dir)
     parsed_data = folder_to_dict(root_dir, root_dir)
 

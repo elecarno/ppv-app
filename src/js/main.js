@@ -207,6 +207,8 @@ function paperClickHandler(qpPath, miPath, spPath, paperFullname, subject) {
     qNavButton.innerHTML = "Show<br>Questions Outline"
     questionSelectionPanelHolder.style.display = "none"
     
+    initialiseDisplays()
+
     window.scrollTo({top: 0})
 }
 
@@ -244,18 +246,34 @@ function getCustomSP(event) {
 // switch to viewer 'page' when "View PDFs" button pressed
 loadCustomPDFs.addEventListener("click", () => {
     if (customQPURL != ""){
-        loadPDF(customQPURL, "qp");
+        loadCustomPDF(customQPURL, "qp");
     }
     if (customMIURL != ""){
-        loadPDF(customMIURL, "mi");
+        loadCustomPDF(customMIURL, "mi");
     }
     if (customSPURL != ""){
-        loadPDF(customSPURL, "sp");
+        loadCustomPDF(customSPURL, "sp");
     }
 
     menuUI.style.display = "none"
     viewerUI.style.display = "block"
+
+    initialiseDisplays()
+
+    window.scrollTo({top: 0})
 })
+
+function initialiseDisplays() {
+    miViewerHolder.style.display = "none"
+    miVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
+    miVisToggleButton.style.color = "var(--button-toggle-off-text)"
+    showMI = false
+    spViewerHolder.style.display = "none"
+    spVisToggleButton.style.backgroundColor = "var(--button-toggle-off)"
+    spVisToggleButton.style.color = "var(--button-toggle-off-text)"
+    showSP = false
+}
+
 
 // footer buttons
 function ShowLicense() {
