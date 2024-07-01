@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
 const SecureElectronLicenseKeys = require("secure-electron-license-keys");
 const path = require('path');
 const fs = require('fs');
@@ -18,29 +18,20 @@ const createWindow = () => {
       },
     })
 
-    // Setup bindings for offline license verification
-    SecureElectronLicenseKeys.mainBindings(ipcMain, win, fs, crypto, {
-        root: process.cwd(),
-        version: app.getVersion(),
-    });
-  
     win.loadFile('./src/index.html')
 
     win.on("closed", () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
         win = null;
     });
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
 
 ipcMain.on('save-zip-file', (event, { name, data }) => {
   const appDataPath = app.getPath('userData');
@@ -132,11 +123,5 @@ ipcMain.on('get-pdf-from-zip', (event, { subject, pdfURL, pdfType }) => {
 });
 
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== "darwin") {
-    app.quit();
-  } else {
-    SecureElectronLicenseKeys.clearMainBindings(ipcMain);
-  }
-})
+  if (process.platform !== 'darwin') { app.quit(); }
+});

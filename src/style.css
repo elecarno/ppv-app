@@ -47,6 +47,12 @@ button:hover {
     font-weight:normal
 }​
 
+#key-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
 #year-selection, #paper-selection {
     float: left;
     width: 30%; /* Each div takes 50% width */

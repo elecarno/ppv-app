@@ -10,8 +10,20 @@
     </head>    
     <body>
         <main>
+            <div id="key-ui" style="margin-top: 70px; margin-left: 180px; height: 880px; width: 300px;">
+                <h1>Past Paper Viewer</h1>
+                <div id="key-container">
+                    <p>Upload Product Key File</p>
+                    <label for="key-file-input" class="custom-file-upload" style="margin-bottom: 20px;">
+                        Load License <span class="file-name"></span>
+                    </label>
+                    <input type="file" id="key-file-input" accept=".data"></input>
+                </div>
+                <button id="check-license-button">Check License</button>
+                <p id="activation-status"></p>
+            </div>
             <!-- Home Page -->
-            <div id="menu-ui" style="margin-top: 70px; margin-left: 180px; height: 880px;">
+            <div id="menu-ui" style="margin-top: 70px; margin-left: 180px; height: 880px; display: none;">
                 <h1>Past Paper Viewer</h1>
                 <div id="subject-custom-container">
                     <!-- Native PDF selection -->
@@ -240,7 +252,7 @@
                 </ul>
                 <h3>Bug Fixes</h3>
                 <ul>
-                    - Fixed reliability issues with Paper Visibility Toggles
+                    <li>Fixed reliability issues with Paper Visibility Toggles</li>
                 </ul>
 
                 <h2>v1.1 - 2024.05.06</h2>
