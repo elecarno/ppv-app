@@ -15,3 +15,7 @@ document.getElementById("check-license-button").addEventListener('click', () => 
         activationStatus.textContent = "Invalid Key";
     }
 });
+
+// TO-DO:
+// - make keys last for only one year
+// - make authentication persistent
