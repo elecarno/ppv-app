@@ -1,9 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const SecureElectronLicenseKeys = require("secure-electron-license-keys");
 const path = require('path');
 const fs = require('fs');
 const JSZip = require('jszip');
-const crypto = require("crypto");
 
 let win;
 

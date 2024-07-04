@@ -1,3 +1,4 @@
+const keyUI                         = document.getElementById("key-ui")
 const menuUI                        = document.getElementById("menu-ui")
 const viewerUI                      = document.getElementById("viewer-ui")
 
@@ -44,3 +45,6 @@ const ahButton                      = document.getElementById("ah-button")
 
 const openQP                        = document.getElementById("load-qp-button")
 const loadCustomPDFs                = document.getElementById("load-custom-button")
+
+const keyInput                      = document.getElementById("key-input")
+const activationStatus              = document.getElementById("activation-status")
