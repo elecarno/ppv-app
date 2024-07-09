@@ -146,7 +146,7 @@ function outlinePDF(doc, pdfType) {
             // loop through hypothetical questions 1-50
             for (let questionNumber = 1; questionNumber <= 50; questionNumber++) {
                 // check for question number
-                if (pageText.includes("\\n" + questionNumber + ". ")) {
+                if (pageText.includes("\\n" + questionNumber + ". ") || pageText.includes("\\n" + "Question " + questionNumber)) {
                     let questionKey = questionNumber + " ";
                     let previousArticle = -1
 
