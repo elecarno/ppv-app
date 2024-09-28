@@ -149,4 +149,4 @@ ipcRenderer.on('pdf-from-zip', (event, { pdfData, pdfType }) => {
   }
 });
 
-// loadSqaFiles()
+loadSqaFiles()

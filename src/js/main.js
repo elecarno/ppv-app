@@ -7,8 +7,6 @@ let customSPURL = ""
 
 // create subject selection buttons
 function loadSubjects() {
-    if (!activated) { return }
-
     subjectSelection.innerHTML = ""
 
     // loop through all subjects
@@ -279,8 +277,6 @@ function initialiseDisplays() {
 
 // footer buttons
 function ShowLicense() {
-    if (!activated) { return }
-
     document.getElementById("license-ui").style.display = "block"
     document.getElementById("patchnotes-ui").style.display = "none"
 
@@ -289,8 +285,6 @@ function ShowLicense() {
 }
 
 function ShowPatchNotes() {
-    if (!activated) { return }
-
     document.getElementById("patchnotes-ui").style.display = "block"
     document.getElementById("license-ui").style.display = "none"
 
@@ -299,8 +293,6 @@ function ShowPatchNotes() {
 }
 
 function ShowHomepage() {
-    if (!activated) { return }
-
     document.getElementById("patchnotes-ui").style.display = "none"
     document.getElementById("license-ui").style.display = "none"
 
@@ -355,5 +347,5 @@ document.querySelectorAll('.custom-file-upload').forEach(function(label) {
 });
 
 
-// initialse page - now happens in authenticator.js
-// loadSubjects()
+// initialse page
+loadSubjects()
