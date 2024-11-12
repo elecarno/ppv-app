@@ -112,9 +112,9 @@ function levelClickHandler(subject, level) {
                 // toggle pressed class for all buttons (selection display)
                 var buttons = yearSelection.getElementsByTagName("button");
                 for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].style.borderRight = "1px solid #25259c"
+                    buttons[i].style.borderRight = "1px solid #5d95e8"
                 }
-                button.style.borderRight = "10px solid #1e1e7b"
+                button.style.borderRight = "10px solid #5d95e8"
 
                 // call yearClickHandler function
                 yearClickHandler(subject, level, year);

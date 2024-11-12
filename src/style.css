@@ -1,12 +1,12 @@
 :root {
     /* colour definitions */
-    --button-active:            #2c2cb7;
+    --button-active:            #4182e4;
     --button-text:              #ffffff;
-    --default-text:             #000000;
+    --default-text:             #2a2a2a;
     --button-toggle-off:        #555555; 
     --button-toggle-off-text:   #d3d3d3; 
-    --button-border:            #25259c;
-    --button-hover:             #20208a;
+    --button-border:            #5d95e8;
+    --button-hover:             #5d95e8;
     --button-grey:              #d3d3d3;
     --button-grey-hover:        #c3c3c3;
     
